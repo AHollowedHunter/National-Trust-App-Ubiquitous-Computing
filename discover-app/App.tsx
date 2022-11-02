@@ -1,20 +1,35 @@
+import {
+  createBottomTabNavigator,
+  BottomTabNavigationOptions,
+} from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { styles } from "./styles";
-import { NativeStackParamList } from "./types";
+import MapScreen from "./screens/MapScreen";
+import { ntColours, styles } from "./styles";
+import { RootBottomTabParamList } from "./types";
 
-const Stack = createNativeStackNavigator<NativeStackParamList>();
+const Tab = createBottomTabNavigator<RootBottomTabParamList>();
+
+const options: BottomTabNavigationOptions = {
+  headerShown: true,
+  headerStyle: { backgroundColor: ntColours.redViolet },
+  headerTitleStyle: { color: "white" },
+  tabBarInactiveTintColor: "black",
+  tabBarActiveTintColor: "black",
+  tabBarActiveBackgroundColor: ntColours.alto,
+  tabBarInactiveBackgroundColor: ntColours.desertStorm,
+};
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style="auto" backgroundColor="#363636" />
+      <StatusBar style="light" backgroundColor={ntColours.cardinalPink} />
       <NavigationContainer>
-        <Stack.Navigator>
-
-        </Stack.Navigator>
+        <Tab.Navigator screenOptions={options}>
+          <Tab.Screen name="Map" component={MapScreen} />
+          <Tab.Screen name="List" component={MapScreen} />
+        </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaView>
   );

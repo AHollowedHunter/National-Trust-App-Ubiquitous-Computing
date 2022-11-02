@@ -1,6 +1,5 @@
 //  Root Navigation
-export type NativeStackParamList = {
-    Map: undefined;
-    List: undefined
-  };
-  
+export type RootBottomTabParamList = {
+  Map: undefined;
+  List: undefined;
+};
