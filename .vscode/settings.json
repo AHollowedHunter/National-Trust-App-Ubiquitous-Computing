@@ -1,5 +1,7 @@
 {
-    "files.exclude": {
-        "**/node_modules/": true
-      },
+  "files.exclude": {
+    "**/node_modules/": true,
+    "**/.expo/": true,
+  },
+  "prettier.tabWidth": 2
 }
