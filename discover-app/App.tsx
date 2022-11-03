@@ -6,8 +6,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MapScreen from "./screens/MapScreen";
-import { ntColours, styles } from "./styles";
-import { RootBottomTabParamList } from "./types";
+import { ntColours, styles } from "./config/styles";
+import { RootBottomTabParamList } from "./config/types";
 
 const Tab = createBottomTabNavigator<RootBottomTabParamList>();
 
