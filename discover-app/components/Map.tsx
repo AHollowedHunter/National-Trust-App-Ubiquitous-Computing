@@ -11,7 +11,7 @@ type Props = {
 };
 
 export function MainMap(props: Props) {
-  
+  const [myState, setMyState] = useState("My State");
 
   useEffect(() => {
     async function getLocation() {

@@ -1,12 +1,10 @@
 import React from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootBottomTabParamList } from "../config/types";
-import Map, { MainMap } from "../components/Map";
+import { MainMap } from "../components/Map";
 
-type Props = NativeStackScreenProps<RootBottomTabParamList>;
+type Props = NativeStackScreenProps<RootBottomTabParamList, "Map">;
 
-function MapScreen({ route, navigation }: Props) {
+export function MapScreen({ route, navigation }: Props) {
   return <MainMap />;
 }
-
-export default MapScreen;
