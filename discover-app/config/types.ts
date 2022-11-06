@@ -1,5 +1,10 @@
 //  Root Navigation
-export type RootBottomTabParamList = {
+export type NativeStackParamList = {
+  Discover: undefined;
+};
+
+// Discover Nav
+export type DiscoverBottomTabParamList = {
   Map: undefined;
   List: undefined;
 };
