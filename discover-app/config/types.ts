@@ -5,12 +5,12 @@ export type NativeStackParamList = {
 
 // Discover Nav
 export type DiscoverBottomTabParamList = {
-  Map: undefined;
-  List: undefined;
+  Map: { places: NTPlace[] };
+  List: { places: NTPlace[] };
 };
 
 // NT Place Data
-export type NTPlaces = {
+export type NTPlace = {
   id: number;
   title: string;
   subTitle: string;
@@ -18,8 +18,26 @@ export type NTPlaces = {
   imageUrl: string;
   imageDescription: string;
   websiteUrl: string;
-  location: any;
+  location: { location: number; latitude: number };
   activityTags: string[];
-  openingTimeStatus: string; // Make enum?
-  cmsRegion: string; // enum?
+  openStatus: NTOpenStatus;
+  region: NTRegion;
+};
+
+export enum NTOpenStatus {
+  AlwayOpen = "",
+  Closed = "Closed today",
+  Open = "Open today",
+  PartOpen = "Partially open today",
+}
+
+export enum NTRegion {
+  SouthWest = "RegionSouthWest",
+  Wales = "RegionWales",
+  NorthWest = "RegionNorthWest",
+  LondonSouthEast = "RegionLondonSouthEast",
+  YorkshireNorthEast = "RegionYorkshireNorthEast",
+  EastEngland = "RegionEastofEngland",
+  NorthernIreland = "RegionNorthernIreland",
+  Midlands = "RegionMidlands",
 }
