@@ -18,7 +18,7 @@ export type NTPlace = {
   imageUrl: string;
   imageDescription: string;
   websiteUrl: string;
-  location: { location: number; latitude: number };
+  location: { longitude: number; latitude: number };
   activityTags: string[];
   openStatus: NTOpenStatus;
   region: NTRegion;

@@ -5,9 +5,10 @@ import {
   getCurrentPositionAsync,
   LocationObjectCoords,
 } from "expo-location";
+import { NTPlace } from "../config/types";
 
 type Props = {
-  children?: React.ReactNode[];
+  places?: NTPlace[];
 };
 
 export function MainMap(props: Props) {
@@ -43,7 +44,19 @@ export function MainMap(props: Props) {
       // followsUserLocation={true}
       mapType="standard"
     >
-      {props.children}
+      {props.places
+        ? props.places.map((place, index) => (
+            <Marker
+              key={index}
+              coordinate={{
+                latitude: place.location.latitude,
+                longitude: place.location.longitude,
+              }}
+              title={place.title}
+              description={place.description}
+            />
+          ))
+        : null}
     </MapView>
   );
 }

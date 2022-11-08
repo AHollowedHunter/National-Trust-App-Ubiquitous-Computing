@@ -6,5 +6,5 @@ import { MainMap } from "../components/Map";
 type Props = BottomTabScreenProps<DiscoverBottomTabParamList, "Map">;
 
 export function MapScreen({ route, navigation }: Props) {
-  return <MainMap />;
+  return <MainMap places={route.params.places}/>;
 }
