@@ -26,46 +26,63 @@ export default function PlaceListItem({ place }: Props) {
       >
         <View
           style={{
-            flexDirection: "row",
-            marginLeft: 24,
-            bottom: -16,
-            zIndex: 1000,
+            // backgroundColor: ntColours.eminence,
+            // marginVertical: 8
           }}
         >
-          <Text
+          <View
             style={{
-              backgroundColor: ntColours.surfieGreen,
-              color: "white",
-              paddingHorizontal: 16,
-              paddingVertical: 8,
-              fontSize: 24,
-              fontFamily: ntFonts.display,
-              maxWidth: "60%",
+              display: "flex",
+              paddingLeft: 24,
+              // bottom: -16,
+              // paddingTop: 16,
+              zIndex: 1000,
+              // backgroundColor: ntColours.apple,
             }}
           >
-            {place.title}
-          </Text>
-          <Text
-            style={{
-              fontFamily: ntFonts.italics,
-              fontSize: 18,
-              backgroundColor: ntColours.desertStorm,
-              flex: 1,
-              paddingRight: 24,
-              textAlign: "right",
-              textAlignVertical: "center",
-            }}
-          >
-            {place.subTitle}
-          </Text>
-        </View>
+            <Text
+              style={{
+                backgroundColor: ntColours.surfieGreen,
+                color: "white",
+                paddingHorizontal: 16,
+                paddingVertical: 8,
+                fontSize: 24,
+                fontFamily: ntFonts.display,
+                alignSelf: "flex-start",
+                zIndex: 1000,
+                bottom: -16,
+                // maxWidth: "60%",
+              }}
+            >
+              {place.title}
+            </Text>
+            <Text
+              style={{
+                fontFamily: ntFonts.italics,
+                fontSize: 16,
+                backgroundColor: ntColours.desertStorm,
+                flex: 1,
+                bottom: -8,
+                // left: 64,
+                right: 16,
+                paddingHorizontal: 16,
+                paddingVertical: 8,
+                textAlign: "right",
+                textAlignVertical: "center",
+                alignSelf: "flex-end",
+              }}
+            >
+              {place.subTitle}
+            </Text>
+          </View>
 
-        <View style={{ height: 200 }}>
-          <Image
-            source={{ uri: place.imageUrl }}
-            style={{ height: "100%", resizeMode: "cover" }}
-            accessibilityLabel={place.imageDescription}
-          />
+          <View style={{ height: 200 }}>
+            <Image
+              source={{ uri: place.imageUrl }}
+              style={{ height: 224, resizeMode: "cover", top: -24 }}
+              accessibilityLabel={place.imageDescription}
+            />
+          </View>
         </View>
 
         <View
@@ -77,7 +94,7 @@ export default function PlaceListItem({ place }: Props) {
           }}
         >
           <Text>{place.description}</Text>
-          <Text style={{ fontWeight: "bold"}}>{place.openStatus}</Text>
+          <Text style={{ fontWeight: "bold" }}>{place.openStatus}</Text>
         </View>
       </View>
     </TouchableHighlight>
