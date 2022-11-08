@@ -21,7 +21,7 @@ const Tab = createBottomTabNavigator<DiscoverBottomTabParamList>();
 const options: BottomTabNavigationOptions = {
   headerShown: true,
   headerStyle: { backgroundColor: ntColours.redViolet },
-  headerTitleStyle: { color: "white", fontFamily: ntFonts.display },
+  headerTitleStyle: { color: "white", fontFamily: ntFonts.display, fontSize: 24 },
   tabBarInactiveTintColor: "black",
   tabBarActiveTintColor: "black",
   tabBarActiveBackgroundColor: ntColours.alto,

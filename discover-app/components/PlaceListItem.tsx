@@ -10,7 +10,7 @@ type Props = {
 export default function PlaceListItem({ place }: Props) {
   return (
     <TouchableHighlight
-      style={{ flex: 1, left: 0, right: 0, marginTop: 8, paddingBottom: 8 }}
+      style={{ flex: 1, left: 0, right: 0 }}
       underlayColor={ntColours.olive}
       activeOpacity={1}
       delayPressIn={60}
@@ -28,7 +28,7 @@ export default function PlaceListItem({ place }: Props) {
           style={{
             flexDirection: "row",
             marginLeft: 24,
-            bottom: -10,
+            bottom: -16,
             zIndex: 1000,
           }}
         >
@@ -36,7 +36,8 @@ export default function PlaceListItem({ place }: Props) {
             style={{
               backgroundColor: ntColours.surfieGreen,
               color: "white",
-              padding: 8,
+              paddingHorizontal: 16,
+              paddingVertical: 8,
               fontSize: 24,
               fontFamily: ntFonts.display,
               maxWidth: "60%",
@@ -71,13 +72,12 @@ export default function PlaceListItem({ place }: Props) {
           style={{
             backgroundColor: ntColours.desertStorm,
             marginHorizontal: 8,
-            shadowOffset: { width: 8, height: 8 },
-            shadowColor: "black",
-            shadowRadius: 8,
+            top: -16,
+            padding: 4,
           }}
         >
           <Text>{place.description}</Text>
-          <Text>{place.openStatus}</Text>
+          <Text style={{ fontWeight: "bold"}}>{place.openStatus}</Text>
         </View>
       </View>
     </TouchableHighlight>
