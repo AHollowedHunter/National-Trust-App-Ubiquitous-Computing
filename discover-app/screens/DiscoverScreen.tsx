@@ -9,7 +9,7 @@ import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
-import { ntColours } from "../config/styles";
+import { ntColours, ntFonts } from "../config/styles";
 import { MapScreen } from "./MapScreen";
 import { ListScreen } from "./ListScreen";
 import { getPlaces } from "../api/Places";
@@ -21,7 +21,7 @@ const Tab = createBottomTabNavigator<DiscoverBottomTabParamList>();
 const options: BottomTabNavigationOptions = {
   headerShown: true,
   headerStyle: { backgroundColor: ntColours.redViolet },
-  headerTitleStyle: { color: "white" },
+  headerTitleStyle: { color: "white", fontFamily: ntFonts.display },
   tabBarInactiveTintColor: "black",
   tabBarActiveTintColor: "black",
   tabBarActiveBackgroundColor: ntColours.alto,
@@ -29,10 +29,12 @@ const options: BottomTabNavigationOptions = {
 };
 
 export function DiscoverScreen() {
-  const [places, setPlaces] = useState([] as NTPlace[]);
-  useEffect(() => {
-    setPlaces(getPlaces());
-  }, []);
+  let places = getPlaces();
+  // const [places, setPlaces] = useState([] as NTPlace[]);
+  // useEffect(() => {
+  //   console.log("Setting place state")
+  //   setPlaces(getPlaces());
+  // }, []);
   
   return (
     <Tab.Navigator screenOptions={options}>

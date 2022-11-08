@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, ListRenderItem, Text, View } from "react-native";
+import { ntColours } from "../config/styles";
 import { NTPlace } from "../config/types";
 import PlaceListItem from "./PlaceListItem";
 
@@ -10,10 +11,10 @@ type Props = {
 export function PlaceList(props: Props) {
   return (
     <FlatList
-      style={{ flex: 1}}
+      style={{ flex: 1, backgroundColor: ntColours.alto }}
       data={props.places}
       keyExtractor={(item) => item.id.toString()}
-      renderItem={(place) => <PlaceListItem place={place.item}></PlaceListItem>}
-    ></FlatList>
+      renderItem={(item) => <PlaceListItem place={item.item}></PlaceListItem>}
+    />
   );
 }
