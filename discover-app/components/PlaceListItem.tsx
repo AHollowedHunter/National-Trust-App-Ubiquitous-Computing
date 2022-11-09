@@ -2,6 +2,7 @@ import React from "react";
 import { Image, Text, TouchableHighlight, View } from "react-native";
 import { ntColours, ntFonts } from "../config/styles";
 import { NTPlace } from "../config/types";
+import { NTIcon } from "./NationalTrustIcon";
 
 type Props = {
   place: NTPlace;
@@ -25,10 +26,12 @@ export default function PlaceListItem({ place }: Props) {
         }}
       >
         <View
-          style={{
-            // backgroundColor: ntColours.eminence,
-            // marginVertical: 8
-          }}
+          style={
+            {
+              // backgroundColor: ntColours.eminence,
+              // marginVertical: 8
+            }
+          }
         >
           <View
             style={{
@@ -95,6 +98,7 @@ export default function PlaceListItem({ place }: Props) {
         >
           <Text>{place.description}</Text>
           <Text style={{ fontWeight: "bold" }}>{place.openStatus}</Text>
+          <NTIcon name="Animals-in-park" style={{ fontSize: 400 }} />
         </View>
       </View>
     </TouchableHighlight>
