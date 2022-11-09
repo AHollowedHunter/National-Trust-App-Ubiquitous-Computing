@@ -25,7 +25,7 @@ const options: BottomTabNavigationOptions = {
   tabBarInactiveTintColor: "black",
   tabBarActiveTintColor: "black",
   tabBarActiveBackgroundColor: ntColours.alto,
-  tabBarInactiveBackgroundColor: ntColours.desertStorm,
+  tabBarInactiveBackgroundColor: ntColours.cararra,
 };
 
 export function DiscoverScreen() {

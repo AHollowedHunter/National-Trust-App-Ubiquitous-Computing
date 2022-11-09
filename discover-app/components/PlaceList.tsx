@@ -15,6 +15,11 @@ export function PlaceList(props: Props) {
       data={props.places}
       keyExtractor={(item) => item.id.toString()}
       renderItem={(item) => <PlaceListItem place={item.item}></PlaceListItem>}
+      ItemSeparatorComponent={() => (
+        <View
+          style={{ height: 8, width: "100%", backgroundColor: ntColours.cararra }}
+        />
+      )}
     />
   );
 }

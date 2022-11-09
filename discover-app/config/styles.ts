@@ -16,6 +16,10 @@ export const ntColours = {
   cararra: "#EDECE9",
   alto: "#DEDEDE",
   doveGrey: "#707070",
+  // Others used on web
+  darkGrey: "#2c2c2c",
+  paletteNav: "#22404c",
+  
 };
 
 export const ntFonts = {

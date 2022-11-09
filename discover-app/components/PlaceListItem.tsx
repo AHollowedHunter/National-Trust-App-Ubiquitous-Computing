@@ -11,19 +11,18 @@ type Props = {
 export default function PlaceListItem({ place }: Props) {
   return (
     <TouchableHighlight
-      style={{ flex: 1, left: 0, right: 0 }}
+      // style={{ marginTop: 8 }}
       underlayColor={ntColours.olive}
       activeOpacity={1}
       delayPressIn={60}
       onPress={() => null} // Do nothing for now
     >
       <View
-        style={{
-          // marginHorizontal: 8,
-          // marginTop: 8,
-          // backgroundColor: ntColours.crimson,
-          flex: 1,
-        }}
+        style={
+          {
+            // flex: 1,
+          }
+        }
       >
         <View
           style={
@@ -35,12 +34,9 @@ export default function PlaceListItem({ place }: Props) {
         >
           <View
             style={{
-              display: "flex",
+              // display: "flex",
               paddingLeft: 24,
-              // bottom: -16,
-              // paddingTop: 16,
               zIndex: 1000,
-              // backgroundColor: ntColours.apple,
             }}
           >
             <Text
@@ -54,7 +50,8 @@ export default function PlaceListItem({ place }: Props) {
                 alignSelf: "flex-start",
                 zIndex: 1000,
                 bottom: -16,
-                // maxWidth: "60%",
+                marginTop: -8,
+                maxWidth: "95%",
               }}
             >
               {place.title}
@@ -93,12 +90,19 @@ export default function PlaceListItem({ place }: Props) {
             backgroundColor: ntColours.desertStorm,
             marginHorizontal: 8,
             top: -16,
+            marginBottom: -8,
             padding: 4,
+            flexDirection: "row",
+            display: "flex",
           }}
         >
-          <Text>{place.description}</Text>
-          <Text style={{ fontWeight: "bold" }}>{place.openStatus}</Text>
-          <NTIcon name="Animals-in-park" style={{ fontSize: 400 }} />
+          <Text style={{ flex: 2 }}>{place.description}</Text>
+          <View style={{ flex: 1, alignItems: "flex-end" }}>
+            <Text style={{ fontWeight: "bold", textAlign: "right" }}>
+              {place.openStatus}
+            </Text>
+            <NTIcon name="Animals-in-park" style={{ fontSize: 24 }} />
+          </View>
         </View>
       </View>
     </TouchableHighlight>

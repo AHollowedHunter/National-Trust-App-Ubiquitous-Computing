@@ -7,10 +7,15 @@ import defaultPlaceData from "./all-places.json";
  */
 export function getPlaces(): NTPlace[] {
   const places: NTPlace[] = [];
+
+  // Load bundled data initially.
+  // Should strip out open status in this case.
+  let data = defaultPlaceData;
+
   
   // The data is provided as a single object, with each place as a child object
   // with its ID as a key. Iterate through each objects value.
-  Object.values(defaultPlaceData).forEach((place) => {
+  Object.values(data).forEach((place) => {
     places.push(convertPlaceData(place));
   });
 
