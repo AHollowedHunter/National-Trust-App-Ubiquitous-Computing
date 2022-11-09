@@ -3,6 +3,7 @@ import { Image, Text, TouchableHighlight, View } from "react-native";
 import { ntColours, ntFonts } from "../config/styles";
 import { NTPlace } from "../config/types";
 import { NTIcon } from "./NationalTrustIcon";
+import OpenStatus from "./OpenStatus";
 
 type Props = {
   place: NTPlace;
@@ -73,6 +74,10 @@ export default function PlaceListItem({ place }: Props) {
               }}
             >
               {place.subTitle}
+              {/* <NTIcon
+                name="Information-centre"
+                style={{ fontSize: 16, color: ntColours.olive }}
+              /> */}
             </Text>
           </View>
 
@@ -91,16 +96,14 @@ export default function PlaceListItem({ place }: Props) {
             marginHorizontal: 8,
             top: -16,
             marginBottom: -8,
-            padding: 4,
+            padding: 8,
             flexDirection: "row",
             display: "flex",
           }}
         >
           <Text style={{ flex: 2 }}>{place.description}</Text>
           <View style={{ flex: 1, alignItems: "flex-end" }}>
-            <Text style={{ fontWeight: "bold", textAlign: "right" }}>
-              {place.openStatus}
-            </Text>
+            <OpenStatus openStatus={place.openStatus} />
             <NTIcon name="Animals-in-park" style={{ fontSize: 24 }} />
           </View>
         </View>

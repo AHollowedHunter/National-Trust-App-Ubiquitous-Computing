@@ -1,23 +1,23 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as SplashScreen from "expo-splash-screen";
-import { createIconSetFromIcoMoon } from "@expo/vector-icons";
 
 import { ntColours, styles } from "./config/styles";
 import { DiscoverScreen } from "./screens/DiscoverScreen";
+import PlacesContext from "./contexts/PlacesContext";
+import { defaultPlaces, getPlaces } from "./api/Places";
 
 SplashScreen.preventAutoHideAsync();
 
-const Icon = createIconSetFromIcoMoon(
-  require("./assets/fonts/NationTrustIcons.json"),
-  'NationalTrustIcons',
-  'NationalTrustIcons.ttf'
-);
-
 export default function App() {
+  const [places, setPlaces] = useState(defaultPlaces);
+  useEffect(() => {
+    setPlaces(getPlaces());
+  }, []);
+
   const [fontsLoaded] = useFonts({
     NationalTrustDisplayWeb_Regular: require("./assets/fonts/NationalTrustDisplayWeb_Regular.ttf"),
     NationalTrustWeb_Regular: require("./assets/fonts/NationalTrustWeb_Regular.ttf"),
@@ -38,9 +38,11 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
       <StatusBar style="light" backgroundColor={ntColours.cardinalPink} />
-      <NavigationContainer>
-        <DiscoverScreen />
-      </NavigationContainer>
+      <PlacesContext.Provider value={{ places }}>
+        <NavigationContainer>
+          <DiscoverScreen />
+        </NavigationContainer>
+      </PlacesContext.Provider>
     </SafeAreaView>
   );
 }

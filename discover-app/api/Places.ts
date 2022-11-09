@@ -1,5 +1,13 @@
 import { NTOpenStatus, NTPlace, NTRegion } from "../config/types";
-import defaultPlaceData from "./all-places.json";
+import allPlaces from "./all-places.json";
+import defaultPlaceData from "./defaultPlaces.json";
+
+/**
+ * Default places list without open status. Used while waiting on current data
+ */
+export const defaultPlaces: NTPlace[] = JSON.parse(
+  JSON.stringify(defaultPlaceData)
+);
 
 /**
  * Gets a list of all the National Trust places
@@ -10,9 +18,8 @@ export function getPlaces(): NTPlace[] {
 
   // Load bundled data initially.
   // Should strip out open status in this case.
-  let data = defaultPlaceData;
+  let data = allPlaces;
 
-  
   // The data is provided as a single object, with each place as a child object
   // with its ID as a key. Iterate through each objects value.
   Object.values(data).forEach((place) => {

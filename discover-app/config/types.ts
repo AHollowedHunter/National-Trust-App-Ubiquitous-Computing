@@ -5,12 +5,12 @@ export type NativeStackParamList = {
 
 // Discover Nav
 export type DiscoverBottomTabParamList = {
-  Map: { places: NTPlace[] };
-  List: { places: NTPlace[] };
+  Map: undefined;
+  List: undefined;
 };
 
 // NT Place Data
-export type NTPlace = {
+export interface NTPlace {
   id: number;
   title: string;
   subTitle: string;

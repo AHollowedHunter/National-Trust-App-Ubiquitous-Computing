@@ -19,7 +19,6 @@ export const ntColours = {
   // Others used on web
   darkGrey: "#2c2c2c",
   paletteNav: "#22404c",
-  
 };
 
 export const ntFonts = {
@@ -33,5 +32,9 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: ntColours.desertStorm,
     // fontFamily: ntFonts.display,
+  },
+  infoBold: {
+    fontWeight: "bold",
+    textAlign: "right",
   },
 });

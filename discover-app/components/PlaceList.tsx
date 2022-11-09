@@ -17,7 +17,11 @@ export function PlaceList(props: Props) {
       renderItem={(item) => <PlaceListItem place={item.item}></PlaceListItem>}
       ItemSeparatorComponent={() => (
         <View
-          style={{ height: 8, width: "100%", backgroundColor: ntColours.cararra }}
+          style={{
+            height: 4,
+            marginHorizontal: 16,
+            backgroundColor: ntColours.darkGrey,
+          }}
         />
       )}
     />
