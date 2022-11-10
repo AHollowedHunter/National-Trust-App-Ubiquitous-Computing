@@ -2,7 +2,7 @@ import React from "react";
 import { Image, Text, TouchableHighlight, View } from "react-native";
 import { ntColours, ntFonts } from "../config/styles";
 import { NTPlace } from "../config/types";
-import { NTIcon } from "./NationalTrustIcon";
+import { NTIcon } from "./NationalTrustIcons";
 import OpenStatus from "./OpenStatus";
 
 type Props = {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import {
   DiscoverBottomTabParamList,
@@ -11,7 +11,7 @@ import {
 import { ntColours, ntFonts } from "../config/styles";
 import { MapScreen } from "./MapScreen";
 import { ListScreen } from "./ListScreen";
-import { defaultPlaces, getPlaces } from "../api/Places";
+import { NTWebIcon } from "../components/NationalTrustIcons";
 
 type Props = NativeStackScreenProps<NativeStackParamList, "Discover">;
 
@@ -31,13 +31,24 @@ const options: BottomTabNavigationOptions = {
   tabBarInactiveBackgroundColor: ntColours.cararra,
 };
 
+const ntTabBarIcon =
+  (iconName: keyof typeof NTWebIcon.glyphMap) =>
+  (props: { focused: boolean; color: string; size: number }) => {
+    return <NTWebIcon name={iconName} size={props.size} color={props.color} />;
+  };
+
 export function DiscoverScreen() {
   return (
     <Tab.Navigator screenOptions={options} initialRouteName="List">
-      <Tab.Screen name="Map" component={MapScreen}/>
+      <Tab.Screen
+        name="Map"
+        component={MapScreen}
+        options={{ tabBarIcon: ntTabBarIcon("map") }}
+      />
       <Tab.Screen
         name="List"
         component={ListScreen}
+        options={{ tabBarIcon: ntTabBarIcon("list") }}
       />
     </Tab.Navigator>
   );

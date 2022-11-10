@@ -26,6 +26,7 @@ export default function App() {
     NationalTrustWeb_Regular: require("./assets/fonts/NationalTrustWeb_Regular.ttf"),
     NationalTrustWeb_Italic: require("./assets/fonts/NationalTrustWeb_Italic.ttf"),
     NationalTrustIcons: require("./assets/fonts/NationalTrustIcons.ttf"),
+    NationalTrustIconsWeb: require("./assets/fonts/NationalTrustIconsWeb.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {
