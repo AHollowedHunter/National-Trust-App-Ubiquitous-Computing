@@ -1,5 +1,4 @@
 import { NTOpenStatus, NTPlace, NTRegion } from "../config/types";
-import allPlaces from "./all-places.json";
 import defaultPlaceData from "./defaultPlaces.json";
 
 /**
@@ -66,7 +65,7 @@ function convertPlaceData(raw: any): NTPlace {
     openStatus:
       raw.openingTimeStatus != undefined
         ? (raw.openingTimeStatus as NTOpenStatus)
-        : NTOpenStatus.AlwayOpen,
+        : NTOpenStatus.Unknown,
     region: raw.cmsRegion as NTRegion,
   };
 

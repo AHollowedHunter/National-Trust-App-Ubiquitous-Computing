@@ -18,7 +18,7 @@ export default function App() {
     const getData = async () => {
       setPlaces(await getPlaces());
     };
-    getData()
+    getData();
   }, []);
 
   const [fontsLoaded] = useFonts({

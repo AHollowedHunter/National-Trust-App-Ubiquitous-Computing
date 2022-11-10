@@ -6,6 +6,7 @@ import {
   LocationObjectCoords,
 } from "expo-location";
 import { NTPlace } from "../config/types";
+import { Image } from "react-native";
 
 type Props = {
   places?: NTPlace[];
@@ -32,16 +33,12 @@ export function MainMap(props: Props) {
     <MapView
       style={{ flex: 1 }}
       initialRegion={{
-        // latitude: this.state.location.latitude,
-        // longitude: this.state.location.longitude,
-
         latitude: 50.6884,
         longitude: -1.95622,
         latitudeDelta: 0.8,
         longitudeDelta: 0.8,
       }}
       showsUserLocation={true}
-      // followsUserLocation={true}
       mapType="standard"
     >
       {props.places
@@ -54,6 +51,8 @@ export function MainMap(props: Props) {
               }}
               title={place.title}
               description={place.description}
+              image={require("../assets/images/map-marker.png")}
+              centerOffset={{ x: 0, y: -32 }}
             />
           ))
         : null}

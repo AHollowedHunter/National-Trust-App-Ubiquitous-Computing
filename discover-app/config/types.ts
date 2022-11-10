@@ -25,7 +25,7 @@ export interface NTPlace {
 };
 
 export enum NTOpenStatus {
-  AlwayOpen = "",
+  Unknown = "",
   Closed = "Closed today",
   Open = "Open today",
   PartOpen = "Partially open today",
