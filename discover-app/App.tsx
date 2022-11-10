@@ -15,7 +15,10 @@ SplashScreen.preventAutoHideAsync();
 export default function App() {
   const [places, setPlaces] = useState(defaultPlaces);
   useEffect(() => {
-    setPlaces(getPlaces());
+    const getData = async () => {
+      setPlaces(await getPlaces());
+    };
+    getData()
   }, []);
 
   const [fontsLoaded] = useFonts({

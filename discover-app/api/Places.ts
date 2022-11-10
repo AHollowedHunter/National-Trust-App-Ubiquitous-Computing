@@ -13,21 +13,31 @@ export const defaultPlaces: NTPlace[] = JSON.parse(
  * Gets a list of all the National Trust places
  * @returns an array of NTPlace
  */
-export function getPlaces(): NTPlace[] {
+export async function getPlaces(): Promise<NTPlace[]> {
   const places: NTPlace[] = [];
 
-  // Load bundled data initially.
-  // Should strip out open status in this case.
-  let data = allPlaces;
+  let placeJson = await getPlaceJson();
 
   // The data is provided as a single object, with each place as a child object
   // with its ID as a key. Iterate through each objects value.
-  Object.values(data).forEach((place) => {
+  Object.values(placeJson).forEach((place) => {
     places.push(convertPlaceData(place));
   });
 
   return places;
 }
+
+const getPlaceJson = async () => {
+  try {
+    const response = await fetch(
+      "https://www.nationaltrust.org.uk/search/data/all-places"
+    );
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 /**
  * Map given data to own type
