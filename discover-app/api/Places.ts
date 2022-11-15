@@ -13,17 +13,20 @@ export const defaultPlaces: NTPlace[] = JSON.parse(
  * @returns an array of NTPlace
  */
 export async function getPlaces(): Promise<NTPlace[]> {
-  const places: NTPlace[] = [];
-
   let placeJson = await getPlaceJson();
 
-  // The data is provided as a single object, with each place as a child object
-  // with its ID as a key. Iterate through each objects value.
-  Object.values(placeJson).forEach((place) => {
-    places.push(convertPlaceData(place));
-  });
+  if (placeJson) {
+    const places: NTPlace[] = [];
+    // The data is provided as a single object, with each place as a child object
+    // with its ID as a key. Iterate through each objects value.
+    Object.values(placeJson).forEach((place) => {
+      places.push(convertPlaceData(place));
+    });
 
-  return places;
+    return places;
+  } else {
+    return defaultPlaces;
+  }
 }
 
 const getPlaceJson = async () => {
@@ -34,7 +37,7 @@ const getPlaceJson = async () => {
     const json = await response.json();
     return json;
   } catch (error) {
-    console.error(error);
+    console.log("Error getting current place data: " + error);
   }
 };
 
