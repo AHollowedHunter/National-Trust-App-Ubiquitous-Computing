@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as SplashScreen from "expo-splash-screen";
 
-import { ntColours, styles } from "./config/styles";
+import { ntColours, appStyles } from "./config/styles";
 import { DiscoverScreen } from "./screens/DiscoverScreen";
 import PlacesContext from "./contexts/PlacesContext";
 import { defaultPlaces, getPlaces } from "./api/Places";
@@ -29,6 +29,7 @@ export default function App() {
     NationalTrustIconsWeb: require("./assets/fonts/NationalTrustIconsWeb.ttf"),
   });
 
+  // Wait for all fonts to be loaded before rendering anything
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
       await SplashScreen.hideAsync();
@@ -40,7 +41,7 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+    <SafeAreaView style={appStyles.container} onLayout={onLayoutRootView}>
       <StatusBar style="light" backgroundColor={ntColours.cardinalPink} />
       <PlacesContext.Provider value={{ places }}>
         <NavigationContainer>

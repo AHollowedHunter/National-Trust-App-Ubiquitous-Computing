@@ -39,7 +39,7 @@ const ntTabBarIcon =
 
 export function DiscoverScreen() {
   return (
-    <Tab.Navigator screenOptions={options} initialRouteName="List">
+    <Tab.Navigator screenOptions={options} initialRouteName="Map">
       <Tab.Screen
         name="Map"
         component={MapScreen}

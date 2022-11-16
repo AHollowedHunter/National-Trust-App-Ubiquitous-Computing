@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import MapView, { Marker } from "react-native-maps";
+import { View, Text } from "react-native";
+import MapView, { Callout, Marker } from "react-native-maps";
 import {
   requestForegroundPermissionsAsync,
   getCurrentPositionAsync,
-  LocationObjectCoords,
 } from "expo-location";
 import { NTPlace } from "../config/types";
-import { Image } from "react-native";
+import MapCallout from "./MapCallout";
 
 type Props = {
   places?: NTPlace[];
@@ -53,7 +53,12 @@ export function MainMap(props: Props) {
               description={place.description}
               image={require("../assets/images/map-marker.png")}
               centerOffset={{ x: 0, y: -32 }}
-            />
+              calloutAnchor={{ x: 0.5, y: 0.5 }}
+            >
+              <Callout key={index} tooltip>
+                <MapCallout place={place} />
+              </Callout>
+            </Marker>
           ))
         : null}
     </MapView>

@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet } from "react-native";
 
 export const ntColours = {
   funGreen: "#007A3B",
@@ -27,7 +27,7 @@ export const ntFonts = {
   italics: "NationalTrustWeb_Italic",
 };
 
-export const styles = StyleSheet.create({
+export const appStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: ntColours.desertStorm,
@@ -36,5 +36,13 @@ export const styles = StyleSheet.create({
   infoBold: {
     fontWeight: "bold",
     textAlign: "right",
+  },
+  heading: {    
+    fontSize: 24,
+    fontFamily: ntFonts.display,
+  },
+  subHeading: {
+    fontFamily: ntFonts.italics,
+    fontSize: 16,
   },
 });
