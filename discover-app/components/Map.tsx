@@ -7,6 +7,7 @@ import {
 } from "expo-location";
 import { NTPlace } from "../config/types";
 import MapCallout from "./MapCallout";
+import { defaultPlaces } from "../api/Places";
 
 type Props = {
   places?: NTPlace[];
@@ -14,6 +15,7 @@ type Props = {
 
 export function MainMap(props: Props) {
   const [myState, setMyState] = useState("My State");
+  const [mapWidth, setMapWidth] = useState(400);
 
   useEffect(() => {
     async function getLocation() {
@@ -40,6 +42,9 @@ export function MainMap(props: Props) {
       }}
       showsUserLocation={true}
       mapType="standard"
+      onLayout={(event) => {
+        setMapWidth(event.nativeEvent.layout.width);
+      }}
     >
       {props.places
         ? props.places.map((place, index) => (
@@ -53,9 +58,9 @@ export function MainMap(props: Props) {
               description={place.description}
               image={require("../assets/images/map-marker.png")}
               centerOffset={{ x: 0, y: -32 }}
-              calloutAnchor={{ x: 0.5, y: 0.5 }}
+              calloutAnchor={{ x: 0.5, y: 0 }}
             >
-              <Callout key={index} tooltip>
+              <Callout key={index} tooltip style={{ width: mapWidth, paddingHorizontal: 16 }}>
                 <MapCallout place={place} />
               </Callout>
             </Marker>

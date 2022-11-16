@@ -2,7 +2,7 @@ import React from "react";
 import { Image, Text, View } from "react-native";
 import { appStyles, ntColours } from "../config/styles";
 import { NTPlace } from "../config/types";
-import { NTIcon } from "./NationalTrustIcons";
+import { NTActivityIcon, NTIcon } from "./NationalTrustIcons";
 import OpenStatus from "./OpenStatus";
 
 type Props = {
@@ -87,10 +87,16 @@ export default function PlaceCard({ place, imageHeight }: Props) {
           flexDirection: "row",
         }}
       >
-        <Text style={{ flex: 2 }}>{place.description}</Text>
-        <View style={{ flex: 1, alignItems: "flex-end" }}>
+        <Text style={{ flex: 1 }}>{place.description}</Text>
+        <View style={{ alignItems: "flex-end", paddingLeft: 8 }}>
           <OpenStatus openStatus={place.openStatus} />
-          <NTIcon name="Animals-in-park" style={{ fontSize: 24 }} />
+          {place.activityTags
+            ? place.activityTags.map((tag, index) => (
+                <Text key={index}>
+                  {tag} {NTActivityIcon(tag, 16)}
+                </Text>
+              ))
+            : null}
         </View>
       </View>
     </View>
