@@ -11,8 +11,8 @@ type Props = {
 };
 
 export default function MapMarker({ place, index, calloutWidth }: Props) {
-  // Used for callout re-render
-  const [renderHack, setRenderHack] = useState(false);
+  // Used for callout re-render. Not using the var, just need state to change
+  const [, setRenderHack] = useState(false);
   let ref = React.createRef<Marker>();
 
   return (
@@ -31,10 +31,9 @@ export default function MapMarker({ place, index, calloutWidth }: Props) {
       onPress={() => {
         // This little hack ensures the marker callout will redraw and display
         // an image without having to select the marker again.
-        if (!renderHack) {
-          setRenderHack(true);
-          ref.current?.showCallout();
-        }
+        // There is a 1-2 second delay depending on network speed.
+        setRenderHack(true);
+        ref.current?.showCallout();
       }}
     >
       <Callout

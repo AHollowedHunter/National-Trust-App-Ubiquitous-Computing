@@ -1,9 +1,9 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { ActivityIndicator, Text, View } from "react-native";
 import { Svg, Image as ImageSvg } from "react-native-svg";
 import { appStyles, ntColours } from "../config/styles";
 import { NTPlace } from "../config/types";
-import { NTActivityIcon, NTIcon } from "./NationalTrustIcons";
+import { NTActivityIcon, NTIcon, NTWebIcon } from "./NationalTrustIcons";
 import OpenStatus from "./OpenStatus";
 
 type Props = {
@@ -70,15 +70,44 @@ export default function PlaceCard({ place, imageHeight, showImage }: Props) {
                 position: "absolute",
                 height: imageHeight + 24,
                 width: "100%",
-                backgroundColor: ntColours.doveGrey,
+                backgroundColor: ntColours.alto,
               }}
-            />
+            >
+              <NTWebIcon
+                name="picture"
+                style={{
+                  fontSize: 32,
+                  color: ntColours.darkGrey,
+                  textAlign: "center",
+                  height: "100%",
+                  textAlignVertical: "center",
+                }}
+              ></NTWebIcon>
+              <ActivityIndicator
+                size={96}
+                color={ntColours.greenHaze}
+                style={{ position: "absolute", width: "100%", height: "100%" }}
+              />
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: ntColours.darkGrey,
+                  position: "relative",
+                  bottom: 64,
+                  textAlign: "center",
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                Loading...
+              </Text>
+            </View>
             <Svg width={"100%"} height={imageHeight + 24}>
               <ImageSvg
                 width={"100%"}
                 height={"100%"}
                 preserveAspectRatio="xMidYMid slice"
-                href={{ uri: place.imageUrl }}
+                href={{ uri: place.imageUrl + "?width=1000" }}
               />
             </Svg>
           </View>
