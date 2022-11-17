@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, Text, View } from "react-native";
+import { Svg, Image as ImageSvg } from "react-native-svg";
 import { appStyles, ntColours } from "../config/styles";
 import { NTPlace } from "../config/types";
 import { NTActivityIcon, NTIcon } from "./NationalTrustIcons";
@@ -8,9 +9,10 @@ import OpenStatus from "./OpenStatus";
 type Props = {
   place: NTPlace;
   imageHeight?: number;
+  showImage: boolean;
 };
 
-export default function PlaceCard({ place, imageHeight }: Props) {
+export default function PlaceCard({ place, imageHeight, showImage }: Props) {
   // Set default if not given
   imageHeight = imageHeight ? imageHeight : 200;
 
@@ -51,6 +53,7 @@ export default function PlaceCard({ place, imageHeight }: Props) {
                 paddingVertical: 8,
                 alignSelf: "flex-end",
                 maxWidth: "95%",
+                opacity: place.subTitle ? 1 : 0,
               },
             ]}
           >
@@ -58,23 +61,30 @@ export default function PlaceCard({ place, imageHeight }: Props) {
           </Text>
         </View>
 
-        <View style={{ top: -24, height: imageHeight }}>
-          <View
-            // This view exists to placeholder the space behind the image if it
-            // does not load, such as Android Map Callouts...
-            style={{
-              position: "absolute",
-              height: imageHeight + 24,
-              width: "100%",
-              backgroundColor: ntColours.doveGrey,
-            }}
-          />
-          <Image
-            source={{ uri: place.imageUrl }}
-            style={{ height: imageHeight + 24 }}
-            accessibilityLabel={place.imageDescription}
-          />
-        </View>
+        {showImage ? (
+          <View style={{ top: -24, height: imageHeight }}>
+            <View
+              // This view exists to placeholder the space behind the image if it
+              // does not load, such as Android Map Callouts...
+              style={{
+                position: "absolute",
+                height: imageHeight + 24,
+                width: "100%",
+                backgroundColor: ntColours.doveGrey,
+              }}
+            />
+            <Svg width={"100%"} height={imageHeight + 24}>
+              <ImageSvg
+                width={"100%"}
+                height={"100%"}
+                preserveAspectRatio="xMidYMid slice"
+                href={{ uri: place.imageUrl }}
+              />
+            </Svg>
+          </View>
+        ) : (
+          <View style={{ height: 24 }} />
+        )}
       </View>
 
       <View

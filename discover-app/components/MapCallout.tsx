@@ -1,16 +1,15 @@
 import React from "react";
-import { Text, View, TouchableHighlight } from "react-native";
-import { appStyles, ntColours } from "../config/styles";
+import { TouchableHighlight } from "react-native";
+import { ntColours } from "../config/styles";
 import { NTPlace } from "../config/types";
-import { NTIcon } from "./NationalTrustIcons";
-import OpenStatus from "./OpenStatus";
 import PlaceCard from "./PlaceCard";
 
 type Props = {
   place: NTPlace;
+  showImage: boolean
 };
 
-export default function MapCallout({ place }: Props) {
+export default function MapCallout({ place, showImage }: Props) {
   return (
     <TouchableHighlight
       underlayColor={ntColours.olive}
@@ -21,7 +20,7 @@ export default function MapCallout({ place }: Props) {
         backgroundColor: ntColours.eminence,
       }}
     >
-      <PlaceCard place={place} imageHeight={150} />
+      <PlaceCard place={place} imageHeight={150} showImage={showImage} />
     </TouchableHighlight>
   );
 }

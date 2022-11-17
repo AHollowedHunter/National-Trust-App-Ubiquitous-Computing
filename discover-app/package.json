@@ -28,7 +28,8 @@
     "expo-font": "~10.2.0",
     "expo-splash-screen": "~0.16.2",
     "@expo/vector-icons": "^13.0.0",
-    "react-native-webview": "11.23.0"
+    "react-native-webview": "11.23.0",
+    "react-native-svg": "12.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

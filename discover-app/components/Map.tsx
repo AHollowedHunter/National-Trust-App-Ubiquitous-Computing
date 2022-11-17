@@ -8,6 +8,7 @@ import {
 import { NTPlace } from "../config/types";
 import MapCallout from "./MapCallout";
 import { defaultPlaces } from "../api/Places";
+import MapMarker from "./MapMarker";
 
 type Props = {
   places?: NTPlace[];
@@ -47,24 +48,9 @@ export function MainMap(props: Props) {
       }}
     >
       {props.places
-        ? props.places.map((place, index) => (
-            <Marker
-              key={index}
-              coordinate={{
-                latitude: place.location.latitude,
-                longitude: place.location.longitude,
-              }}
-              title={place.title}
-              description={place.description}
-              image={require("../assets/images/map-marker.png")}
-              centerOffset={{ x: 0, y: -32 }}
-              calloutAnchor={{ x: 0.5, y: 0 }}
-            >
-              <Callout key={index} tooltip style={{ width: mapWidth, paddingHorizontal: 16 }}>
-                <MapCallout place={place} />
-              </Callout>
-            </Marker>
-          ))
+        ? props.places.map((place, index) =>
+            MapMarker({ place, index, calloutWidth: mapWidth })
+          )
         : null}
     </MapView>
   );
