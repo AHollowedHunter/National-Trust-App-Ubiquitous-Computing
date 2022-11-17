@@ -6,7 +6,7 @@ import PlaceCard from "./PlaceCard";
 
 type Props = {
   place: NTPlace;
-  showImage: boolean
+  showImage: boolean;
 };
 
 export default function MapCallout({ place, showImage }: Props) {

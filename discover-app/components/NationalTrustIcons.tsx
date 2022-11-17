@@ -45,14 +45,7 @@ export const NTActivityIcon = (activity: String, size?: number) => {
       return (
         <NTIcon name="Rock-climbing" style={{ fontSize: size ? size : 24 }} />
       );
-    case "Running":
-      // return (
-      //   // <NTIcon name="" style={{ fontSize: size ? size : 24 }} />
-      // );
     case "Boating":
-      return (
-        <NTIcon name="Sailing-boating" style={{ fontSize: size ? size : 24 }} />
-      );
     case "Sailing":
       return (
         <NTIcon name="Sailing-boating" style={{ fontSize: size ? size : 24 }} />
@@ -81,6 +74,10 @@ export const NTActivityIcon = (activity: String, size?: number) => {
       return (
         <NTIcon name="Fishing" style={{ fontSize: size ? size : 24 }} />
       );
+    case "Running":
+      // return (
+      //   // <NTIcon name="" style={{ fontSize: size ? size : 24 }} />
+      // );
     case "Archery":
       // return (
       //   <NTIcon name="" style={{ fontSize: size ? size : 24 }} />

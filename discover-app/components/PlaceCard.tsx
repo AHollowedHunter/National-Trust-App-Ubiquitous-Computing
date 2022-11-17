@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { Svg, Image as ImageSvg } from "react-native-svg";
 import { appStyles, ntColours } from "../config/styles";
 import { NTPlace } from "../config/types";
