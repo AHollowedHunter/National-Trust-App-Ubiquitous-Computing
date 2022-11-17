@@ -1,7 +1,7 @@
 import { createIconSet } from "@expo/vector-icons";
 import NTWebIconGlyphMap from "../assets/fonts/NationalTrustIconsWeb.glyphMap.json";
 import NTIconGlyphMap from "../assets/fonts/NationalTrustIcons.glyphmap.json";
-import { ActivityType } from "expo-location";
+import NTIconCustomGlyphMap from "../assets/fonts/NationalTrustIconsCustom.glyphmap.json"
 
 export const NTIcon = createIconSet(
   NTIconGlyphMap,
@@ -14,6 +14,12 @@ export const NTWebIcon = createIconSet(
   "NationalTrustIconsWeb",
   "NationalTrustIconsWeb.ttf"
 );
+
+export const NTIconCustom = createIconSet(
+  NTIconCustomGlyphMap,
+  "NationalTrustIconsCustom",
+  "NationalTrustIconsCustom.ttf"
+)
 
 export const NTActivityIcon = (activity: String, size?: number) => {
   switch (activity) {
@@ -75,12 +81,12 @@ export const NTActivityIcon = (activity: String, size?: number) => {
         <NTIcon name="Fishing" style={{ fontSize: size ? size : 24 }} />
       );
     case "Running":
-      // return (
-      //   // <NTIcon name="" style={{ fontSize: size ? size : 24 }} />
-      // );
+      return (
+        <NTIconCustom name="Running" style={{ fontSize: size ? size : 24 }} />
+      );
     case "Archery":
-      // return (
-      //   <NTIcon name="" style={{ fontSize: size ? size : 24 }} />
-      // );
+      return (
+        <NTIconCustom name="Archery" style={{ fontSize: size ? size : 24 }} />
+      );
   }
 };

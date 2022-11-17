@@ -27,6 +27,7 @@ export default function App() {
     NationalTrustWeb_Italic: require("./assets/fonts/NationalTrustWeb_Italic.ttf"),
     NationalTrustIcons: require("./assets/fonts/NationalTrustIcons.ttf"),
     NationalTrustIconsWeb: require("./assets/fonts/NationalTrustIconsWeb.ttf"),
+    NationalTrustIconsCustom: require("./assets/fonts/NationalTrustIconsCustom.ttf"),
   });
 
   // Wait for all fonts to be loaded before rendering anything
