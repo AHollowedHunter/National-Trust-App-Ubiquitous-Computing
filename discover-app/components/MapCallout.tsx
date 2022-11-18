@@ -20,7 +20,7 @@ export default function MapCallout({ place, showImage }: Props) {
         backgroundColor: ntColours.eminence,
       }}
     >
-      <PlaceCard place={place} imageHeight={150} showImage={showImage} />
+      <PlaceCard place={place} imageHeight={240} showImage={showImage} />
     </TouchableHighlight>
   );
 }

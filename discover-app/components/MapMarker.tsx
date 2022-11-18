@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { Callout, Marker } from "react-native-maps";
+import React, { useState } from "react";
+import { View } from "react-native";
+import MapView, { Callout, Marker } from "react-native-maps";
+import Svg, { SvgFromUri, SvgFromXml } from "react-native-svg";
+import { ntColours } from "../config/styles";
 import { NTPlace } from "../config/types";
 import MapCallout from "./MapCallout";
-import { defaultPlaces } from "../api/Places";
 
 type Props = {
   place: NTPlace;
-  index: number;
-  calloutWidth: number;
+  mapRef: React.MutableRefObject<MapView | null>;
+  mapWidth: number;
 };
 
-export default function MapMarker({ place, index, calloutWidth }: Props) {
+export default function MapMarker({ place, mapRef, mapWidth }: Props) {
   // Used for callout re-render. Not using the var, just need state to change
   const [, setRenderHack] = useState(false);
   let ref = React.createRef<Marker>();
 
   return (
     <Marker
-      key={index}
       coordinate={{
         latitude: place.location.latitude,
         longitude: place.location.longitude,
@@ -26,7 +27,7 @@ export default function MapMarker({ place, index, calloutWidth }: Props) {
       description={place.description}
       image={require("../assets/images/map-marker.png")}
       centerOffset={{ x: 0, y: -32 }}
-      calloutAnchor={{ x: 0.5, y: 0 }}
+      calloutAnchor={{ x: 0.5, y: 0.7 }}
       ref={ref}
       onPress={() => {
         // This little hack ensures the marker callout will redraw and display
@@ -34,14 +35,32 @@ export default function MapMarker({ place, index, calloutWidth }: Props) {
         // There is a 1-2 second delay depending on network speed.
         setRenderHack(true);
         ref.current?.showCallout();
+        // EOH
+
+        mapRef.current?.animateCamera({
+          heading: 0,
+          center: {
+            latitude:
+              place.location.latitude +
+              (mapRef.current.props.initialRegion?.latitudeDelta ?? 0) / 3.5,
+            longitude: place.location.longitude,
+          },
+          pitch: 0,
+        });
       }}
     >
-      <Callout
-        key={index}
-        tooltip
-        style={{ width: calloutWidth, paddingHorizontal: 16 }}
-      >
+      <Callout tooltip style={{ width: mapWidth, paddingHorizontal: 16 }}>
         <MapCallout place={place} showImage={true} />
+        <Svg>
+          <SvgFromXml
+            xml={`<svg height="16" width="${mapWidth - 32}">
+                    <polygon
+                      points="0,0 ${mapWidth - 32},0 ${(mapWidth - 32) / 2},16" 
+                      style="fill:${ntColours.eminence};"
+                    />
+                  </svg>`}
+          />
+        </Svg>
       </Callout>
     </Marker>
   );

@@ -93,7 +93,7 @@ export default function PlaceCard({ place, imageHeight, showImage }: Props) {
                   fontSize: 18,
                   color: ntColours.darkGrey,
                   position: "relative",
-                  bottom: 64,
+                  bottom: 48,
                   textAlign: "center",
                   width: "100%",
                   height: "100%",

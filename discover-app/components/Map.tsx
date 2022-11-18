@@ -18,37 +18,33 @@ type Props = {
 };
 
 export function MainMap(props: Props) {
-  const [myPosition, setMyPosition] = useState({
-    coords: { latitude: 50.6884, longitude: -1.95622 },
-  });
-  const [loading, setLoading] = useState(true);
+  const mapRef = React.useRef<MapView | null>(null);
   const [mapWidth, setMapWidth] = useState(400);
 
   useEffect(() => {
     async function getLocation() {
       let { status } = await requestForegroundPermissionsAsync();
       if (status !== "granted") {
-        // setErrorMsg("Permission to access location was denied");
-        setLoading(false);
         return;
       }
-      if (loading) {
-        setMyPosition(await getCurrentPositionAsync());
-        setLoading(false);
-      }
+      let pos = await getCurrentPositionAsync();
+      mapRef.current?.animateCamera({
+        heading: 0,
+        center: pos.coords,
+        pitch: 0,
+      });
     }
 
     getLocation();
   }, []);
 
-  // let location = myPosition;
-
   return (
     <MapView
+      ref={mapRef}
       style={{ flex: 1 }}
       initialRegion={{
-        latitude: myPosition.coords.latitude,
-        longitude: myPosition.coords.longitude,
+        latitude: 50.6884,
+        longitude: -2.95622,
         latitudeDelta: 0.8,
         longitudeDelta: 0.8,
       }}
@@ -57,11 +53,12 @@ export function MainMap(props: Props) {
       onLayout={(event) => {
         setMapWidth(event.nativeEvent.layout.width);
       }}
+      showsBuildings={true}
     >
       {props.places
-        ? props.places.map((place, index) =>
-            MapMarker({ place, index, calloutWidth: mapWidth })
-          )
+        ? props.places.map((place, index) => (
+            <MapMarker key={index} mapRef={mapRef} place={place} mapWidth={mapWidth} />
+          ))
         : null}
     </MapView>
   );
