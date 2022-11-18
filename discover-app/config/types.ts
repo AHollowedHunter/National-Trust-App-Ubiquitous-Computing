@@ -1,7 +1,12 @@
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
 //  Root Navigation
 export type NativeStackParamList = {
   Discover: undefined;
+  Place: { place: NTPlace };
 };
+
+export type NativeStackProps = NativeStackNavigationProp<NativeStackParamList>;
 
 // Discover Nav
 export type DiscoverBottomTabParamList = {
@@ -22,7 +27,7 @@ export interface NTPlace {
   activityTags: string[];
   openStatus: NTOpenStatus;
   region: NTRegion;
-};
+}
 
 export enum NTOpenStatus {
   Unknown = "",

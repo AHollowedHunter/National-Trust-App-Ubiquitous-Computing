@@ -37,7 +37,7 @@ const ntTabBarIcon =
     return <NTWebIcon name={iconName} size={props.size} color={props.color} />;
   };
 
-export function DiscoverScreen() {
+export function DiscoverScreen({ route, navigation }: Props) {
   return (
     <Tab.Navigator screenOptions={options} initialRouteName="Map">
       <Tab.Screen

@@ -15,7 +15,6 @@ export default function MapCallout({ place, showImage }: Props) {
       underlayColor={ntColours.olive}
       activeOpacity={1}
       delayPressIn={60}
-      onPress={() => null}
       style={{
         backgroundColor: ntColours.eminence,
       }}

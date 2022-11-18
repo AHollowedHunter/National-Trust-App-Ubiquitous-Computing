@@ -9,10 +9,15 @@ import { ntColours, appStyles } from "./config/styles";
 import { DiscoverScreen } from "./screens/DiscoverScreen";
 import PlacesContext from "./contexts/PlacesContext";
 import { defaultPlaces, getPlaces } from "./api/Places";
+import { PlaceScreen } from "./screens/PlaceScreen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NativeStackParamList } from "./config/types";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+const NativeStack = createNativeStackNavigator<NativeStackParamList>();
+
   const [places, setPlaces] = useState(defaultPlaces);
   useEffect(() => {
     const getData = async () => {
@@ -46,7 +51,10 @@ export default function App() {
       <StatusBar style="light" backgroundColor={ntColours.cardinalPink} />
       <PlacesContext.Provider value={{ places }}>
         <NavigationContainer>
-          <DiscoverScreen />
+          <NativeStack.Navigator>
+            <NativeStack.Screen name="Discover" component={DiscoverScreen}/>
+            <NativeStack.Screen name="Place" component={PlaceScreen}/>
+          </NativeStack.Navigator>
         </NavigationContainer>
       </PlacesContext.Provider>
     </SafeAreaView>

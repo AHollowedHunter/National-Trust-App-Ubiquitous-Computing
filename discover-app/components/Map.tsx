@@ -44,7 +44,7 @@ export function MainMap(props: Props) {
       style={{ flex: 1 }}
       initialRegion={{
         latitude: 50.6884,
-        longitude: -2.95622,
+        longitude: -1.95622,
         latitudeDelta: 0.8,
         longitudeDelta: 0.8,
       }}

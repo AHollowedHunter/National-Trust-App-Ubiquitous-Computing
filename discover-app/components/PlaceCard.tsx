@@ -1,8 +1,9 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { ActivityIndicator, Text, View } from "react-native";
 import { Svg, Image as ImageSvg } from "react-native-svg";
 import { appStyles, ntColours } from "../config/styles";
-import { NTPlace } from "../config/types";
+import { NativeStackParamList, NTPlace } from "../config/types";
 import { NTActivityIcon, NTIcon, NTWebIcon } from "./NationalTrustIcons";
 import OpenStatus from "./OpenStatus";
 
@@ -15,6 +16,8 @@ type Props = {
 export default function PlaceCard({ place, imageHeight, showImage }: Props) {
   // Set default if not given
   imageHeight = imageHeight ? imageHeight : 200;
+
+  let navigation = useNavigation<NativeStackParamList>();
 
   return (
     <View>

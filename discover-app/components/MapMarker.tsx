@@ -1,9 +1,10 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { View } from "react-native";
 import MapView, { Callout, Marker } from "react-native-maps";
 import Svg, { SvgFromUri, SvgFromXml } from "react-native-svg";
 import { ntColours } from "../config/styles";
-import { NTPlace } from "../config/types";
+import { NativeStackProps, NTPlace } from "../config/types";
 import MapCallout from "./MapCallout";
 
 type Props = {
@@ -13,6 +14,8 @@ type Props = {
 };
 
 export default function MapMarker({ place, mapRef, mapWidth }: Props) {
+  let navigation = useNavigation<NativeStackProps>();
+  
   // Used for callout re-render. Not using the var, just need state to change
   const [, setRenderHack] = useState(false);
   let ref = React.createRef<Marker>();
@@ -49,7 +52,11 @@ export default function MapMarker({ place, mapRef, mapWidth }: Props) {
         });
       }}
     >
-      <Callout tooltip style={{ width: mapWidth, paddingHorizontal: 16 }}>
+      <Callout
+        tooltip
+        style={{ width: mapWidth, paddingHorizontal: 16 }}
+        onPress={() => navigation.push("Place", { place: place })}
+      >
         <MapCallout place={place} showImage={true} />
         <Svg>
           <SvgFromXml
