@@ -88,7 +88,7 @@ export default function PlaceCard({ place, imageHeight, showImage }: Props) {
               ></NTWebIcon>
               <ActivityIndicator
                 size={96}
-                color={ntColours.greenHaze}
+                color={ntColours.olive}
                 style={{ position: "absolute", width: "100%", height: "100%" }}
               />
               <Text

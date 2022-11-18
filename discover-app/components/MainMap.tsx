@@ -1,17 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Text, ActivityIndicator } from "react-native";
-import MapView, { Callout, Marker } from "react-native-maps";
+import MapView from "react-native-maps";
 import {
   requestForegroundPermissionsAsync,
   getCurrentPositionAsync,
-  LocationObject,
 } from "expo-location";
 import { NTPlace } from "../config/types";
-import MapCallout from "./MapCallout";
-import { defaultPlaces } from "../api/Places";
 import MapMarker from "./MapMarker";
-import { Colors } from "react-native/Libraries/NewAppScreen";
-import { ntColours } from "../config/styles";
 
 type Props = {
   places?: NTPlace[];
@@ -57,7 +51,12 @@ export function MainMap(props: Props) {
     >
       {props.places
         ? props.places.map((place, index) => (
-            <MapMarker key={index} mapRef={mapRef} place={place} mapWidth={mapWidth} />
+            <MapMarker
+              key={index}
+              mapRef={mapRef}
+              place={place}
+              mapWidth={mapWidth}
+            />
           ))
         : null}
     </MapView>

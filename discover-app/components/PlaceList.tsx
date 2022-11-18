@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { FlatList, ListRenderItem, Text, View } from "react-native";
+import React from "react";
+import { FlatList } from "react-native";
 import { ntColours } from "../config/styles";
 import { NTPlace } from "../config/types";
 import PlaceListItem from "./PlaceListItem";
+import Separator from "./Separator";
 
 type Props = {
   places: NTPlace[];
@@ -15,15 +16,7 @@ export function PlaceList(props: Props) {
       data={props.places}
       keyExtractor={(item) => item.id.toString()}
       renderItem={(item) => <PlaceListItem place={item.item}></PlaceListItem>}
-      ItemSeparatorComponent={() => (
-        <View
-          style={{
-            height: 4,
-            marginHorizontal: 16,
-            backgroundColor: ntColours.darkGrey,
-          }}
-        />
-      )}
+      ItemSeparatorComponent={() => <Separator />}
     />
   );
 }
