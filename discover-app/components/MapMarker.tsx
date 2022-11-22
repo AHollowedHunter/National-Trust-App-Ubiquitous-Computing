@@ -15,9 +15,9 @@ type Props = {
 
 export default function MapMarker({ place, mapRef, mapWidth }: Props) {
   let navigation = useNavigation<NativeStackProps>();
-  
+
   // Used for callout re-render. Not using the var, just need state to change
-  const [, setRenderHack] = useState(false);
+  const [renderHack, setRenderHack] = useState(false);
   let ref = React.createRef<Marker>();
 
   return (
@@ -69,6 +69,10 @@ export default function MapMarker({ place, mapRef, mapWidth }: Props) {
           />
         </Svg>
       </Callout>
+      {
+        // Get the callout to redraw and load the image by "using" state
+        renderHack ? null : null
+      }
     </Marker>
   );
 }

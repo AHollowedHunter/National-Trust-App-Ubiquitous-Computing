@@ -4,19 +4,34 @@ import { StatusBar } from "expo-status-bar";
 import React, { useCallback, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as SplashScreen from "expo-splash-screen";
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationOptions,
+} from "@react-navigation/native-stack";
 
-import { ntColours, appStyles } from "./config/styles";
+import { ntColours, appStyles, ntFonts } from "./config/styles";
 import { DiscoverScreen } from "./screens/DiscoverScreen";
 import PlacesContext from "./contexts/PlacesContext";
 import { defaultPlaces, getPlaces } from "./api/Places";
 import { PlaceScreen } from "./screens/PlaceScreen";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NativeStackParamList } from "./config/types";
 
 SplashScreen.preventAutoHideAsync();
 
+const stackOptions: NativeStackNavigationOptions = {
+  headerShown: true,
+  headerStyle: { backgroundColor: ntColours.redViolet },
+  headerTitleStyle: {
+    fontFamily: ntFonts.display,
+    fontSize: 32,
+  },
+  headerTitleAlign: "center",
+  headerTintColor: "white",
+  animation: "fade",
+};
+
 export default function App() {
-const NativeStack = createNativeStackNavigator<NativeStackParamList>();
+  const NativeStack = createNativeStackNavigator<NativeStackParamList>();
 
   const [places, setPlaces] = useState(defaultPlaces);
   useEffect(() => {
@@ -51,9 +66,13 @@ const NativeStack = createNativeStackNavigator<NativeStackParamList>();
       <StatusBar style="light" backgroundColor={ntColours.cardinalPink} />
       <PlacesContext.Provider value={{ places }}>
         <NavigationContainer>
-          <NativeStack.Navigator>
-            <NativeStack.Screen name="Discover" component={DiscoverScreen}/>
-            <NativeStack.Screen name="Place" component={PlaceScreen}/>
+          <NativeStack.Navigator screenOptions={stackOptions}>
+            <NativeStack.Screen name="Discover" component={DiscoverScreen} />
+            <NativeStack.Screen
+              name="Place"
+              component={PlaceScreen}
+              options={({ route }) => ({ title: route.params.place.title })}
+            />
           </NativeStack.Navigator>
         </NavigationContainer>
       </PlacesContext.Provider>

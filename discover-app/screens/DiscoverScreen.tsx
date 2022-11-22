@@ -17,8 +17,8 @@ type Props = NativeStackScreenProps<NativeStackParamList, "Discover">;
 
 const Tab = createBottomTabNavigator<DiscoverBottomTabParamList>();
 
-const options: BottomTabNavigationOptions = {
-  headerShown: true,
+const bottomTabOptions: BottomTabNavigationOptions = {
+  headerShown: false,
   headerStyle: { backgroundColor: ntColours.redViolet },
   headerTitleStyle: {
     color: "white",
@@ -29,6 +29,10 @@ const options: BottomTabNavigationOptions = {
   tabBarActiveTintColor: "black",
   tabBarActiveBackgroundColor: ntColours.alto,
   tabBarInactiveBackgroundColor: ntColours.cararra,
+  tabBarLabelStyle: {
+    fontFamily: ntFonts.standard,
+    fontSize: 16,
+  },
 };
 
 const ntTabBarIcon =
@@ -39,7 +43,7 @@ const ntTabBarIcon =
 
 export function DiscoverScreen({ route, navigation }: Props) {
   return (
-    <Tab.Navigator screenOptions={options} initialRouteName="Map">
+    <Tab.Navigator screenOptions={bottomTabOptions} initialRouteName="Map">
       <Tab.Screen
         name="Map"
         component={MapScreen}
