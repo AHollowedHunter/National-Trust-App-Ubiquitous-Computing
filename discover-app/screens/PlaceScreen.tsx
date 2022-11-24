@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { NativeStackParamList } from "../config/types";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { View, Text, Image, ActivityIndicator } from "react-native";
-import { ntColours } from "../config/styles";
+import { View, ScrollView, Text, Image, ActivityIndicator } from "react-native";
+import { appStyles, ntColours } from "../config/styles";
 import { MiniMap } from "../components/MiniMap";
 import ImageLoading from "../components/ImageLoading";
+import OpenStatus from "../components/OpenStatus";
+import { NTActivityIcon } from "../components/NationalTrustIcons";
+import Separator from "../components/Separator";
+import { Alert } from "../components/Alert";
 
 type Props = NativeStackScreenProps<NativeStackParamList, "Place">;
 
@@ -12,9 +16,72 @@ export function PlaceScreen({ route, navigation }: Props) {
   const place = route.params.place;
 
   return (
-    <View style={{ flex: 1, backgroundColor: ntColours.desertStorm }}>
-      <ImageLoading uri={place.imageUrl} imageHeight={250} />
-      <MiniMap place={place} style={{ height: 200 }} />
-    </View>
+    <ScrollView style={{ flex: 1, backgroundColor: ntColours.alto }}>
+      <View
+        style={{
+          paddingHorizontal: 24,
+          zIndex: 1000,
+          position: "absolute",
+          width: "100%",
+        }}
+      >
+        <Text
+          style={[
+            appStyles.subHeading,
+            {
+              backgroundColor: ntColours.desertStorm,
+              paddingHorizontal: 16,
+              paddingVertical: 8,
+              alignSelf: "flex-end",
+              maxWidth: "95%",
+              opacity: place.subTitle ? 1 : 0,
+            },
+          ]}
+        >
+          {place.subTitle}
+        </Text>
+      </View>
+
+      <ImageLoading uri={place.imageUrl} imageHeight={300} />
+
+      <View
+        style={{
+          backgroundColor: ntColours.desertStorm,
+          top: -16,
+          marginHorizontal: 8,
+          marginBottom: -8,
+          padding: 8,
+        }}
+      >
+        <Alert content="Test Alert" />
+        <View
+          style={{
+            flexDirection: "row",
+            marginBottom: 8,
+          }}
+        >
+          <Text style={[appStyles.description, { flex: 1 }]}>
+            {place.description}
+          </Text>
+          <View style={{ alignItems: "flex-end", paddingLeft: 8 }}>
+            <OpenStatus openStatus={place.openStatus} />
+            {place.activityTags
+              ? place.activityTags.map((tag, index) => (
+                  <Text key={index}>
+                    {tag} {NTActivityIcon(tag, 16)}
+                  </Text>
+                ))
+              : null}
+          </View>
+        </View>
+
+        <Separator style={{ marginVertical: 8 }} />
+
+        <View style={{ flex: 1 }}>
+          <Text style={appStyles.heading}>Location and Directions</Text>
+          <MiniMap place={place} style={{ flex: 1, height: 200 }} />
+        </View>
+      </View>
+    </ScrollView>
   );
 }

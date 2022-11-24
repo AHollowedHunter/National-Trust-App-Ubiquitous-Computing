@@ -93,7 +93,7 @@ export default function PlaceCard({
           flexDirection: "row",
         }}
       >
-        <Text style={{ flex: 1 }}>{place.description}</Text>
+        <Text style={[appStyles.description, { flex: 1 }]}>{place.description}</Text>
         <View style={{ alignItems: "flex-end", paddingLeft: 8 }}>
           <OpenStatus openStatus={place.openStatus} />
           {place.activityTags

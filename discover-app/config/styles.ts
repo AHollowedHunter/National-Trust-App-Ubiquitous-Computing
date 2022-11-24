@@ -37,12 +37,28 @@ export const appStyles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "right",
   },
-  heading: {    
+  heading: {
     fontSize: 24,
     fontFamily: ntFonts.display,
   },
   subHeading: {
     fontFamily: ntFonts.italics,
     fontSize: 16,
+  },
+  description: {
+    fontSize: 16,
+  },
+  alert: {
+    marginBottom: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 8,
+    backgroundColor: "#ffcc00",
+    flexDirection: "row",
+  },
+  alertText: {
+    color: ntColours.darkGrey,
+    fontSize: 16,
+    flex: 1,
+    paddingHorizontal: 8,
   },
 });

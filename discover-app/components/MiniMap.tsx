@@ -23,11 +23,12 @@ export function MiniMap({ place, zoom, style }: Props) {
       mapType="standard"
       showsBuildings={true}
       liteMode={true}
+      showsUserLocation={true}
     >
       <Marker
         key={place.id}
         coordinate={place.location}
-        image={require("../assets/images/map-marker.png")}
+        image={require("../assets/images/map-marker-cardinal-pink.png")}
       />
     </MapView>
   );

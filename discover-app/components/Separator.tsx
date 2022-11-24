@@ -1,14 +1,21 @@
 import React from "react";
-import { View } from "react-native";
+import { StyleProp, View, ViewStyle } from "react-native";
 import { ntColours } from "../config/styles";
 
-const Separator = () => (
+type Props = {
+  style?: StyleProp<ViewStyle>;
+};
+
+const Separator = ({ style }: Props) => (
   <View
-    style={{
-      height: 4,
-      marginHorizontal: 16,
-      backgroundColor: ntColours.darkGrey,
-    }}
+    style={[
+      style,
+      {
+        height: 4,
+        marginHorizontal: 16,
+        backgroundColor: ntColours.darkGrey,
+      },
+    ]}
   />
 );
 
