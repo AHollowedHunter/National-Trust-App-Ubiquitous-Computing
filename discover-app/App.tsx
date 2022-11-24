@@ -25,7 +25,7 @@ const stackOptions: NativeStackNavigationOptions = {
     fontFamily: ntFonts.display,
     fontSize: 32,
   },
-  headerTitleAlign: "center",
+  headerTitleAlign: "left",
   headerTintColor: "white",
   animation: "fade",
 };
@@ -71,7 +71,7 @@ export default function App() {
             <NativeStack.Screen
               name="Place"
               component={PlaceScreen}
-              options={({ route }) => ({ title: route.params.place.title })}
+              options={({ route }) => ({ title: route.params.place.title, headerTitleAlign: "center" })}
             />
           </NativeStack.Navigator>
         </NavigationContainer>

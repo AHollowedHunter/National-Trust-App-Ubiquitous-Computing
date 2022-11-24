@@ -48,7 +48,8 @@ export function MainMap(props: Props) {
       onLayout={(event) => {
         setMapWidth(event.nativeEvent.layout.width);
       }}
-      showsBuildings={true}
+      showsBuildings={true}      
+      moveOnMarkerPress={false} // Handled in MapMarker onPress
     >
       {props.places
         ? props.places.map((place, index) => (

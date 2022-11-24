@@ -22,10 +22,7 @@ export default function MapMarker({ place, mapRef, mapWidth }: Props) {
 
   return (
     <Marker
-      coordinate={{
-        latitude: place.location.latitude,
-        longitude: place.location.longitude,
-      }}
+      coordinate={place.location}
       title={place.title}
       description={place.description}
       image={require("../assets/images/map-marker.png")}
@@ -42,6 +39,8 @@ export default function MapMarker({ place, mapRef, mapWidth }: Props) {
 
         let cam = await mapRef.current?.getCamera();
         let boundries = await mapRef.current?.getMapBoundaries();
+        // Don't center the map on the marker, instead place the marker towards
+        // the bottom to leave enough room for the callout
         const getLatitudeOffset = () =>
           boundries
             ? (boundries?.northEast.latitude - boundries?.southWest.latitude) /

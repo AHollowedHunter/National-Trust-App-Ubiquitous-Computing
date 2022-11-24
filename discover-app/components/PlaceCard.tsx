@@ -4,6 +4,7 @@ import { ActivityIndicator, Image, Text, View } from "react-native";
 import { Svg, Image as ImageSvg } from "react-native-svg";
 import { appStyles, ntColours } from "../config/styles";
 import { NativeStackParamList, NTPlace } from "../config/types";
+import ImageLoading from "./ImageLoading";
 import { NTActivityIcon, NTIcon, NTWebIcon } from "./NationalTrustIcons";
 import OpenStatus from "./OpenStatus";
 
@@ -71,71 +72,12 @@ export default function PlaceCard({
         </View>
 
         {showImage ? (
-          <View style={{ top: -24, height: imageHeight }}>
-            <View
-              // This view exists to placeholder the space behind the image if it
-              // does not load, such as Android Map Callouts...
-              style={{
-                position: "absolute",
-                height: imageHeight + 24,
-                width: "100%",
-                backgroundColor: ntColours.alto,
-                display: imageLoading ? "flex" : "none",
-              }}
-            >
-              <NTWebIcon
-                name="picture"
-                style={{
-                  fontSize: 32,
-                  color: ntColours.darkGrey,
-                  textAlign: "center",
-                  height: "100%",
-                  textAlignVertical: "center",
-                }}
-              ></NTWebIcon>
-              <ActivityIndicator
-                size={96}
-                color={ntColours.olive}
-                style={{ position: "absolute", width: "100%", height: "100%" }}
-              />
-              <Text
-                style={{
-                  fontSize: 18,
-                  color: ntColours.darkGrey,
-                  position: "relative",
-                  bottom: 48,
-                  textAlign: "center",
-                  width: "100%",
-                  height: "100%",
-                }}
-              >
-                Loading...
-              </Text>
-            </View>
-            <View>
-              <Image
-                onLoad={() => {
-                  setImageLoading(false);
-                }}
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  height: imageHeight + 24,
-                }}
-                source={{ uri: place.imageUrl + "?width=1000" }}
-              />
-              {useSvgImage ? (
-                <Svg width={"100%"} height={imageHeight + 24}>
-                  <ImageSvg
-                    width={"100%"}
-                    height={"100%"}
-                    preserveAspectRatio="xMidYMid slice"
-                    href={{ uri: place.imageUrl + "?width=1000" }}
-                  />
-                </Svg>
-              ) : null}
-            </View>
-          </View>
+          <ImageLoading
+            uri={place.imageUrl}
+            imageHeight={250}
+            offset={24}
+            useSvgImage={useSvgImage}
+          />
         ) : (
           <View style={{ height: 24 }} />
         )}
