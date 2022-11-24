@@ -1,8 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { View } from "react-native";
 import MapView, { Callout, Marker } from "react-native-maps";
-import Svg, { SvgFromUri, SvgFromXml } from "react-native-svg";
+import Svg, { SvgFromXml } from "react-native-svg";
 import { ntColours } from "../config/styles";
 import { NativeStackProps, NTPlace } from "../config/types";
 import MapCallout from "./MapCallout";
@@ -19,6 +18,8 @@ export default function MapMarker({ place, mapRef, mapWidth }: Props) {
   // Used for callout re-render. Not using the var, just need state to change
   const [renderHack, setRenderHack] = useState(false);
   let ref = React.createRef<Marker>();
+
+  let markerColour = ntColours.eminence;
 
   return (
     <Marker
@@ -64,13 +65,17 @@ export default function MapMarker({ place, mapRef, mapWidth }: Props) {
         style={{ width: mapWidth, paddingHorizontal: 16 }}
         onPress={() => navigation.push("Place", { place: place })}
       >
-        <MapCallout place={place} showImage={true} />
+        <MapCallout
+          place={place}
+          colour={markerColour}
+          showImage={true}
+        />
         <Svg>
           <SvgFromXml
             xml={`<svg height="16" width="${mapWidth - 32}">
                     <polygon
                       points="0,0 ${mapWidth - 32},0 ${(mapWidth - 32) / 2},16" 
-                      style="fill:${ntColours.eminence};"
+                      style="fill:${markerColour};"
                     />
                   </svg>`}
           />

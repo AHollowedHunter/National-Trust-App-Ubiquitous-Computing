@@ -42,7 +42,11 @@ export function PlaceScreen({ route, navigation }: Props) {
         </Text>
       </View>
 
-      <ImageLoading uri={place.imageUrl} imageHeight={300} />
+      <ImageLoading
+        uri={place.imageUrl}
+        description={place.imageDescription}
+        imageHeight={300}
+      />
 
       <View
         style={{
@@ -53,7 +57,12 @@ export function PlaceScreen({ route, navigation }: Props) {
           padding: 8,
         }}
       >
-        <Alert content="Test Alert" />
+        <Alert
+          content={
+            "This location is closed for the season.\
+            We look forward to seeing you again when we reopen"
+          }
+        />
         <View
           style={{
             flexDirection: "row",
@@ -78,7 +87,7 @@ export function PlaceScreen({ route, navigation }: Props) {
         <Separator style={{ marginVertical: 8 }} />
 
         <View style={{ flex: 1 }}>
-          <Text style={appStyles.heading}>Location and Directions</Text>
+          <Text style={appStyles.sectionHeading}>Location and Directions</Text>
           <MiniMap place={place} style={{ flex: 1, height: 200 }} />
         </View>
       </View>

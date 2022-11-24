@@ -44,13 +44,19 @@ export const appStyles = StyleSheet.create({
   subHeading: {
     fontFamily: ntFonts.italics,
     fontSize: 16,
+  },  
+  sectionHeading: {
+    fontSize: 24,
+    fontFamily: ntFonts.display,
+    textAlign: "center",
+    marginBottom: 4,
   },
   description: {
     fontSize: 16,
   },
   alert: {
     marginBottom: 8,
-    paddingHorizontal: 8,
+    paddingHorizontal: 16,
     paddingVertical: 8,
     backgroundColor: "#ffcc00",
     flexDirection: "row",
@@ -59,6 +65,6 @@ export const appStyles = StyleSheet.create({
     color: ntColours.darkGrey,
     fontSize: 16,
     flex: 1,
-    paddingHorizontal: 8,
+    paddingRight: 8,
   },
 });

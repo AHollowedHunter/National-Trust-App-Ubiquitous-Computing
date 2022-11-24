@@ -8,6 +8,7 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from "@react-navigation/native-stack";
+import { ToastProvider } from "react-native-toast-notifications";
 
 import { ntColours, appStyles, ntFonts } from "./config/styles";
 import { DiscoverScreen } from "./screens/DiscoverScreen";
@@ -15,6 +16,7 @@ import PlacesContext from "./contexts/PlacesContext";
 import { defaultPlaces, getPlaces } from "./api/Places";
 import { PlaceScreen } from "./screens/PlaceScreen";
 import { NativeStackParamList } from "./config/types";
+import CustomHeader from "./components/CustomHeader";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -65,16 +67,25 @@ export default function App() {
     <SafeAreaView style={appStyles.container} onLayout={onLayoutRootView}>
       <StatusBar style="light" backgroundColor={ntColours.cardinalPink} />
       <PlacesContext.Provider value={{ places }}>
-        <NavigationContainer>
-          <NativeStack.Navigator screenOptions={stackOptions}>
-            <NativeStack.Screen name="Discover" component={DiscoverScreen} />
-            <NativeStack.Screen
-              name="Place"
-              component={PlaceScreen}
-              options={({ route }) => ({ title: route.params.place.title, headerTitleAlign: "center" })}
-            />
-          </NativeStack.Navigator>
-        </NavigationContainer>
+        <ToastProvider duration={2500}>
+          <NavigationContainer>
+            <NativeStack.Navigator screenOptions={stackOptions}>
+              <NativeStack.Screen name="Discover" component={DiscoverScreen} />
+              <NativeStack.Screen
+                name="Place"
+                component={PlaceScreen}
+                options={({ route }) => ({
+                  headerTitle: () => (
+                    <CustomHeader
+                      title={route.params.place.title}
+                      placeId={route.params.place.id}
+                    />
+                  ),
+                })}
+              />
+            </NativeStack.Navigator>
+          </NavigationContainer>
+        </ToastProvider>
       </PlacesContext.Provider>
     </SafeAreaView>
   );

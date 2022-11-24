@@ -74,6 +74,7 @@ export default function PlaceCard({
         {showImage ? (
           <ImageLoading
             uri={place.imageUrl}
+            description={place.imageDescription}
             imageHeight={250}
             offset={24}
             useSvgImage={useSvgImage}

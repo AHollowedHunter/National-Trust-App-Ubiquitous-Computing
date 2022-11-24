@@ -19,6 +19,7 @@ export function Alert(props: Props) {
           textAlignVertical: "center",
           height: "100%",
         }}
+        accessibilityLabel={"Important Symbol"}
       />
     </View>
   );
