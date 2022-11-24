@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
-import { ActivityIndicator, Text, View } from "react-native";
+import React, { MutableRefObject, useRef, useState } from "react";
+import { ActivityIndicator, Image, Text, View } from "react-native";
 import { Svg, Image as ImageSvg } from "react-native-svg";
 import { appStyles, ntColours } from "../config/styles";
 import { NativeStackParamList, NTPlace } from "../config/types";
@@ -11,13 +11,19 @@ type Props = {
   place: NTPlace;
   imageHeight?: number;
   showImage: boolean;
+  useSvgImage?: boolean;
 };
 
-export default function PlaceCard({ place, imageHeight, showImage }: Props) {
+export default function PlaceCard({
+  place,
+  imageHeight,
+  showImage,
+  useSvgImage,
+}: Props) {
   // Set default if not given
   imageHeight = imageHeight ? imageHeight : 200;
 
-  let navigation = useNavigation<NativeStackParamList>();
+  const [imageLoading, setImageLoading] = useState(true);
 
   return (
     <View>
@@ -74,6 +80,7 @@ export default function PlaceCard({ place, imageHeight, showImage }: Props) {
                 height: imageHeight + 24,
                 width: "100%",
                 backgroundColor: ntColours.alto,
+                display: imageLoading ? "flex" : "none",
               }}
             >
               <NTWebIcon
@@ -105,14 +112,29 @@ export default function PlaceCard({ place, imageHeight, showImage }: Props) {
                 Loading...
               </Text>
             </View>
-            <Svg width={"100%"} height={imageHeight + 24}>
-              <ImageSvg
-                width={"100%"}
-                height={"100%"}
-                preserveAspectRatio="xMidYMid slice"
-                href={{ uri: place.imageUrl + "?width=1000" }}
+            <View>
+              <Image
+                onLoad={() => {
+                  setImageLoading(false);
+                }}
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: imageHeight + 24,
+                }}
+                source={{ uri: place.imageUrl + "?width=1000" }}
               />
-            </Svg>
+              {useSvgImage ? (
+                <Svg width={"100%"} height={imageHeight + 24}>
+                  <ImageSvg
+                    width={"100%"}
+                    height={"100%"}
+                    preserveAspectRatio="xMidYMid slice"
+                    href={{ uri: place.imageUrl + "?width=1000" }}
+                  />
+                </Svg>
+              ) : null}
+            </View>
           </View>
         ) : (
           <View style={{ height: 24 }} />

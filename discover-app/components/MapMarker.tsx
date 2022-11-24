@@ -32,7 +32,7 @@ export default function MapMarker({ place, mapRef, mapWidth }: Props) {
       centerOffset={{ x: 0, y: -32 }}
       calloutAnchor={{ x: 0.5, y: 0.7 }}
       ref={ref}
-      onPress={() => {
+      onPress={async () => {
         // This little hack ensures the marker callout will redraw and display
         // an image without having to select the marker again.
         // There is a 1-2 second delay depending on network speed.
@@ -40,15 +40,26 @@ export default function MapMarker({ place, mapRef, mapWidth }: Props) {
         ref.current?.showCallout();
         // EOH
 
+        let cam = await mapRef.current?.getCamera();
+        let boundries = await mapRef.current?.getMapBoundaries();
+        const test = () => Math.log(cam?.zoom ?? 0) / (cam?.zoom ?? 1);
+        const test2 = () =>
+          boundries
+            ? (boundries?.northEast.latitude - boundries?.southWest.latitude) /
+              3.5
+            : 9;
+        console.log(test());
+        console.log(test2());
+
         mapRef.current?.animateCamera({
-          heading: 0,
+          heading: cam?.heading ?? 0,
           center: {
-            latitude:
-              place.location.latitude +
-              (mapRef.current.props.initialRegion?.latitudeDelta ?? 0) / 3.5,
+            latitude: place.location.latitude + test2(),
             longitude: place.location.longitude,
           },
           pitch: 0,
+          zoom: cam?.zoom ?? 10,
+          altitude: cam?.altitude ?? 10,
         });
       }}
     >

@@ -36,11 +36,12 @@ export function MainMap(props: Props) {
     <MapView
       ref={mapRef}
       style={{ flex: 1 }}
-      initialRegion={{
-        latitude: 50.6884,
-        longitude: -1.95622,
-        latitudeDelta: 0.8,
-        longitudeDelta: 0.8,
+      initialCamera={{
+        center: { latitude: 50.6884, longitude: -1.95622 },
+        pitch: 0,
+        heading: 0,
+        zoom: 10,
+        altitude: 10,
       }}
       showsUserLocation={true}
       mapType="standard"
