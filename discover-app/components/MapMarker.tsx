@@ -42,19 +42,16 @@ export default function MapMarker({ place, mapRef, mapWidth }: Props) {
 
         let cam = await mapRef.current?.getCamera();
         let boundries = await mapRef.current?.getMapBoundaries();
-        const test = () => Math.log(cam?.zoom ?? 0) / (cam?.zoom ?? 1);
-        const test2 = () =>
+        const getLatitudeOffset = () =>
           boundries
             ? (boundries?.northEast.latitude - boundries?.southWest.latitude) /
               3.5
             : 9;
-        console.log(test());
-        console.log(test2());
 
         mapRef.current?.animateCamera({
           heading: cam?.heading ?? 0,
           center: {
-            latitude: place.location.latitude + test2(),
+            latitude: place.location.latitude + getLatitudeOffset(),
             longitude: place.location.longitude,
           },
           pitch: 0,
