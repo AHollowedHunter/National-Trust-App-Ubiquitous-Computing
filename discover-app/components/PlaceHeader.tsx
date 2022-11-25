@@ -10,14 +10,13 @@ type Props = {
   placeId: number;
 };
 
-export default function CustomHeader({ title }: Props) {
+export default function PlaceHeader({ title, placeId }: Props) {
   const width = (Dimensions.get("window").width / 100) * 70;
   const toast = useToast();
   return (
     <View
       style={{ backgroundColor: ntColours.redViolet, flexDirection: "row" }}
     >
-      {/* <View style={{width: 48, height: 48, backgroundColor: "white"}}></View> */}
       <Text
         style={[appStyles.heading, { color: "white", width: width }]}
         adjustsFontSizeToFit={true}

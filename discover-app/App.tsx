@@ -16,7 +16,7 @@ import PlacesContext from "./contexts/PlacesContext";
 import { defaultPlaces, getPlaces } from "./api/Places";
 import { PlaceScreen } from "./screens/PlaceScreen";
 import { NativeStackParamList } from "./config/types";
-import CustomHeader from "./components/CustomHeader";
+import CustomHeader from "./components/PlaceHeader";
 
 SplashScreen.preventAutoHideAsync();
 

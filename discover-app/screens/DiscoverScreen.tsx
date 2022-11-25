@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import {
   DiscoverBottomTabParamList,
@@ -12,6 +12,8 @@ import { ntColours, ntFonts } from "../config/styles";
 import { MapScreen } from "./MapScreen";
 import { ListScreen } from "./ListScreen";
 import { NTWebIcon } from "../components/NationalTrustIcons";
+import DiscoverFilter from "../components/DiscoverFilter";
+import { View } from "react-native";
 
 type Props = NativeStackScreenProps<NativeStackParamList, "Discover">;
 
@@ -19,12 +21,6 @@ const Tab = createBottomTabNavigator<DiscoverBottomTabParamList>();
 
 const bottomTabOptions: BottomTabNavigationOptions = {
   headerShown: false,
-  headerStyle: { backgroundColor: ntColours.redViolet },
-  headerTitleStyle: {
-    color: "white",
-    fontFamily: ntFonts.display,
-    fontSize: 32,
-  },
   tabBarInactiveTintColor: "black",
   tabBarActiveTintColor: "black",
   tabBarActiveBackgroundColor: ntColours.alto,
@@ -42,18 +38,25 @@ const ntTabBarIcon =
   };
 
 export function DiscoverScreen({ route, navigation }: Props) {
+  const [screenHeight, setScreenHeight] = useState(600);
   return (
-    <Tab.Navigator screenOptions={bottomTabOptions} initialRouteName="Map">
-      <Tab.Screen
-        name="Map"
-        component={MapScreen}
-        options={{ tabBarIcon: ntTabBarIcon("map") }}
-      />
-      <Tab.Screen
-        name="List"
-        component={ListScreen}
-        options={{ tabBarIcon: ntTabBarIcon("list") }}
-      />
-    </Tab.Navigator>
+    <View
+      style={{ flex: 1 }}
+      onLayout={(e) => setScreenHeight(e.nativeEvent.layout.height)}
+    >
+      <DiscoverFilter screenHeight={screenHeight}/>
+      <Tab.Navigator screenOptions={bottomTabOptions} initialRouteName="Map">
+        <Tab.Screen
+          name="Map"
+          component={MapScreen}
+          options={{ tabBarIcon: ntTabBarIcon("map") }}
+        />
+        <Tab.Screen
+          name="List"
+          component={ListScreen}
+          options={{ tabBarIcon: ntTabBarIcon("list") }}
+        />
+      </Tab.Navigator>
+    </View>
   );
 }
