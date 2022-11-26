@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NativeStackParamList } from "../config/types";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { View, ScrollView, Text, Image, ActivityIndicator } from "react-native";
+import { View, ScrollView, Text } from "react-native";
 import { appStyles, ntColours } from "../config/styles";
 import { MiniMap } from "../components/MiniMap";
 import ImageLoading from "../components/ImageLoading";
@@ -77,7 +77,7 @@ export function PlaceScreen({ route, navigation }: Props) {
             {place.activityTags
               ? place.activityTags.map((tag, index) => (
                   <Text key={index}>
-                    {tag} {NTActivityIcon(tag, 16)}
+                    {tag} <NTActivityIcon activity={tag} size={16} />
                   </Text>
                 ))
               : null}

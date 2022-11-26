@@ -100,7 +100,7 @@ export default function PlaceCard({
           {place.activityTags
             ? place.activityTags.map((tag, index) => (
                 <Text key={index}>
-                  {tag} {NTActivityIcon(tag, 16)}
+                  {tag} <NTActivityIcon activity={tag} size={16} />
                 </Text>
               ))
             : null}
