@@ -42,7 +42,6 @@ export function DiscoverScreen({ route, navigation }: Props) {
     <View
       style={{ flex: 1 }}
     >
-      <DiscoverFilter />
       <Tab.Navigator screenOptions={bottomTabOptions} initialRouteName="Map">
         <Tab.Screen
           name="Map"

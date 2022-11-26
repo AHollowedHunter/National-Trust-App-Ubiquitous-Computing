@@ -17,6 +17,7 @@ import { defaultPlaces, getPlaces } from "./api/Places";
 import { PlaceScreen } from "./screens/PlaceScreen";
 import { NativeStackParamList } from "./config/types";
 import CustomHeader from "./components/PlaceHeader";
+import DiscoverFilter from "./components/DiscoverFilter";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -67,12 +68,22 @@ export default function App() {
     <SafeAreaView style={appStyles.container} onLayout={onLayoutRootView}>
       <StatusBar style="light" backgroundColor={ntColours.cardinalPink} />
       <PlacesContext.Provider
-        value={{ places, filteredPlaces: places, setFilteredPlaces: setPlaces }}
+        value={{
+          allPlaces: places,
+          filteredPlaces: places,
+          setFilteredPlaces: setPlaces,
+        }}
       >
         <ToastProvider duration={2500}>
           <NavigationContainer>
             <NativeStack.Navigator screenOptions={stackOptions}>
-              <NativeStack.Screen name="Discover" component={DiscoverScreen} />
+              <NativeStack.Screen
+                name="Discover"
+                component={DiscoverScreen}
+                options={({ route }) => ({
+                  headerRight: () => <DiscoverFilter />,
+                })}
+              />
               <NativeStack.Screen
                 name="Place"
                 component={PlaceScreen}

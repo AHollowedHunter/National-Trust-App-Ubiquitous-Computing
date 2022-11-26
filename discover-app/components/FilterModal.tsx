@@ -32,7 +32,7 @@ export default function FilterModal({ dismissModal }: Props) {
         }}
       >
         <FlexButton
-          title="Clear"
+          title="Clear All"
           onPress={() => dismissModal()}
           backgroundColor={ntColours.crimson}
           color={"white"}
