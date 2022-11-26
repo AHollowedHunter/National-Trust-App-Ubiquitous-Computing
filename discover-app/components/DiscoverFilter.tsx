@@ -4,6 +4,7 @@ import {
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  StyleSheet,
 } from "react-native";
 import Modal from "react-native-modal";
 
@@ -13,6 +14,15 @@ import { NTWebIcon } from "./NationalTrustIcons";
 
 type Props = {};
 
+const style = StyleSheet.create({
+  text: {
+    fontSize: 24,
+    fontFamily: ntFonts.standard,
+    textAlignVertical: "center",
+    color: "white",
+  },
+});
+
 export default function DiscoverFilter() {
   const [filterVisible, setFilterVisible] = useState(false);
   const dismissFilterModal = () => setFilterVisible(false);
@@ -20,26 +30,13 @@ export default function DiscoverFilter() {
   return (
     <View>
       <TouchableOpacity
-        style={{ flexDirection: "row", paddingHorizontal: 8 }}
+        style={{ flexDirection: "row" }}
         onPress={() => setFilterVisible(true)}
       >
-        <Text
-          style={{
-            textAlignVertical: "center",
-            fontFamily: ntFonts.standard,
-            fontSize: 24,
-            color: "white",
-          }}
-        >
-          {"Filter "}
-        </Text>
+        <Text style={style.text}>{"Filters "}</Text>
         <NTWebIcon
           name="settings"
-          style={{
-            fontSize: 24,
-            textAlignVertical: "center",
-            color: "white",
-          }}
+          style={style.text}
           accessibilityLabel={"Search Button"}
         />
       </TouchableOpacity>

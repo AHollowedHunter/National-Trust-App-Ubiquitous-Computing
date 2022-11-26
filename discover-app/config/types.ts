@@ -12,6 +12,7 @@ export type NativeStackProps = NativeStackNavigationProp<NativeStackParamList>;
 export type DiscoverBottomTabParamList = {
   Map: undefined;
   List: undefined;
+  Search: undefined;
 };
 
 // NT Place Data
@@ -24,9 +25,29 @@ export interface NTPlace {
   imageDescription: string;
   websiteUrl: string;
   location: { longitude: number; latitude: number };
-  activityTags: string[];
+  activityTags: Activity[];
   openStatus: NTOpenStatus;
   region: NTRegion;
+}
+
+export enum Activity {
+  Archery = "Archery",
+  Boating = "Boating",
+  CanoeingAndKayaking = "Canoeing and kayaking",
+  Caving = "Caving",
+  Climbing = "Climbing",
+  Coasteering = "Coasteering",
+  Cycling = "Cycling",
+  DogWalking = "Dog walking",
+  Fishing = "Fishing",
+  Geocaching = "Geocaching",
+  HorseRiding = "Horse riding",
+  Orienteering = "Orienteering",
+  Running = "Running",
+  Sailing = "Sailing",
+  Surfing = "Surfing",
+  Swimming = "Swimming",
+  Walking = "Walking",
 }
 
 export enum NTOpenStatus {

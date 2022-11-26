@@ -1,4 +1,4 @@
-import { NTOpenStatus, NTPlace, NTRegion } from "../config/types";
+import { Activity, NTOpenStatus, NTPlace, NTRegion } from "../config/types";
 import defaultPlaceData from "./defaultPlaces.json";
 
 /**
@@ -51,7 +51,7 @@ const getPlaceJson = async () => {
  */
 function convertPlaceData(raw: any): NTPlace {
   // Activity Tags are provided as a single string CSV, convert now for ease
-  let activityTags: string[] = [];
+  let activityTags: Activity[] = [];
   if (raw.activityTagsAsCsv) {
     activityTags = raw.activityTagsAsCsv.split(",").map((tag: string) => {
       return tag.trim();

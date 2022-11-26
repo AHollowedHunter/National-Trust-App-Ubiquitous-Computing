@@ -32,7 +32,8 @@
     "react-native-toast-notifications": "^3.3.1",
     "react-native-web": "~0.18.7",
     "react-native-webview": "11.23.0",
-    "vector-icons": "^0.1.0"
+    "vector-icons": "^0.1.0",
+    "expo-haptics": "~11.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

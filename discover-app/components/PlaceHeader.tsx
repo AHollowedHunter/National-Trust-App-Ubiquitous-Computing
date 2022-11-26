@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Dimensions } from "react-native";
 import { useToast } from "react-native-toast-notifications";
+import * as Haptics from "expo-haptics";
 
 import { appStyles, ntColours } from "../config/styles";
 import { NTWebIcon } from "./NationalTrustIcons";
@@ -32,7 +33,10 @@ export default function PlaceHeader({ title, placeId }: Props) {
           paddingHorizontal: 8,
           textAlignVertical: "center",
         }}
-        onPress={() => toast.show("Added to Favourites")}
+        onPress={() => {
+          Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+          toast.show("Added to Favourites");
+        }}
       />
     </View>
   );

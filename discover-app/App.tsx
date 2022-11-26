@@ -18,6 +18,7 @@ import { PlaceScreen } from "./screens/PlaceScreen";
 import { NativeStackParamList } from "./config/types";
 import CustomHeader from "./components/PlaceHeader";
 import DiscoverFilter from "./components/DiscoverFilter";
+import { NTIcon } from "./components/NationalTrustIcons";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -80,7 +81,19 @@ export default function App() {
               <NativeStack.Screen
                 name="Discover"
                 component={DiscoverScreen}
-                options={({ route }) => ({
+                options={() => ({
+                  headerLeft: () => (
+                    <NTIcon
+                      style={{
+                        fontSize: 48,
+                        textAlignVertical: "center",
+                        color: "white",
+                        marginLeft: -8,
+                        paddingRight: 8,
+                      }}
+                      name="National-Trust-oakleaf"
+                    ></NTIcon>
+                  ),
                   headerRight: () => <DiscoverFilter />,
                 })}
               />

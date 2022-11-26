@@ -1,8 +1,13 @@
 import React from "react";
-import { Button, TouchableHighlight, View, Text } from "react-native";
-import { ntColours } from "../config/styles";
+import { View, Text } from "react-native";
+import * as Haptics from "expo-haptics";
+
+import { appStyles, ntColours } from "../config/styles";
+import { Activity } from "../config/types";
 import { usePlacesContext } from "../contexts/PlacesContext";
 import FlexButton from "./FlexButton";
+import { NTActivityIcon } from "./NationalTrustIcons";
+import FilterToggleButton from "./TagButton";
 
 type Props = {
   dismissModal: Function;
@@ -21,10 +26,27 @@ export default function FilterModal({ dismissModal }: Props) {
         padding: 4,
       }}
     >
-      <FlexButton title="Test" onPress={() => dismissModal()} />
-      <FlexButton title="Test" onPress={() => dismissModal()} />
-      <FlexButton title="Test" onPress={() => dismissModal()} />
-      <FlexButton title="Test" onPress={() => dismissModal()} />
+      <View style={{ flex: 1 }}>
+        <Text style={[appStyles.sectionHeading, { color: "white" }]}>
+          Filter by Activity
+        </Text>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
+          {Object.values(Activity).map((tag) => (
+            <FilterToggleButton
+              title={tag}
+              icon={<NTActivityIcon activity={tag} size={24} />}
+              onPress={() => {}}
+            />
+          ))}
+        </View>
+      </View>
       <View
         style={{
           flexDirection: "row",
@@ -33,7 +55,9 @@ export default function FilterModal({ dismissModal }: Props) {
       >
         <FlexButton
           title="Clear All"
-          onPress={() => dismissModal()}
+          onPress={() => {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+          }}
           backgroundColor={ntColours.crimson}
           color={"white"}
         />

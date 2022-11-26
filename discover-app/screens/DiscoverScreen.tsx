@@ -12,7 +12,6 @@ import { ntColours, ntFonts } from "../config/styles";
 import { MapScreen } from "./MapScreen";
 import { ListScreen } from "./ListScreen";
 import { NTWebIcon } from "../components/NationalTrustIcons";
-import DiscoverFilter from "../components/DiscoverFilter";
 import { View } from "react-native";
 
 type Props = NativeStackScreenProps<NativeStackParamList, "Discover">;
