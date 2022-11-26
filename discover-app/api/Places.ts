@@ -34,6 +34,9 @@ const getPlaceJson = async () => {
     const response = await fetch(
       "https://www.nationaltrust.org.uk/search/data/all-places"
     );
+    if (response.status == 404) {
+      throw "Returned 404 when retrieving current data.";
+    }
     const json = await response.json();
     return json;
   } catch (error) {
