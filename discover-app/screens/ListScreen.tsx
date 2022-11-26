@@ -7,6 +7,6 @@ import { usePlacesContext } from "../contexts/PlacesContext";
 type Props = BottomTabScreenProps<DiscoverBottomTabParamList, "List">;
 
 export function ListScreen({ route, navigation }: Props) {
-  const { places } = usePlacesContext();
-  return <PlaceList places={places} />;
+  const { filteredPlaces } = usePlacesContext();
+  return <PlaceList places={filteredPlaces} />;
 }

@@ -38,13 +38,11 @@ const ntTabBarIcon =
   };
 
 export function DiscoverScreen({ route, navigation }: Props) {
-  const [screenHeight, setScreenHeight] = useState(600);
   return (
     <View
       style={{ flex: 1 }}
-      onLayout={(e) => setScreenHeight(e.nativeEvent.layout.height)}
     >
-      <DiscoverFilter screenHeight={screenHeight}/>
+      <DiscoverFilter />
       <Tab.Navigator screenOptions={bottomTabOptions} initialRouteName="Map">
         <Tab.Screen
           name="Map"

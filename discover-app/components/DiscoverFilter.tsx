@@ -12,13 +12,12 @@ import Modal from "react-native-modal";
 import { appStyles, ntColours, ntFonts } from "../config/styles";
 import FilterModal from "./FilterModal";
 import { NTWebIcon } from "./NationalTrustIcons";
-type Props = {
-  screenHeight: number;
-};
-export default function DisoverHeader({ screenHeight }: Props) {
+
+type Props = {};
+
+export default function DisoverHeader() {
   const [filterVisible, setFilterVisible] = useState(false);
   const dismissFilterModal = () => setFilterVisible(false);
-  const width = (Dimensions.get("window").width / 100) * 70;
 
   return (
     <View
@@ -91,19 +90,9 @@ export default function DisoverHeader({ screenHeight }: Props) {
             <View style={{ flex: 1, backgroundColor: ntColours.darkGrey }} />
           </TouchableWithoutFeedback>
         }
-        coverScreen={false}
+        coverScreen={true}
       >
-        <View
-          style={{
-            alignSelf: "center",
-            width: "90%",
-            height: screenHeight * 0.85,
-            top: screenHeight / 2.2,
-            backgroundColor: ntColours.surfieGreen,
-          }}
-        >
-          <FilterModal dismissModal={dismissFilterModal} />
-        </View>
+        <FilterModal dismissModal={dismissFilterModal} />
       </Modal>
     </View>
   );

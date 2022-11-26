@@ -66,7 +66,9 @@ export default function App() {
   return (
     <SafeAreaView style={appStyles.container} onLayout={onLayoutRootView}>
       <StatusBar style="light" backgroundColor={ntColours.cardinalPink} />
-      <PlacesContext.Provider value={{ places }}>
+      <PlacesContext.Provider
+        value={{ places, filteredPlaces: places, setFilteredPlaces: setPlaces }}
+      >
         <ToastProvider duration={2500}>
           <NavigationContainer>
             <NativeStack.Navigator screenOptions={stackOptions}>
