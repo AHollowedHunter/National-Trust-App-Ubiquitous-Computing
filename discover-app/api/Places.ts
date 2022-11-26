@@ -29,6 +29,10 @@ export async function getPlaces(): Promise<NTPlace[]> {
   }
 }
 
+/**
+ * Get the current place data from api
+ * @returns place data as JSON
+ */
 const getPlaceJson = async () => {
   try {
     const response = await fetch(
