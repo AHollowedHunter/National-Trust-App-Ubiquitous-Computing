@@ -9,7 +9,9 @@ type Props = {
 
 export default function OpenStatus({ openStatus }: Props) {
   if (openStatus) {
-    return <Text style={appStyles.infoBold}>{openStatus}</Text>;
+    return (
+      <Text style={[{ fontSize: 16 }, appStyles.infoBold]}>{openStatus}</Text>
+    );
   }
   return <></>;
 }

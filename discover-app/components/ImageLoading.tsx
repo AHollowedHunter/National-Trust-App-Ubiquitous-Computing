@@ -37,6 +37,7 @@ export default function ImageLoading({
           backgroundColor: ntColours.alto,
           display: imageLoading ? "flex" : "none",
         }}
+        importantForAccessibility={"no-hide-descendants"}
       >
         <NTWebIcon
           name="picture"
@@ -78,6 +79,7 @@ export default function ImageLoading({
             height: imageHeight + offset,
           }}
           source={{ uri: uri + "?width=1000" }}
+          accessible={false}
         />
         {useSvgImage ? (
           <Svg width={"100%"} height={imageHeight + offset}>
@@ -96,7 +98,7 @@ export default function ImageLoading({
             top: 32,
             width: "100%",
           }}
-          accessibilityLabel={description}
+          accessibilityLabel={"Image: " + description}
         ></View>
       </View>
     </View>

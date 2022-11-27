@@ -60,6 +60,7 @@ export const appStyles = StyleSheet.create({
     paddingVertical: 8,
     backgroundColor: "#ffcc00",
     flexDirection: "row",
+    elevation: 2,
   },
   alertText: {
     color: ntColours.darkGrey,

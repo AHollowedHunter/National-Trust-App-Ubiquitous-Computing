@@ -22,8 +22,6 @@ export default function PlaceCard({
   // Set default if not given
   imageHeight = imageHeight ? imageHeight : 200;
 
-  const [imageLoading, setImageLoading] = useState(true);
-
   return (
     <View>
       <View>
@@ -46,6 +44,7 @@ export default function PlaceCard({
                 alignSelf: "flex-start",
                 maxWidth: "95%",
                 zIndex: 1000,
+                elevation: 4,
               },
             ]}
           >
@@ -62,6 +61,7 @@ export default function PlaceCard({
                 alignSelf: "flex-end",
                 maxWidth: "95%",
                 opacity: place.subTitle ? 1 : 0,
+                elevation: 4,
               },
             ]}
           >
@@ -90,6 +90,7 @@ export default function PlaceCard({
           marginBottom: -8,
           padding: 8,
           flexDirection: "row",
+          elevation: 4,
         }}
       >
         <Text style={[appStyles.description, { flex: 1 }]}>

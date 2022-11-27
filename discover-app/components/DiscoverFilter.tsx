@@ -9,6 +9,7 @@ import {
 import Modal from "react-native-modal";
 
 import { appStyles, ntColours, ntFonts } from "../config/styles";
+import { FilterProvider } from "../contexts/FilterContext";
 import FilterModal from "./FilterModal";
 import { NTWebIcon } from "./NationalTrustIcons";
 
@@ -28,30 +29,33 @@ export default function DiscoverFilter() {
   const dismissFilterModal = () => setFilterVisible(false);
 
   return (
-    <View>
-      <TouchableOpacity
-        style={{ flexDirection: "row" }}
-        onPress={() => setFilterVisible(true)}
-      >
-        <Text style={style.text}>{"Filters "}</Text>
-        <NTWebIcon
-          name="settings"
-          style={style.text}
-          accessibilityLabel={"Search Button"}
-        />
-      </TouchableOpacity>
-      <Modal
-        isVisible={filterVisible}
-        onBackdropPress={() => setFilterVisible(false)}
-        customBackdrop={
-          <TouchableWithoutFeedback onPress={dismissFilterModal}>
-            <View style={{ flex: 1, backgroundColor: ntColours.darkGrey }} />
-          </TouchableWithoutFeedback>
-        }
-        coverScreen={true}
-      >
-        <FilterModal dismissModal={dismissFilterModal} />
-      </Modal>
-    </View>
+    <FilterProvider>
+      <View>
+        <TouchableOpacity
+          onPress={() => setFilterVisible(true)}
+          accessibilityLabel={"Open Filters"}
+        >
+          <View
+            style={{ flexDirection: "row", paddingVertical: 10 }}
+            importantForAccessibility="no-hide-descendants"
+          >
+            <Text style={style.text}>{"Filters "}</Text>
+            <NTWebIcon name="settings" style={style.text} />
+          </View>
+        </TouchableOpacity>
+        <Modal
+          isVisible={filterVisible}
+          onBackdropPress={() => setFilterVisible(false)}
+          customBackdrop={
+            <TouchableWithoutFeedback onPress={dismissFilterModal}>
+              <View style={{ flex: 1, backgroundColor: ntColours.darkGrey }} />
+            </TouchableWithoutFeedback>
+          }
+          coverScreen={true}
+        >
+          <FilterModal dismissModal={dismissFilterModal} />
+        </Modal>
+      </View>
+    </FilterProvider>
   );
 }

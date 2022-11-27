@@ -14,6 +14,7 @@ const Separator = ({ style }: Props) => (
         height: 4,
         marginHorizontal: 16,
         backgroundColor: ntColours.darkGrey,
+        elevation: 2,
       },
     ]}
   />

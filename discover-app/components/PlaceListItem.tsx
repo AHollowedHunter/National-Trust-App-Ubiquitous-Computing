@@ -16,7 +16,8 @@ export default function PlaceListItem({ place }: Props) {
       underlayColor={ntColours.alto}
       activeOpacity={0.8}
       delayPressIn={60}
-      onPress={() => navigation.push("Place", { place: place })} // Do nothing for now
+      onPress={() => navigation.push("Place", { place: place })}
+      accessibilityLabel={`${place.title}: ${place.subTitle}`}
     >
       {/* Wrap all childen in a View for activeOpactiy to work 
       see https://github.com/facebook/react-native/issues/11834 */}

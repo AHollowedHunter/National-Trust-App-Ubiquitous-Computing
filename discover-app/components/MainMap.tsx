@@ -6,6 +6,8 @@ import {
 } from "expo-location";
 import { NTPlace } from "../config/types";
 import MapMarker from "./MapMarker";
+import { ActivityIndicator } from "react-native";
+import { ntColours } from "../config/styles";
 
 type Props = {
   places?: NTPlace[];
@@ -14,6 +16,7 @@ type Props = {
 export function MainMap(props: Props) {
   const mapRef = React.useRef<MapView | null>(null);
   const [mapWidth, setMapWidth] = useState(400);
+  const [mapReady, setMapReady] = useState(false);
 
   useEffect(() => {
     async function getLocation() {
@@ -33,34 +36,50 @@ export function MainMap(props: Props) {
   }, []);
 
   return (
-    <MapView
-      ref={mapRef}
-      style={{ flex: 1 }}
-      initialCamera={{
-        center: { latitude: 50.6884, longitude: -1.95622 },
-        pitch: 0,
-        heading: 0,
-        zoom: 10,
-        altitude: 10,
-      }}
-      showsUserLocation={true}
-      mapType="standard"
-      onLayout={(event) => {
-        setMapWidth(event.nativeEvent.layout.width);
-      }}
-      showsBuildings={true}      
-      moveOnMarkerPress={false} // Handled in MapMarker onPress
-    >
-      {props.places
-        ? props.places.map((place, index) => (
-            <MapMarker
-              key={index}
-              mapRef={mapRef}
-              place={place}
-              mapWidth={mapWidth}
-            />
-          ))
-        : null}
-    </MapView>
+    <>
+      <MapView
+        ref={mapRef}
+        style={{ flex: 1 }}
+        initialCamera={{
+          center: { latitude: 50.6884, longitude: -1.95622 },
+          pitch: 0,
+          heading: 0,
+          zoom: 10,
+          altitude: 10,
+        }}
+        showsUserLocation={true}
+        mapType="standard"
+        onLayout={(event) => {
+          setMapWidth(event.nativeEvent.layout.width);
+        }}
+        onMapReady={() => setMapReady(true)}
+        showsBuildings={true}
+        moveOnMarkerPress={false} // Handled in MapMarker onPress
+      >
+        {props.places
+          ? props.places.map((place, index) => (
+              <MapMarker
+                key={index}
+                mapRef={mapRef}
+                place={place}
+                mapWidth={mapWidth}
+              />
+            ))
+          : null}
+      </MapView>
+      <ActivityIndicator
+        size={128}
+        color={ntColours.olive}
+        style={{
+          position: "absolute",
+          display: mapReady ? "none" : "flex",
+          alignSelf: "center",
+          top: "40%",
+          elevation: 4,
+          backgroundColor: ntColours.paletteNav,
+          borderRadius: 64,
+        }}
+      />
+    </>
   );
 }

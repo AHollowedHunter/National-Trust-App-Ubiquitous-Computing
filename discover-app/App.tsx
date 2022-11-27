@@ -12,13 +12,12 @@ import { ToastProvider } from "react-native-toast-notifications";
 
 import { ntColours, appStyles, ntFonts } from "./config/styles";
 import { DiscoverScreen } from "./screens/DiscoverScreen";
-import PlacesContext from "./contexts/PlacesContext";
-import { defaultPlaces, getPlaces } from "./api/Places";
 import { PlaceScreen } from "./screens/PlaceScreen";
 import { NativeStackParamList } from "./config/types";
-import CustomHeader from "./components/PlaceHeader";
+import PlaceHeader from "./components/PlaceHeader";
 import DiscoverFilter from "./components/DiscoverFilter";
 import { NTIcon } from "./components/NationalTrustIcons";
+import { PlacesProvider } from "./contexts/PlacesContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -36,14 +35,6 @@ const stackOptions: NativeStackNavigationOptions = {
 
 export default function App() {
   const NativeStack = createNativeStackNavigator<NativeStackParamList>();
-
-  const [places, setPlaces] = useState(defaultPlaces);
-  useEffect(() => {
-    const getData = async () => {
-      setPlaces(await getPlaces());
-    };
-    getData();
-  }, []);
 
   const [fontsLoaded] = useFonts({
     NationalTrustDisplayWeb_Regular: require("./assets/fonts/NationalTrustDisplayWeb_Regular.ttf"),
@@ -68,13 +59,7 @@ export default function App() {
   return (
     <SafeAreaView style={appStyles.container} onLayout={onLayoutRootView}>
       <StatusBar style="light" backgroundColor={ntColours.cardinalPink} />
-      <PlacesContext.Provider
-        value={{
-          allPlaces: places,
-          filteredPlaces: places,
-          setFilteredPlaces: setPlaces,
-        }}
-      >
+      <PlacesProvider>
         <ToastProvider duration={2500}>
           <NavigationContainer>
             <NativeStack.Navigator screenOptions={stackOptions}>
@@ -102,7 +87,7 @@ export default function App() {
                 component={PlaceScreen}
                 options={({ route }) => ({
                   headerTitle: () => (
-                    <CustomHeader
+                    <PlaceHeader
                       title={route.params.place.title}
                       placeId={route.params.place.id}
                     />
@@ -112,7 +97,7 @@ export default function App() {
             </NativeStack.Navigator>
           </NavigationContainer>
         </ToastProvider>
-      </PlacesContext.Provider>
+      </PlacesProvider>
     </SafeAreaView>
   );
 }

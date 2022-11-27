@@ -35,6 +35,7 @@ export function PlaceScreen({ route, navigation }: Props) {
               alignSelf: "flex-end",
               maxWidth: "95%",
               opacity: place.subTitle ? 1 : 0,
+              elevation: 4,
             },
           ]}
         >
@@ -55,6 +56,7 @@ export function PlaceScreen({ route, navigation }: Props) {
           marginHorizontal: 8,
           marginBottom: -8,
           padding: 8,
+          elevation: 4,
         }}
       >
         <Alert
@@ -76,8 +78,11 @@ export function PlaceScreen({ route, navigation }: Props) {
             <OpenStatus openStatus={place.openStatus} />
             {place.activityTags
               ? place.activityTags.map((tag, index) => (
-                  <Text key={index}>
-                    {tag} <NTActivityIcon activity={tag} size={16} />
+                  <Text
+                    key={index}
+                    style={{ fontSize: 16, textAlignVertical: "center" }}
+                  >
+                    {tag} <NTActivityIcon activity={tag} size={18} />
                   </Text>
                 ))
               : null}

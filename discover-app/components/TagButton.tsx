@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View, StyleSheet } from "react-native";
 import { ntColours } from "../config/styles";
 import { NTWebIcon } from "./NationalTrustIcons";
 
@@ -7,11 +7,12 @@ type Props = {
   title: string;
   icon?: JSX.Element;
   onPress: () => void;
+  isToggled: boolean;
 };
-export default function FilterToggleButton({ title, icon, onPress }: Props) {
-  const [isToggled, setIsToggled] = useState(false);
+export default function FilterToggleButton({ title, icon, onPress, isToggled }: Props) {
+  // const [isToggled, setIsToggled] = useState(false);
 
-  const toggle = () => setIsToggled(!isToggled);
+  // const toggle = () => setIsToggled(!isToggled);
 
   return (
     <TouchableOpacity
@@ -20,20 +21,29 @@ export default function FilterToggleButton({ title, icon, onPress }: Props) {
         margin: 4,
         borderRadius: 2,
         elevation: 4,
-        backgroundColor: isToggled ? ntColours.apple : ntColours.cararra,
+        backgroundColor: isToggled ? "#04d875" : ntColours.cararra,
       }}
       onPress={() => {
-        toggle();
+        // toggle();
         onPress();
       }}
       activeOpacity={0.7}
+      accessibilityLabel={title}
+      accessibilityState={{ checked: isToggled }}
     >
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View
+        importantForAccessibility={"no-hide-descendants"}
+        style={{ flexDirection: "row", alignItems: "center" }}
+      >
         <NTWebIcon
           name={isToggled ? "tick" : "circle"}
           style={{ fontSize: 16 }}
         />
-        <Text key={title} lineBreakMode={"middle"} style={{ fontSize: 16, paddingHorizontal: 4 }}>
+        <Text
+          key={title}
+          lineBreakMode={"middle"}
+          style={{ fontSize: 16, paddingHorizontal: 4 }}
+        >
           {title}
         </Text>
         {icon ?? null}

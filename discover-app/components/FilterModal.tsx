@@ -4,16 +4,17 @@ import * as Haptics from "expo-haptics";
 
 import { appStyles, ntColours } from "../config/styles";
 import { Activity, NTOpenStatus } from "../config/types";
-import { usePlacesContext } from "../contexts/PlacesContext";
 import FlexButton from "./FlexButton";
 import { NTActivityIcon, NTWebIcon } from "./NationalTrustIcons";
 import FilterToggleButton from "./TagButton";
+import { Filters } from "../config/reducers";
+import { useFilterContext } from "../contexts/FilterContext";
 
 type Props = {
   dismissModal: Function;
 };
 export default function FilterModal({ dismissModal }: Props) {
-  const { setFilteredPlaces } = usePlacesContext();
+  const { state: placeState, dispatch: placeDispatch } = useFilterContext();
 
   return (
     <View
@@ -43,11 +44,13 @@ export default function FilterModal({ dismissModal }: Props) {
             key={NTOpenStatus.Open}
             title={NTOpenStatus.Open.valueOf()}
             onPress={() => {}}
+            isToggled={false}
           />
           <FilterToggleButton
             key={NTOpenStatus.PartOpen}
             title={NTOpenStatus.PartOpen.valueOf()}
             onPress={() => {}}
+            isToggled={true}
           />
         </View>
       </View>
@@ -71,14 +74,26 @@ export default function FilterModal({ dismissModal }: Props) {
         >
           {Object.entries(Activity).map(([key, value]) => (
             <FilterToggleButton
-              key={value}
-              title={key}
+              key={key}
+              title={value}
               icon={<NTActivityIcon activity={value} size={24} />}
-              onPress={() => {}}
+              onPress={() => {
+                placeDispatch({
+                  type: Filters.Activity,
+                  payload: { activity: value },
+                });
+              }}
+              isToggled={placeState.activeFilters.activities.includes(value)}
             />
           ))}
         </View>
       </View>
+
+      <Text
+        style={[appStyles.sectionHeading, { color: "white", marginBottom: 8 }]}
+      >
+        Matching places: 0
+      </Text>
 
       <View
         style={{

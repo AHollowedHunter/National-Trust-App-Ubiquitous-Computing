@@ -26,11 +26,14 @@ export default function CustomButton({
         elevation: 4,
         flex: 1,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
       }}
       onPress={() => onPress()}
+      accessibilityLabel={title}
     >
-      <Text style={{ color: color, fontSize: 18 }}>{title}</Text>
+      <Text style={{ color: color, fontSize: 18 }} accessible={false}>
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 }

@@ -7,10 +7,12 @@ type Props = {
   content: string;
 };
 
-export function Alert(props: Props) {
+export function Alert({ content }: Props) {
   return (
-    <View style={appStyles.alert}>
-      <Text style={appStyles.alertText}>{props.content}</Text>
+    <View style={appStyles.alert} accessibilityLabel={"Alert: " + content}>
+      <Text style={appStyles.alertText} accessible={false}>
+        {content}
+      </Text>
       <NTIcon
         name="Important"
         style={{
@@ -19,7 +21,6 @@ export function Alert(props: Props) {
           textAlignVertical: "center",
           height: "100%",
         }}
-        accessibilityLabel={"Important Symbol"}
       />
     </View>
   );

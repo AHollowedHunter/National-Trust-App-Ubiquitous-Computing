@@ -38,9 +38,7 @@ const ntTabBarIcon =
 
 export function DiscoverScreen({ route, navigation }: Props) {
   return (
-    <View
-      style={{ flex: 1 }}
-    >
+    <View style={{ flex: 1 }}>
       <Tab.Navigator screenOptions={bottomTabOptions} initialRouteName="Map">
         <Tab.Screen
           name="Map"
