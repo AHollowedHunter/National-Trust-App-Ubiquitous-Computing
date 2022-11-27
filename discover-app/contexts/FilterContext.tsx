@@ -44,7 +44,7 @@ const FilterProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
     });
 
     setFilteredPlaces(places);
-  }, [state]);
+  }, [state, allPlaces]);
 
   return (
     <FilterContext.Provider value={{ state, dispatch }}>

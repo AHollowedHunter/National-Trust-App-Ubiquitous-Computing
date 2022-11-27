@@ -37,9 +37,12 @@ export async function getPlaces(): Promise<NTPlace[]> {
  */
 const getPlaceJson = async () => {
   try {
-    const response = await fetch(
-      "https://www.nationaltrust.org.uk/search/data/all-places"
-    );
+    // Original URL used before NT changed website
+    // let url = "https://www.nationaltrust.org.uk/search/data/all-places"
+    let url =
+      "https://web.archive.org/web/20220925170256id_/https://www.nationaltrust.org.uk/search/data/all-places";
+
+    const response = await fetch(url);
     if (response.status == 404) {
       throw "Returned 404 when retrieving current data.";
     }
