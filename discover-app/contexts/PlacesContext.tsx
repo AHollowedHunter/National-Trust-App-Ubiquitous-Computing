@@ -1,36 +1,29 @@
-import { createContext, useContext, Dispatch, useReducer } from "react";
+import { createContext, useContext, useState } from "react";
 import { defaultPlaces } from "../api/Places";
-import { FilterActions } from "../config/reducers";
 import { NTPlace } from "../config/types";
 
-export type PlacesState = {
+export type Places = {
   allPlaces: NTPlace[];
+  setAllPlaces: (places: NTPlace[]) => void;
   filteredPlaces: NTPlace[];
+  setFilteredPlaces: (places: NTPlace[]) => void;
 };
 
-const initialState: PlacesState = {
+const PlacesContext = createContext<Places>({
   allPlaces: defaultPlaces,
+  setAllPlaces: () => null,
   filteredPlaces: defaultPlaces,
-};
-
-const PlacesContext = createContext<{
-  state: PlacesState;
-  dispatch: Dispatch<FilterActions>;
-}>({
-  state: initialState,
-  dispatch: () => null,
-});
-
-const placesReducer = (state: PlacesState, action: FilterActions) => ({
-  allPlaces: state.allPlaces,
-  filteredPlaces: state.filteredPlaces,
+  setFilteredPlaces: () => null,
 });
 
 const PlacesProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
-  const [state, dispatch] = useReducer(placesReducer, initialState);
+  const [allPlaces, setAllPlaces] = useState(defaultPlaces);
+  const [filteredPlaces, setFilteredPlaces] = useState(defaultPlaces);
 
   return (
-    <PlacesContext.Provider value={{ state, dispatch }}>
+    <PlacesContext.Provider
+      value={{ allPlaces, setAllPlaces, filteredPlaces, setFilteredPlaces }}
+    >
       {children}
     </PlacesContext.Provider>
   );

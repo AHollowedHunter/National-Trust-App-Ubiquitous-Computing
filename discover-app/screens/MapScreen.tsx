@@ -7,6 +7,6 @@ import { usePlacesContext } from "../contexts/PlacesContext";
 type Props = BottomTabScreenProps<DiscoverBottomTabParamList, "Map">;
 
 export function MapScreen({ route, navigation }: Props) {
-  const { state } = usePlacesContext();
-  return <MainMap places={state.filteredPlaces} />;
+  const { filteredPlaces } = usePlacesContext();
+  return <MainMap places={filteredPlaces} />;
 }

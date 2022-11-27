@@ -3,11 +3,11 @@ import { View, Text } from "react-native";
 import * as Haptics from "expo-haptics";
 
 import { appStyles, ntColours } from "../config/styles";
-import { Activity, NTOpenStatus } from "../config/types";
+import { Activity, NTOpenStatus, NTRegion } from "../config/types";
 import FlexButton from "./FlexButton";
 import { NTActivityIcon, NTWebIcon } from "./NationalTrustIcons";
 import FilterToggleButton from "./FilterToggleButton";
-import { Filters } from "../config/reducers";
+import { Filters } from "../config/filterReducer";
 import { useFilterContext } from "../contexts/FilterContext";
 import { usePlacesContext } from "../contexts/PlacesContext";
 
@@ -16,7 +16,7 @@ type Props = {
 };
 export default function FilterModal({ dismissModal }: Props) {
   const { state: filterState, dispatch: filterDispatch } = useFilterContext();
-  const { state: placeState, dispatch: placeDispatch } = usePlacesContext();
+  const { allPlaces, filteredPlaces, setFilteredPlaces } = usePlacesContext();
 
   return (
     <View
@@ -24,7 +24,6 @@ export default function FilterModal({ dismissModal }: Props) {
         backgroundColor: ntColours.paletteNav,
         alignSelf: "center",
         width: "90%",
-        // height: "90%",
         elevation: 8,
         padding: 4,
         borderRadius: 2,
@@ -36,7 +35,6 @@ export default function FilterModal({ dismissModal }: Props) {
         </Text>
         <View
           style={{
-            // flex: 1,
             flexDirection: "row",
             flexWrap: "wrap",
             justifyContent: "center",
@@ -73,7 +71,6 @@ export default function FilterModal({ dismissModal }: Props) {
 
       <View
         style={{
-          // flex: 1,
           marginBottom: 8,
         }}
       >
@@ -82,7 +79,6 @@ export default function FilterModal({ dismissModal }: Props) {
         </Text>
         <View
           style={{
-            // flex: 1,
             flexDirection: "row",
             flexWrap: "wrap",
             justifyContent: "center",
@@ -108,7 +104,7 @@ export default function FilterModal({ dismissModal }: Props) {
       <Text
         style={[appStyles.sectionHeading, { color: "white", marginBottom: 8 }]}
       >
-        Matching places: {placeState.filteredPlaces.length}
+        Matching places: {filteredPlaces.length}
       </Text>
 
       <View

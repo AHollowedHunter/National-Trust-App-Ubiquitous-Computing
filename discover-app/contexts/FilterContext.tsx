@@ -1,8 +1,20 @@
-import { createContext, useContext, Dispatch, useReducer } from "react";
-import { FilterActions, filterReducer, FilterType } from "../config/reducers";
+import {
+  createContext,
+  useContext,
+  Dispatch,
+  useReducer,
+  useEffect,
+} from "react";
+import {
+  FilterActions,
+  filterReducer,
+  FiltersType,
+} from "../config/filterReducer";
+import { NTPlace } from "../config/types";
+import { usePlacesContext } from "./PlacesContext";
 
 export type FilterState = {
-  activeFilters: FilterType;
+  activeFilters: FiltersType;
 };
 
 const initialState: FilterState = {
@@ -23,6 +35,17 @@ const mainReducer = (state: FilterState, action: FilterActions) => ({
 
 const FilterProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const [state, dispatch] = useReducer(mainReducer, initialState);
+
+  const { allPlaces, setFilteredPlaces } = usePlacesContext();
+  useEffect(() => {
+    let places = allPlaces;
+
+    state.activeFilters.activities.forEach((activity) => {
+      places = places.filter((place) => place.activityTags.includes(activity));
+    });
+
+    setFilteredPlaces(places);
+  }, [state]);
 
   return (
     <FilterContext.Provider value={{ state, dispatch }}>

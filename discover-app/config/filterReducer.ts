@@ -17,7 +17,7 @@ export enum Filters {
   Clear = "FILTER_CLEAR",
 }
 
-export type FilterType = {
+export type FiltersType = {
   activities: Activity[];
   status: NTOpenStatus[];
   region: NTRegion[];
@@ -36,7 +36,7 @@ type FilterPayload = {
 export type FilterActions =
   ActionMap<FilterPayload>[keyof ActionMap<FilterPayload>];
 
-export const filterReducer = (state: FilterType, action: FilterActions) => {
+export const filterReducer = (state: FiltersType, action: FilterActions) => {
   switch (action.type) {
     case Filters.Clear:
       state.activities = [];

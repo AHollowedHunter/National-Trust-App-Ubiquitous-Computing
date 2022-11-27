@@ -22,6 +22,22 @@ const style = StyleSheet.create({
     textAlignVertical: "center",
     color: "white",
   },
+  badge: {
+    borderColor: "white",
+    backgroundColor: ntColours.veniceBlue,
+    color: "white",
+    width: 20,
+    height: 20,
+    lineHeight: 18,
+    fontSize: 14,
+    textAlign: "center",
+    textAlignVertical: "center",
+    borderWidth: 1,
+    borderRadius: 20,
+    position: "absolute",
+    left: -18,
+    top: 12,
+  },
 });
 
 export default function DiscoverFilter() {
@@ -39,7 +55,7 @@ export default function DiscoverFilter() {
             style={{ flexDirection: "row", paddingVertical: 10 }}
             importantForAccessibility="no-hide-descendants"
           >
-            <Text style={style.text}>{"Filters "}</Text>
+            <Text style={style.text}>{" Filters "}</Text>
             <NTWebIcon name="settings" style={style.text} />
           </View>
         </TouchableOpacity>

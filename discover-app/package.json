@@ -17,6 +17,7 @@
     "@react-navigation/native-stack": "^6.9.1",
     "expo": "~46.0.13",
     "expo-font": "~10.2.0",
+    "expo-haptics": "~11.3.0",
     "expo-location": "~14.3.0",
     "expo-splash-screen": "~0.16.2",
     "expo-status-bar": "~1.4.0",
@@ -32,8 +33,7 @@
     "react-native-toast-notifications": "^3.3.1",
     "react-native-web": "~0.18.7",
     "react-native-webview": "11.23.0",
-    "vector-icons": "^0.1.0",
-    "expo-haptics": "~11.3.0"
+    "vector-icons": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
