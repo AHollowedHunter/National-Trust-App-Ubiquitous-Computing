@@ -9,12 +9,14 @@ import { NTActivityIcon, NTWebIcon } from "./NationalTrustIcons";
 import FilterToggleButton from "./TagButton";
 import { Filters } from "../config/reducers";
 import { useFilterContext } from "../contexts/FilterContext";
+import { usePlacesContext } from "../contexts/PlacesContext";
 
 type Props = {
   dismissModal: Function;
 };
 export default function FilterModal({ dismissModal }: Props) {
-  const { state: placeState, dispatch: placeDispatch } = useFilterContext();
+  const { state: filterState, dispatch: filterDispatch } = useFilterContext();
+  const { state: placeState, dispatch: placeDispatch } = usePlacesContext();
 
   return (
     <View
@@ -43,14 +45,28 @@ export default function FilterModal({ dismissModal }: Props) {
           <FilterToggleButton
             key={NTOpenStatus.Open}
             title={NTOpenStatus.Open.valueOf()}
-            onPress={() => {}}
-            isToggled={false}
+            onPress={() => {
+              filterDispatch({
+                type: Filters.Status,
+                payload: { status: NTOpenStatus.Open },
+              });
+            }}
+            isToggled={filterState.activeFilters.status.includes(
+              NTOpenStatus.Open
+            )}
           />
           <FilterToggleButton
             key={NTOpenStatus.PartOpen}
             title={NTOpenStatus.PartOpen.valueOf()}
-            onPress={() => {}}
-            isToggled={true}
+            onPress={() => {
+              filterDispatch({
+                type: Filters.Status,
+                payload: { status: NTOpenStatus.PartOpen },
+              });
+            }}
+            isToggled={filterState.activeFilters.status.includes(
+              NTOpenStatus.PartOpen
+            )}
           />
         </View>
       </View>
@@ -78,12 +94,12 @@ export default function FilterModal({ dismissModal }: Props) {
               title={value}
               icon={<NTActivityIcon activity={value} size={24} />}
               onPress={() => {
-                placeDispatch({
+                filterDispatch({
                   type: Filters.Activity,
                   payload: { activity: value },
                 });
               }}
-              isToggled={placeState.activeFilters.activities.includes(value)}
+              isToggled={filterState.activeFilters.activities.includes(value)}
             />
           ))}
         </View>
@@ -92,7 +108,7 @@ export default function FilterModal({ dismissModal }: Props) {
       <Text
         style={[appStyles.sectionHeading, { color: "white", marginBottom: 8 }]}
       >
-        Matching places: 0
+        Matching places: {placeState.filteredPlaces.length}
       </Text>
 
       <View
