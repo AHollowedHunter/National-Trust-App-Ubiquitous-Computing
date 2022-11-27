@@ -100,9 +100,22 @@ export default function PlaceCard({
           <OpenStatus openStatus={place.openStatus} />
           {place.activityTags
             ? place.activityTags.map((tag, index) => (
-                <Text key={index}>
-                  {tag} <NTActivityIcon activity={tag} size={16} />
-                </Text>
+                <View
+                  key={index}
+                  style={{ flexDirection: "row", alignItems: "center" }}
+                >
+                  <Text
+                    lineBreakMode={"middle"}
+                    style={{
+                      fontSize: 16,
+                      paddingHorizontal: 2,
+                      textAlign: "right",
+                    }}
+                  >
+                    {tag}
+                  </Text>
+                  <NTActivityIcon activity={tag} size={18} />
+                </View>
               ))
             : null}
         </View>
