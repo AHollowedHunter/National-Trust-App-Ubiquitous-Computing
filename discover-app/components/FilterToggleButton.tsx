@@ -9,11 +9,12 @@ type Props = {
   onPress: () => void;
   isToggled: boolean;
 };
-export default function FilterToggleButton({ title, icon, onPress, isToggled }: Props) {
-  // const [isToggled, setIsToggled] = useState(false);
-
-  // const toggle = () => setIsToggled(!isToggled);
-
+export default function FilterToggleButton({
+  title,
+  icon,
+  onPress,
+  isToggled,
+}: Props) {
   return (
     <TouchableOpacity
       style={{
@@ -24,7 +25,6 @@ export default function FilterToggleButton({ title, icon, onPress, isToggled }: 
         backgroundColor: isToggled ? "#04d875" : ntColours.cararra,
       }}
       onPress={() => {
-        // toggle();
         onPress();
       }}
       activeOpacity={0.7}

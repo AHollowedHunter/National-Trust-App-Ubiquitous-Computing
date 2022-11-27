@@ -6,7 +6,7 @@ import { appStyles, ntColours } from "../config/styles";
 import { Activity, NTOpenStatus } from "../config/types";
 import FlexButton from "./FlexButton";
 import { NTActivityIcon, NTWebIcon } from "./NationalTrustIcons";
-import FilterToggleButton from "./TagButton";
+import FilterToggleButton from "./FilterToggleButton";
 import { Filters } from "../config/reducers";
 import { useFilterContext } from "../contexts/FilterContext";
 import { usePlacesContext } from "../contexts/PlacesContext";
@@ -120,6 +120,7 @@ export default function FilterModal({ dismissModal }: Props) {
         <FlexButton
           title="Clear All"
           onPress={() => {
+            filterDispatch({ type: Filters.Clear });
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
           }}
           backgroundColor={ntColours.redViolet}

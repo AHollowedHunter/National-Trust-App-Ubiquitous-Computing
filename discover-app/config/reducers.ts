@@ -14,6 +14,7 @@ type ActionMap<M extends { [index: string]: any }> = {
 export enum Filters {
   Activity = "FILTER_ACTIVITY",
   Status = "FILTER_STATUS",
+  Clear = "FILTER_CLEAR",
 }
 
 export type FilterType = {
@@ -29,6 +30,7 @@ type FilterPayload = {
   [Filters.Status]: {
     status: NTOpenStatus;
   };
+  [Filters.Clear]: undefined;
 };
 
 export type FilterActions =
@@ -36,6 +38,11 @@ export type FilterActions =
 
 export const filterReducer = (state: FilterType, action: FilterActions) => {
   switch (action.type) {
+    case Filters.Clear:
+      state.activities = [];
+      state.region = [];
+      state.status = [];
+      break;
     case Filters.Activity:
       if (state.activities.includes(action.payload.activity)) {
         state.activities = state.activities.filter(
