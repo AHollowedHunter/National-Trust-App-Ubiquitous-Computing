@@ -10,7 +10,6 @@ import {
   filterReducer,
   FiltersType,
 } from "../config/filterReducer";
-import { NTPlace } from "../config/types";
 import { usePlacesContext } from "./PlacesContext";
 
 export type FilterState = {
@@ -58,5 +57,4 @@ export function useFilterContext() {
   return useContext(FilterContext);
 }
 
-// export default PlacesContext;
 export { FilterProvider, FilterContext };

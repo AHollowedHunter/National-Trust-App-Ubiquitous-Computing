@@ -23,6 +23,7 @@ export default function MapMarker({ place, mapRef, mapWidth }: Props) {
 
   return (
     <Marker
+      tracksViewChanges={false}
       coordinate={place.location}
       title={place.title}
       description={place.description}
@@ -65,11 +66,7 @@ export default function MapMarker({ place, mapRef, mapWidth }: Props) {
         style={{ width: mapWidth, paddingHorizontal: 16 }}
         onPress={() => navigation.push("Place", { place: place })}
       >
-        <MapCallout
-          place={place}
-          colour={markerColour}
-          showImage={true}
-        />
+        <MapCallout place={place} colour={markerColour} showImage={true} />
         <Svg>
           <SvgFromXml
             xml={`<svg height="16" width="${mapWidth - 32}">

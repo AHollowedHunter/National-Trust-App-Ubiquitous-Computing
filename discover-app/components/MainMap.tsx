@@ -1,22 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MapView from "react-native-maps";
 import {
   requestForegroundPermissionsAsync,
+  getLastKnownPositionAsync,
   getCurrentPositionAsync,
 } from "expo-location";
-import { NTPlace } from "../config/types";
 import MapMarker from "./MapMarker";
 import { ActivityIndicator } from "react-native";
 import { ntColours } from "../config/styles";
+import { usePlacesContext } from "../contexts/PlacesContext";
 
-type Props = {
-  places?: NTPlace[];
-};
-
-export function MainMap(props: Props) {
+export function MainMap() {
   const mapRef = React.useRef<MapView | null>(null);
   const [mapWidth, setMapWidth] = useState(400);
   const [mapReady, setMapReady] = useState(false);
+
+  const { filteredPlaces } = usePlacesContext();
 
   useEffect(() => {
     async function getLocation() {
@@ -56,16 +55,14 @@ export function MainMap(props: Props) {
         showsBuildings={true}
         moveOnMarkerPress={false} // Handled in MapMarker onPress
       >
-        {props.places
-          ? props.places.map((place, index) => (
-              <MapMarker
-                key={index}
-                mapRef={mapRef}
-                place={place}
-                mapWidth={mapWidth}
-              />
-            ))
-          : null}
+        {filteredPlaces.map((place) => (
+          <MapMarker
+            key={place.id}
+            mapRef={mapRef}
+            place={place}
+            mapWidth={mapWidth}
+          />
+        ))}
       </MapView>
       <ActivityIndicator
         size={128}
