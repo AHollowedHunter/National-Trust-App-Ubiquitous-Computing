@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import MapView from "react-native-maps";
 import {
   requestForegroundPermissionsAsync,
-  getLastKnownPositionAsync,
   getCurrentPositionAsync,
 } from "expo-location";
 import MapMarker from "./MapMarker";
@@ -10,7 +9,7 @@ import { ActivityIndicator } from "react-native";
 import { ntColours } from "../config/styles";
 import { usePlacesContext } from "../contexts/PlacesContext";
 import MapModal from "./MapModal";
-import { MapProvider } from "../contexts/MapContext";
+import { MapProvider, useMapContext } from "../contexts/MapContext";
 
 export function MainMap() {
   const mapRef = React.useRef<MapView | null>(null);
@@ -18,6 +17,7 @@ export function MainMap() {
   const [mapReady, setMapReady] = useState(false);
 
   const { filteredPlaces } = usePlacesContext();
+
 
   useEffect(() => {
     async function getLocation() {
@@ -32,7 +32,6 @@ export function MainMap() {
         pitch: 0,
       });
     }
-
     getLocation();
   }, []);
 
@@ -59,17 +58,12 @@ export function MainMap() {
           moveOnMarkerPress={false} // Handled in MapMarker onPress
         >
           {filteredPlaces.map((place) => (
-            <MapMarker
-              key={place.id}
-              mapRef={mapRef}
-              place={place}
-              mapWidth={mapWidth}
-            />
+            <MapMarker key={place.id} mapRef={mapRef} place={place} />
           ))}
         </MapView>
 
         <MapModal />
-        
+
         <ActivityIndicator
           size={128}
           color={ntColours.olive}

@@ -1,18 +1,16 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 import MapView, { Callout, Marker } from "react-native-maps";
-import { ntColours } from "../config/styles";
 import { NTPlace } from "../config/types";
 import { useMapContext } from "../contexts/MapContext";
 
 type Props = {
   place: NTPlace;
   mapRef: React.MutableRefObject<MapView | null>;
-  mapWidth: number;
 };
 
-export default function MapMarker({ place, mapRef, mapWidth }: Props) {
-  const { place: contextPlace, setPlace, toggleVisible } = useMapContext();
+export default function MapMarker({ place, mapRef }: Props) {
+  const { place: contextPlace, setPlace, setVisible } = useMapContext();
 
   let markerImage =
     contextPlace == place
@@ -29,7 +27,7 @@ export default function MapMarker({ place, mapRef, mapWidth }: Props) {
       centerOffset={{ x: 0, y: -32 }}
       onPress={async () => {
         setPlace(place);
-        toggleVisible();
+        setVisible(true);
 
         let cam = await mapRef.current?.getCamera();
         let boundries = await mapRef.current?.getMapBoundaries();
@@ -56,6 +54,10 @@ export default function MapMarker({ place, mapRef, mapWidth }: Props) {
         );
       }}
     >
+      {/* 
+      Use an empty callout with display: "none",
+      to stop the default callout showing
+      */}
       <Callout tooltip style={{ display: "none" }}>
         <Text></Text>
       </Callout>

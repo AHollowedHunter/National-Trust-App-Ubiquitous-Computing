@@ -55,7 +55,9 @@ export function NTActivityIcon({ activity, size }: NTActivityIconProps) {
     case Activity.Geocaching:
       return <NTIcon name="Geocaching" style={{ fontSize: size ?? 24 }} />;
     case Activity.Coasteering:
-      return <NTIcon name="Orienteering" style={{ fontSize: size ?? 24 }} />;
+      return (
+        <NTIconCustom name="Coasteering" style={{ fontSize: size ?? 24 }} />
+      );
     case Activity.Fishing:
       return <NTIcon name="Fishing" style={{ fontSize: size ?? 24 }} />;
     case Activity.Running:

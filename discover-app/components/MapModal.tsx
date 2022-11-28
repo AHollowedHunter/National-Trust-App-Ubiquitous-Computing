@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import Modal from "react-native-modal";
@@ -10,20 +10,29 @@ import PlaceCard from "./PlaceCard";
 
 export default function MarkerModal() {
   const navigation = useNavigation<NativeStackProps>();
-  const { place, visible, toggleVisible } = useMapContext();
+  const { place, visible, setVisible } = useMapContext();
+
+  // Set a callback when the modal loses focus (Such as navigating to another
+  // screen) to close the modal.
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => setVisible(false);
+    }, [])
+  );
 
   if (!place) return <></>;
 
   return (
     <Modal
       isVisible={visible}
-      onBackdropPress={() => toggleVisible()}
+      onBackButtonPress={() => setVisible(false)}
+      onBackdropPress={() => setVisible(false)}
+      coverScreen={false}
       customBackdrop={
-        <TouchableWithoutFeedback onPress={toggleVisible}>
+        <TouchableWithoutFeedback onPress={() => setVisible(false)}>
           <View style={{ flex: 1, backgroundColor: "transparent" }} />
         </TouchableWithoutFeedback>
       }
-      coverScreen={false}
       animationIn={"zoomInUp"}
       animationInTiming={400}
       animationOut={"zoomOut"}
@@ -40,7 +49,6 @@ export default function MarkerModal() {
         }}
         onPress={() => {
           navigation.push("Place", { place: place });
-          toggleVisible();
         }}
       >
         <PlaceCard place={place} imageHeight={200} />

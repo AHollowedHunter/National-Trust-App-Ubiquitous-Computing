@@ -5,20 +5,19 @@ export type Places = {
   place?: NTPlace;
   setPlace: (place: NTPlace) => void;
   visible: boolean;
-  toggleVisible: () => void;
+  setVisible: (visible: boolean) => void;
 };
 
 const MapContext = createContext<Places>({
   place: undefined,
   setPlace: () => null,
   visible: false,
-  toggleVisible: () => null,
+  setVisible: () => null,
 });
 
 const MapProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const [place, setPlace] = useState<NTPlace>();
   const [visible, setVisible] = useState(false);
-  const toggleVisible = () => setVisible(!visible);
 
   return (
     <MapContext.Provider
@@ -26,7 +25,7 @@ const MapProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
         place: place,
         setPlace: setPlace,
         visible: visible,
-        toggleVisible: toggleVisible,
+        setVisible: setVisible,
       }}
     >
       {children}

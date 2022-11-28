@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { ActivityIndicator, Image, Text, View } from "react-native";
-import { Svg, Image as ImageSvg } from "react-native-svg";
 import { ntColours } from "../config/styles";
 import { NTWebIcon } from "./NationalTrustIcons";
 
@@ -9,20 +8,14 @@ type Props = {
   description?: string;
   imageHeight?: number;
   offset?: number;
-  useSvgImage?: boolean;
 };
 
 export default function ImageLoading({
   uri,
   description,
-  imageHeight,
-  offset,
-  useSvgImage,
+  imageHeight = 200,
+  offset = 0,
 }: Props) {
-  // Set default if not given
-  imageHeight = imageHeight ? imageHeight : 200;
-  offset = offset ?? 0;
-
   const [imageLoading, setImageLoading] = useState(true);
 
   return (
@@ -81,16 +74,6 @@ export default function ImageLoading({
           source={{ uri: uri + "?width=1000" }}
           accessible={false}
         />
-        {useSvgImage ? (
-          <Svg width={"100%"} height={imageHeight + offset}>
-            <ImageSvg
-              width={"100%"}
-              height={"100%"}
-              preserveAspectRatio="xMidYMid slice"
-              href={{ uri: uri + "?width=1000" }}
-            />
-          </Svg>
-        ) : null}
         <View
           style={{
             position: "absolute",

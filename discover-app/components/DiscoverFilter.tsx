@@ -60,6 +60,7 @@ export default function DiscoverFilter() {
           </View>
         </TouchableOpacity>
         <Modal
+          onBackButtonPress={dismissFilterModal}
           isVisible={filterVisible}
           onBackdropPress={() => setFilterVisible(false)}
           customBackdrop={
