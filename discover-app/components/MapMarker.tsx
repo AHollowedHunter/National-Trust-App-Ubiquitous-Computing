@@ -12,9 +12,12 @@ type Props = {
 };
 
 export default function MapMarker({ place, mapRef, mapWidth }: Props) {
-  const { setPlace, toggleVisible } = useMapContext();
+  const { place: contextPlace, setPlace, toggleVisible } = useMapContext();
 
-  let markerColour = ntColours.eminence;
+  let markerImage =
+    contextPlace == place
+      ? require("../assets/images/map-marker-cardinal-pink.png")
+      : require("../assets/images/map-marker.png");
 
   return (
     <Marker
@@ -22,7 +25,7 @@ export default function MapMarker({ place, mapRef, mapWidth }: Props) {
       coordinate={place.location}
       title={place.title}
       description={place.description}
-      image={require("../assets/images/map-marker.png")}
+      image={markerImage}
       centerOffset={{ x: 0, y: -32 }}
       onPress={async () => {
         setPlace(place);
@@ -35,7 +38,7 @@ export default function MapMarker({ place, mapRef, mapWidth }: Props) {
         const getLatitudeOffset = () =>
           boundries
             ? (boundries?.northEast.latitude - boundries?.southWest.latitude) /
-              3.5
+              3
             : 9;
 
         mapRef.current?.animateCamera(

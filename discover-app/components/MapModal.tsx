@@ -33,11 +33,10 @@ export default function MarkerModal() {
       <TouchableOpacity
         activeOpacity={0.8}
         style={{
-          backgroundColor: ntColours.eminence,
+          backgroundColor: ntColours.cardinalPink,
           alignSelf: "center",
           width: "100%",
           elevation: 8,
-          borderRadius: 2,
         }}
         onPress={() => {
           navigation.push("Place", { place: place });
