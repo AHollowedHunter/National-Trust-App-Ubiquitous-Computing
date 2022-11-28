@@ -10,6 +10,7 @@ import {
   filterReducer,
   FiltersType,
 } from "../config/filterReducer";
+import { NTOpenStatus } from "../config/types";
 import { usePlacesContext } from "./PlacesContext";
 
 export type FilterState = {
@@ -42,6 +43,24 @@ const FilterProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
     state.activeFilters.activities.forEach((activity) => {
       places = places.filter((place) => place.activityTags.includes(activity));
     });
+
+  
+    if (
+      state.activeFilters.status.includes(NTOpenStatus.Open) &&
+      state.activeFilters.status.includes(NTOpenStatus.PartOpen)
+    ) {
+      places = places.filter(
+        (place) =>
+          place.openStatus == NTOpenStatus.Open ||
+          place.openStatus == NTOpenStatus.PartOpen
+      );
+    } else if (state.activeFilters.status.includes(NTOpenStatus.Open)) {
+      places = places.filter((place) => place.openStatus == NTOpenStatus.Open);
+    } else if (state.activeFilters.status.includes(NTOpenStatus.PartOpen)) {
+      places = places.filter(
+        (place) => place.openStatus == NTOpenStatus.PartOpen
+      );
+    }
 
     setFilteredPlaces(places);
   }, [state, allPlaces]);

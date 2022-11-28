@@ -55,7 +55,7 @@ export const filterReducer = (state: FiltersType, action: FilterActions) => {
     case Filters.Status:
       if (state.status.includes(action.payload.status)) {
         state.status = state.status.filter(
-          (activity) => activity != action.payload.status
+          (status) => status != action.payload.status
         );
       } else {
         state.status = [...state.status, action.payload.status];

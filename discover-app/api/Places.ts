@@ -1,6 +1,4 @@
-import { FiltersType } from "../config/filterReducer";
 import { Activity, NTOpenStatus, NTPlace, NTRegion } from "../config/types";
-import { usePlacesContext } from "../contexts/PlacesContext";
 import defaultPlaceData from "./defaultPlaces.json";
 
 /**
