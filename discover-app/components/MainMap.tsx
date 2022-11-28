@@ -9,6 +9,8 @@ import MapMarker from "./MapMarker";
 import { ActivityIndicator } from "react-native";
 import { ntColours } from "../config/styles";
 import { usePlacesContext } from "../contexts/PlacesContext";
+import MapModal from "./MapModal";
+import { MapProvider } from "../contexts/MapContext";
 
 export function MainMap() {
   const mapRef = React.useRef<MapView | null>(null);
@@ -35,48 +37,53 @@ export function MainMap() {
   }, []);
 
   return (
-    <>
-      <MapView
-        ref={mapRef}
-        style={{ flex: 1 }}
-        initialCamera={{
-          center: { latitude: 50.6884, longitude: -1.95622 },
-          pitch: 0,
-          heading: 0,
-          zoom: 10,
-          altitude: 10,
-        }}
-        showsUserLocation={true}
-        mapType="standard"
-        onLayout={(event) => {
-          setMapWidth(event.nativeEvent.layout.width);
-        }}
-        onMapReady={() => setMapReady(true)}
-        showsBuildings={true}
-        moveOnMarkerPress={false} // Handled in MapMarker onPress
-      >
-        {filteredPlaces.map((place) => (
-          <MapMarker
-            key={place.id}
-            mapRef={mapRef}
-            place={place}
-            mapWidth={mapWidth}
-          />
-        ))}
-      </MapView>
-      <ActivityIndicator
-        size={128}
-        color={ntColours.olive}
-        style={{
-          position: "absolute",
-          display: mapReady ? "none" : "flex",
-          alignSelf: "center",
-          top: "40%",
-          elevation: 4,
-          backgroundColor: ntColours.paletteNav,
-          borderRadius: 64,
-        }}
-      />
-    </>
+    <MapProvider>
+      <>
+        <MapView
+          ref={mapRef}
+          style={{ flex: 1 }}
+          initialCamera={{
+            center: { latitude: 50.6884, longitude: -1.95622 },
+            pitch: 0,
+            heading: 0,
+            zoom: 10,
+            altitude: 10,
+          }}
+          showsUserLocation={true}
+          mapType="standard"
+          onLayout={(event) => {
+            setMapWidth(event.nativeEvent.layout.width);
+          }}
+          onMapReady={() => setMapReady(true)}
+          showsBuildings={true}
+          moveOnMarkerPress={false} // Handled in MapMarker onPress
+        >
+          {filteredPlaces.map((place) => (
+            <MapMarker
+              key={place.id}
+              mapRef={mapRef}
+              place={place}
+              mapWidth={mapWidth}
+            />
+          ))}
+        </MapView>
+
+        <MapModal />
+        
+        <ActivityIndicator
+          size={128}
+          color={ntColours.olive}
+          style={{
+            position: "absolute",
+            display: mapReady ? "none" : "flex",
+            alignSelf: "center",
+            top: "40%",
+            elevation: 4,
+            backgroundColor: ntColours.paletteNav,
+            borderRadius: 64,
+          }}
+        />
+      </>
+    </MapProvider>
   );
 }

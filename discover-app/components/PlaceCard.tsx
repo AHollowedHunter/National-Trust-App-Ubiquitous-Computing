@@ -9,16 +9,9 @@ import OpenStatus from "./OpenStatus";
 type Props = {
   place: NTPlace;
   imageHeight?: number;
-  showImage: boolean;
-  useSvgImage?: boolean;
 };
 
-export default function PlaceCard({
-  place,
-  imageHeight,
-  showImage,
-  useSvgImage,
-}: Props) {
+export default function PlaceCard({ place, imageHeight }: Props) {
   // Set default if not given
   imageHeight = imageHeight ? imageHeight : 200;
 
@@ -68,18 +61,12 @@ export default function PlaceCard({
             {place.subTitle}
           </Text>
         </View>
-
-        {showImage ? (
-          <ImageLoading
-            uri={place.imageUrl}
-            description={place.imageDescription}
-            imageHeight={250}
-            offset={24}
-            useSvgImage={useSvgImage}
-          />
-        ) : (
-          <View style={{ height: 24 }} />
-        )}
+        <ImageLoading
+          uri={place.imageUrl}
+          description={place.imageDescription}
+          imageHeight={imageHeight}
+          offset={24}
+        />
       </View>
 
       <View
