@@ -19,7 +19,10 @@ export async function getPlaces(): Promise<NTPlace[]> {
     const places: NTPlace[] = [];
     // The data is provided as a single object, with each place as a child object
     // with its ID as a key. Iterate through each objects value.
-    Object.values(placeJson).forEach((place) => {
+    // Object.values(placeJson).forEach((place) => {
+    //   places.push(convertPlaceData(place));
+    // });
+    placeJson.pagedMultiMatch.results.forEach((place: any) => {
       places.push(convertPlaceData(place));
     });
 
@@ -38,7 +41,8 @@ const getPlaceJson = async () => {
     // Original URL used before NT changed website
     // let url = "https://www.nationaltrust.org.uk/search/data/all-places"
     let url =
-      "https://web.archive.org/web/20220925170256id_/https://www.nationaltrust.org.uk/search/data/all-places";
+      // "https://web.archive.org/web/20220925170256id_/https://www.nationaltrust.org.uk/search/data/all-places";
+      "https://www.nationaltrust.org.uk/api/search/places?query=&pageStartIndex=0&pageSize=1000&maxPlaceResults=1000";
 
     const response = await fetch(url);
     if (response.status == 404) {
@@ -58,28 +62,25 @@ const getPlaceJson = async () => {
  */
 function convertPlaceData(raw: any): NTPlace {
   // Activity Tags are provided as a single string CSV, convert now for ease
-  let activityTags: Activity[] = [];
-  if (raw.activityTagsAsCsv) {
-    activityTags = raw.activityTagsAsCsv.split(",").map((tag: string) => {
-      return tag.trim();
-    });
-  }
+  let activityTags: Activity[] =
+    defaultPlaces.find((place) => place.id == parseInt(raw.id.value))
+      ?.activityTags ?? [];
 
   let place: NTPlace = {
-    id: parseInt(raw.id),
+    id: parseInt(raw.id.value),
     title: raw.title,
     subTitle: raw.subTitle,
     description: raw.description,
     imageUrl: raw.imageUrl,
     imageDescription: raw.imageDescription,
     websiteUrl: raw.websiteUrl,
-    location: raw.location,
+    location: { longitude: raw.location.lon, latitude: raw.location.lat },
     activityTags: activityTags,
     openStatus:
-      raw.openingTimeStatus != undefined
-        ? (raw.openingTimeStatus as NTOpenStatus)
-        : NTOpenStatus.Unknown,
-    region: raw.cmsRegion as NTRegion,
+      NTOpenStatus[
+        raw.dayOpeningStatus[0]?.openingTimeStatus as keyof typeof NTOpenStatus
+      ] ?? NTOpenStatus.UNKNOWN,
+    region: raw.cmsRegion,
   };
 
   return place;

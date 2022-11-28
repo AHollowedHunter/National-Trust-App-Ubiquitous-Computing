@@ -27,7 +27,7 @@ export interface NTPlace {
   location: { longitude: number; latitude: number };
   activityTags: Activity[];
   openStatus: NTOpenStatus;
-  region: NTRegion;
+  region: string;
 }
 
 export enum Activity {
@@ -51,10 +51,10 @@ export enum Activity {
 }
 
 export enum NTOpenStatus {
-  Unknown = "",
-  Closed = "Closed today",
-  Open = "Open today",
-  PartOpen = "Partially open today",
+  UNKNOWN = "",
+  CLOSED = "Closed today",
+  FULLY_OPEN = "Open today",
+  PARTIALLY_OPEN = "Partially open today",
 }
 
 export enum NTRegion {

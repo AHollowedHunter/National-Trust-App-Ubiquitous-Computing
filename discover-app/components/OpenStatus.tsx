@@ -9,11 +9,11 @@ type Props = {
 
 const statusColor = (status: NTOpenStatus) => {
   switch (status) {
-    case NTOpenStatus.Open:
+    case NTOpenStatus.FULLY_OPEN:
       return ntColours.apple;
-    case NTOpenStatus.PartOpen:
+    case NTOpenStatus.PARTIALLY_OPEN:
       return ntColours.olive;
-    case NTOpenStatus.Closed:
+    case NTOpenStatus.CLOSED:
       return ntColours.crimson;
   }
 };

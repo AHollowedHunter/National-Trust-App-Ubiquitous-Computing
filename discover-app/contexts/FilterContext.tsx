@@ -49,19 +49,19 @@ const FilterProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
 
   
     if (
-      state.activeFilters.status.includes(NTOpenStatus.Open) &&
-      state.activeFilters.status.includes(NTOpenStatus.PartOpen)
+      state.activeFilters.status.includes(NTOpenStatus.FULLY_OPEN) &&
+      state.activeFilters.status.includes(NTOpenStatus.PARTIALLY_OPEN)
     ) {
       places = places.filter(
         (place) =>
-          place.openStatus == NTOpenStatus.Open ||
-          place.openStatus == NTOpenStatus.PartOpen
+          place.openStatus == NTOpenStatus.FULLY_OPEN ||
+          place.openStatus == NTOpenStatus.PARTIALLY_OPEN
       );
-    } else if (state.activeFilters.status.includes(NTOpenStatus.Open)) {
-      places = places.filter((place) => place.openStatus == NTOpenStatus.Open);
-    } else if (state.activeFilters.status.includes(NTOpenStatus.PartOpen)) {
+    } else if (state.activeFilters.status.includes(NTOpenStatus.FULLY_OPEN)) {
+      places = places.filter((place) => place.openStatus == NTOpenStatus.FULLY_OPEN);
+    } else if (state.activeFilters.status.includes(NTOpenStatus.PARTIALLY_OPEN)) {
       places = places.filter(
-        (place) => place.openStatus == NTOpenStatus.PartOpen
+        (place) => place.openStatus == NTOpenStatus.PARTIALLY_OPEN
       );
     }
 

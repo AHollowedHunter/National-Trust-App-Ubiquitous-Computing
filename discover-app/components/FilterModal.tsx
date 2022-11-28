@@ -41,29 +41,29 @@ export default function FilterModal({ dismissModal }: Props) {
           }}
         >
           <FilterToggleButton
-            key={NTOpenStatus.Open}
-            title={NTOpenStatus.Open.valueOf()}
+            key={NTOpenStatus.FULLY_OPEN}
+            title={NTOpenStatus.FULLY_OPEN.valueOf()}
             onPress={() => {
               filterDispatch({
                 type: Filters.Status,
-                payload: { status: NTOpenStatus.Open },
+                payload: { status: NTOpenStatus.FULLY_OPEN },
               });
             }}
             isToggled={filterState.activeFilters.status.includes(
-              NTOpenStatus.Open
+              NTOpenStatus.FULLY_OPEN
             )}
           />
           <FilterToggleButton
-            key={NTOpenStatus.PartOpen}
-            title={NTOpenStatus.PartOpen.valueOf()}
+            key={NTOpenStatus.PARTIALLY_OPEN}
+            title={NTOpenStatus.PARTIALLY_OPEN.valueOf()}
             onPress={() => {
               filterDispatch({
                 type: Filters.Status,
-                payload: { status: NTOpenStatus.PartOpen },
+                payload: { status: NTOpenStatus.PARTIALLY_OPEN },
               });
             }}
             isToggled={filterState.activeFilters.status.includes(
-              NTOpenStatus.PartOpen
+              NTOpenStatus.PARTIALLY_OPEN
             )}
           />
         </View>
