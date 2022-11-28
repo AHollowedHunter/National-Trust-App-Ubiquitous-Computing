@@ -35,8 +35,11 @@ const mainReducer = (state: FilterState, action: FilterActions) => ({
 
 const FilterProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const [state, dispatch] = useReducer(mainReducer, initialState);
-
   const { allPlaces, setFilteredPlaces } = usePlacesContext();
+
+  // Whenever the active filters or mian place are updated, update the filtered 
+  // data. Needs to be in a useEffect to wait for this context to update before 
+  // attempting to update the PlacesContext
   useEffect(() => {
     let places = allPlaces;
 
