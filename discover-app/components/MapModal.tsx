@@ -30,13 +30,14 @@ export default function MarkerModal() {
       coverScreen={false}
       customBackdrop={
         <TouchableWithoutFeedback onPress={() => setVisible(false)}>
-          <View style={{ flex: 1, backgroundColor: "transparent" }} />
+          <View style={{ flex: 1, backgroundColor: ntColours.darkGrey, opacity: 0.35 }} />
         </TouchableWithoutFeedback>
       }
       animationIn={"zoomInUp"}
       animationInTiming={400}
       animationOut={"zoomOut"}
       animationOutTiming={200}
+      useNativeDriverForBackdrop
       style={{ justifyContent: "flex-start", marginTop: 64 }}
     >
       <TouchableOpacity
