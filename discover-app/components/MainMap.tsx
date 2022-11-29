@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import MapView from "react-native-maps";
-import MapMarker from "./MapMarker";
 import { ActivityIndicator } from "react-native";
+
 import { ntColours } from "../config/styles";
-import { usePlacesContext } from "../contexts/PlacesContext";
 import MapModal from "./MapModal";
+import MapMarker from "./MapMarker";
+import { usePlacesContext } from "../contexts/PlacesContext";
 import { MapProvider } from "../contexts/MapContext";
 import { useLocationContext } from "../contexts/LocationContext";
 

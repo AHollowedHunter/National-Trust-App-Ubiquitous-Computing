@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Text, TouchableOpacity, View, StyleSheet } from "react-native";
+import React from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 import { ntColours } from "../config/styles";
 import { NTWebIcon } from "./NationalTrustIcons";
 

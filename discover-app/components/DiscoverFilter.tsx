@@ -8,12 +8,10 @@ import {
 } from "react-native";
 import Modal from "react-native-modal";
 
-import { appStyles, ntColours, ntFonts } from "../config/styles";
+import { ntColours, ntFonts } from "../config/styles";
 import { FilterProvider, useFilterContext } from "../contexts/FilterContext";
 import FilterModal from "./FilterModal";
 import { NTWebIcon } from "./NationalTrustIcons";
-
-type Props = {};
 
 const style = StyleSheet.create({
   text: {

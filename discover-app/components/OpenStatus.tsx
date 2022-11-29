@@ -1,5 +1,6 @@
 import React from "react";
 import { Text } from "react-native";
+
 import { appStyles, ntColours } from "../config/styles";
 import { NTOpenStatus } from "../config/types";
 

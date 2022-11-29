@@ -44,7 +44,7 @@ export const appStyles = StyleSheet.create({
   subHeading: {
     fontFamily: ntFonts.italics,
     fontSize: 16,
-  },  
+  },
   sectionHeading: {
     fontSize: 24,
     fontFamily: ntFonts.display,

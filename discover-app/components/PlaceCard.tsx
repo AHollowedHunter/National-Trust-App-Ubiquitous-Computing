@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Text, View } from "react-native";
 import { appStyles, ntColours } from "../config/styles";
 import { NTPlace } from "../config/types";
@@ -12,10 +12,7 @@ type Props = {
   imageHeight?: number;
 };
 
-export default function PlaceCard({ place, imageHeight }: Props) {
-  // Set default if not given
-  imageHeight = imageHeight ? imageHeight : 200;
-
+export default function PlaceCard({ place, imageHeight = 200 }: Props) {
   return (
     <View>
       <View>
@@ -83,9 +80,7 @@ export default function PlaceCard({ place, imageHeight }: Props) {
       >
         <View style={{ flex: 1 }}>
           <Distance distance={place.distance} />
-          <Text style={[appStyles.description]}>
-            {place.description}
-          </Text>
+          <Text style={[appStyles.description]}>{place.description}</Text>
         </View>
         <View style={{ alignItems: "flex-end", paddingLeft: 8 }}>
           <OpenStatus openStatus={place.openStatus} />

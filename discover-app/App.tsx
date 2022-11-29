@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as SplashScreen from "expo-splash-screen";
 import {

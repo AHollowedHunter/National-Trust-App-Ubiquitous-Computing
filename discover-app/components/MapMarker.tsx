@@ -1,6 +1,7 @@
 import React from "react";
 import { Text } from "react-native";
 import MapView, { Callout, Marker } from "react-native-maps";
+
 import { NTPlace } from "../config/types";
 import { useMapContext } from "../contexts/MapContext";
 

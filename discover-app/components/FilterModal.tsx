@@ -3,17 +3,11 @@ import { View, Text, ScrollView } from "react-native";
 import * as Haptics from "expo-haptics";
 
 import { appStyles, ntColours } from "../config/styles";
-import {
-  Activity,
-  NTOpenStatus,
-  NTRegion,
-  PlaceCategory,
-} from "../config/types";
+import { Activity, NTOpenStatus, PlaceCategory } from "../config/types";
 import FlexButton from "./FlexButton";
 import {
   NTActivityIcon,
   NTCategoryIcon,
-  NTIcon,
   NTWebIcon,
 } from "./NationalTrustIcons";
 import FilterToggleButton from "./FilterToggleButton";

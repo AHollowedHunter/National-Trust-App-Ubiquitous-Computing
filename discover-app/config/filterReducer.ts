@@ -1,4 +1,4 @@
-import { Activity, NTOpenStatus, NTRegion, PlaceCategory } from "./types";
+import { Activity, NTOpenStatus, PlaceCategory } from "./types";
 
 type ActionMap<M extends { [index: string]: any }> = {
   [Key in keyof M]: M[Key] extends undefined

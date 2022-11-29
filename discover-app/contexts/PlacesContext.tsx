@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { defaultPlaces,  getPlaces } from "../api/Places";
+import { defaultPlaces, getPlaces } from "../api/Places";
 import { NTPlace } from "../config/types";
 import { useLocationContext } from "./LocationContext";
 

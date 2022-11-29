@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   Animated,
-  View,
   Text,
   TextStyle,
   StyleProp,
   TouchableOpacity,
 } from "react-native";
+
 import { appStyles } from "../config/styles";
 import { NTWebIcon } from "./NationalTrustIcons";
 

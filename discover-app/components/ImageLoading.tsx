@@ -22,7 +22,7 @@ export default function ImageLoading({
     <View style={{ top: -offset, height: imageHeight }}>
       <View
         // This view exists to placeholder the space behind the image if it
-        // does not load, such as Android Map Callouts...
+        // does not load
         style={{
           position: "absolute",
           height: imageHeight + offset,

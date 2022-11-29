@@ -22,7 +22,7 @@ export default function PlaceListItem({ place }: Props) {
       {/* Wrap all childen in a View for activeOpactiy to work 
       see https://github.com/facebook/react-native/issues/11834 */}
       <View>
-        <PlaceCard place={place} showImage={true} />
+        <PlaceCard place={place} />
       </View>
     </TouchableHighlight>
   );
