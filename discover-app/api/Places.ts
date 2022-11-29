@@ -7,6 +7,7 @@ import {
   NTOpenStatus,
   NTPlace,
   OpeningCalendar,
+  PlaceCategory,
 } from "../config/types";
 import defaultPlaceData from "./defaultPlaces.json";
 
@@ -42,7 +43,7 @@ export async function getPlaces(
     latitude: 50.6884,
     longitude: -1.95622,
   };
-  
+
   let placeJson = await getJsonFromUrl(
     ALL_PLACES_JSON_URL + `&lat=${latitude}&lon=${longitude}`
   );
@@ -95,6 +96,11 @@ function convertPlaceData(
     defaultPlaces.find((place) => place.id == parseInt(raw.id.value))
       ?.activityTags ?? [];
 
+  let categories: PlaceCategory[] = raw.tagRefs.map((tag: any) => {
+    if (Object.keys(PlaceCategory).includes(tag))
+      return PlaceCategory[tag as keyof typeof PlaceCategory];
+  });
+
   let place: NTPlace = {
     id: parseInt(raw.id.value),
     title: raw.title,
@@ -111,6 +117,7 @@ function convertPlaceData(
         raw.dayOpeningStatus[0]?.openingTimeStatus as keyof typeof NTOpenStatus
       ] ?? NTOpenStatus.UNKNOWN,
     region: raw.cmsRegion,
+    categories: categories,
   };
   if (userLocation)
     place.distance = roundDistance(

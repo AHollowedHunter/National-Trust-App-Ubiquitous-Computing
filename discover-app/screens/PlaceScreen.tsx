@@ -27,6 +27,8 @@ export function PlaceScreen({ route, navigation }: Props) {
     getDetails();
   }, []);
 
+  console.log(place.categories)
+
   return (
     <ScrollView style={{ flex: 1, backgroundColor: ntColours.alto }}>
       <View
@@ -98,6 +100,8 @@ export function PlaceScreen({ route, navigation }: Props) {
               : null}
           </View>
         </View>
+
+        <Text>{place.categories?.map(tag => tag)}</Text>
 
         {detailedPlace?.longDescription ? (
           <>

@@ -30,6 +30,7 @@ export interface NTPlace {
   openStatus: NTOpenStatus;
   region: string;
   distance?: number;
+  categories?: PlaceCategory[];
 }
 
 export enum Activity {
@@ -116,4 +117,23 @@ export interface Facilities {
 export interface AccessTag {
   name: string;
   description: string;
+}
+
+export enum PlaceCategory {
+  IA000001 = "Churches and Chapels", //
+  IA000002 = "Houses", //
+  IA000003 = "Houses and Buildings",
+  IA000004 = "Sites and Monuments", //
+  // IA000005 = "Outdoors",
+  // IA000006 = "Buildings",
+  IA000008 = "Castles and Forts", //
+  IA000009 = "Coast and Beaches", //
+  // IA000010 = "Parks",
+  // IA000011 = "Gardens",
+  IA000012 = "Gardens and Parks", //
+  IA000013 = "Mills Forges and Mines", //
+  // IA000014 = "Art and Collections",
+  IA000015 = "Countryside", //
+  IA000016 = "Coastal Outdoor Centre",
+  IA000017 = "Villages and Pubs", //
 }
