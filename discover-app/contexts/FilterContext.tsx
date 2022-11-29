@@ -18,7 +18,7 @@ export type FilterState = {
 };
 
 const initialState: FilterState = {
-  activeFilters: { activities: [], status: [], region: [] },
+  activeFilters: { activities: [], categories: [], status: [], region: [] },
 };
 
 const FilterContext = createContext<{
@@ -37,8 +37,8 @@ const FilterProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const [state, dispatch] = useReducer(mainReducer, initialState);
   const { allPlaces, setFilteredPlaces } = usePlacesContext();
 
-  // Whenever the active filters or mian place are updated, update the filtered 
-  // data. Needs to be in a useEffect to wait for this context to update before 
+  // Whenever the active filters or mian place are updated, update the filtered
+  // data. Needs to be in a useEffect to wait for this context to update before
   // attempting to update the PlacesContext
   useEffect(() => {
     let places = allPlaces;
@@ -47,7 +47,10 @@ const FilterProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
       places = places.filter((place) => place.activityTags.includes(activity));
     });
 
-  
+    state.activeFilters.categories.forEach((category) => {
+      places = places.filter((place) => place.categories?.includes(category));
+    });
+
     if (
       state.activeFilters.status.includes(NTOpenStatus.FULLY_OPEN) &&
       state.activeFilters.status.includes(NTOpenStatus.PARTIALLY_OPEN)
@@ -58,8 +61,12 @@ const FilterProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
           place.openStatus == NTOpenStatus.PARTIALLY_OPEN
       );
     } else if (state.activeFilters.status.includes(NTOpenStatus.FULLY_OPEN)) {
-      places = places.filter((place) => place.openStatus == NTOpenStatus.FULLY_OPEN);
-    } else if (state.activeFilters.status.includes(NTOpenStatus.PARTIALLY_OPEN)) {
+      places = places.filter(
+        (place) => place.openStatus == NTOpenStatus.FULLY_OPEN
+      );
+    } else if (
+      state.activeFilters.status.includes(NTOpenStatus.PARTIALLY_OPEN)
+    ) {
       places = places.filter(
         (place) => place.openStatus == NTOpenStatus.PARTIALLY_OPEN
       );

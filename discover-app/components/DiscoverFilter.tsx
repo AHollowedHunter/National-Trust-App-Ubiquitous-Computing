@@ -9,7 +9,7 @@ import {
 import Modal from "react-native-modal";
 
 import { appStyles, ntColours, ntFonts } from "../config/styles";
-import { FilterProvider } from "../contexts/FilterContext";
+import { FilterProvider, useFilterContext } from "../contexts/FilterContext";
 import FilterModal from "./FilterModal";
 import { NTWebIcon } from "./NationalTrustIcons";
 
@@ -43,6 +43,16 @@ const style = StyleSheet.create({
 export default function DiscoverFilter() {
   const [filterVisible, setFilterVisible] = useState(false);
   const dismissFilterModal = () => setFilterVisible(false);
+  const { state } = useFilterContext();
+
+  const activeFiltersCount = () => {
+    return (
+      state.activeFilters.activities.length +
+      state.activeFilters.categories.length +
+      state.activeFilters.region.length +
+      state.activeFilters.status.length
+    );
+  };
 
   return (
     <FilterProvider>
@@ -55,7 +65,11 @@ export default function DiscoverFilter() {
             style={{ flexDirection: "row", paddingVertical: 10 }}
             importantForAccessibility="no-hide-descendants"
           >
-            <Text style={style.text}>{" Filters "}</Text>
+            <Text style={style.text}>
+              {(activeFiltersCount()
+                ? `(\u2009${activeFiltersCount()}\u2009)`
+                : "") + " Filters "}
+            </Text>
             <NTWebIcon name="settings" style={style.text} />
           </View>
         </TouchableOpacity>
@@ -69,7 +83,7 @@ export default function DiscoverFilter() {
             </TouchableWithoutFeedback>
           }
           coverScreen={true}
-          style={{marginHorizontal: 4}}
+          style={{ marginHorizontal: 4 }}
         >
           <FilterModal dismissModal={dismissFilterModal} />
         </Modal>

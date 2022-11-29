@@ -97,12 +97,12 @@ export default function FilterModal({ dismissModal }: Props) {
                 title={value}
                 icon={<NTCategoryIcon category={value} size={24} />}
                 onPress={() => {
-                  // filterDispatch({
-                  //   type: Filters.Activity,
-                  //   payload: { activity: value },
-                  // });
+                  filterDispatch({
+                    type: Filters.Category,
+                    payload: { category: value },
+                  });
                 }}
-                isToggled={false}
+                isToggled={filterState.activeFilters.categories.includes(value)}
                 maxWidth={"45%"}
               />
             ))}

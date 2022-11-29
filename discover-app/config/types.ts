@@ -134,6 +134,5 @@ export enum PlaceCategory {
   IA000013 = "Mills Forges and Mines", //
   // IA000014 = "Art and Collections",
   IA000015 = "Countryside", //
-  IA000016 = "Coastal Outdoor Centre",
   IA000017 = "Villages and Pubs", //
 }

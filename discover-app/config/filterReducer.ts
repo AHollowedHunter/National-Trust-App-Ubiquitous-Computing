@@ -1,4 +1,4 @@
-import { Activity, NTOpenStatus, NTRegion } from "./types";
+import { Activity, NTOpenStatus, NTRegion, PlaceCategory } from "./types";
 
 type ActionMap<M extends { [index: string]: any }> = {
   [Key in keyof M]: M[Key] extends undefined
@@ -20,6 +20,7 @@ export enum Filters {
 
 export type FiltersType = {
   activities: Activity[];
+  categories: PlaceCategory[];
   status: NTOpenStatus[];
   region: NTRegion[];
 };
@@ -27,6 +28,9 @@ export type FiltersType = {
 type FilterPayload = {
   [Filters.Activity]: {
     activity: Activity;
+  };
+  [Filters.Category]: {
+    category: PlaceCategory;
   };
   [Filters.Status]: {
     status: NTOpenStatus;
@@ -41,6 +45,7 @@ export const filterReducer = (state: FiltersType, action: FilterActions) => {
   switch (action.type) {
     case Filters.Clear:
       state.activities = [];
+      state.categories = [];
       state.region = [];
       state.status = [];
       break;
@@ -51,6 +56,15 @@ export const filterReducer = (state: FiltersType, action: FilterActions) => {
         );
       } else {
         state.activities = [...state.activities, action.payload.activity];
+      }
+      break;
+    case Filters.Category:
+      if (state.categories.includes(action.payload.category)) {
+        state.categories = state.categories.filter(
+          (activity) => activity != action.payload.category
+        );
+      } else {
+        state.categories = [...state.categories, action.payload.category];
       }
       break;
     case Filters.Status:

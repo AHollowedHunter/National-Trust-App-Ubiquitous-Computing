@@ -27,10 +27,10 @@ type NTCategoryIconProps = {
   size?: number;
 };
 
-export function NTCategoryIcon({category, size}: NTCategoryIconProps) {
+export function NTCategoryIcon({ category, size }: NTCategoryIconProps) {
   switch (category) {
     case PlaceCategory.IA000001:
-      return <NTIcon name="Church" style={{ fontSize: size ?? 24 }} />;
+      return <NTIcon name="Abbey" style={{ fontSize: size ?? 24 }} />;
     case PlaceCategory.IA000003:
       return <NTIcon name="Historic-house" style={{ fontSize: size ?? 24 }} />;
     case PlaceCategory.IA000004:
@@ -45,8 +45,6 @@ export function NTCategoryIcon({category, size}: NTCategoryIconProps) {
       return <NTIcon name="Watermill" style={{ fontSize: size ?? 24 }} />;
     case PlaceCategory.IA000015:
       return <NTIcon name="Countryside" style={{ fontSize: size ?? 24 }} />;
-    case PlaceCategory.IA000016:
-      return <NTIcon name="Other-buildings" style={{ fontSize: size ?? 24 }} />;
     case PlaceCategory.IA000017:
       return <NTIcon name="Pub" style={{ fontSize: size ?? 24 }} />;
   }
