@@ -10,11 +10,14 @@ import OpenStatus from "../components/OpenStatus";
 import {
   NTActivityIcon,
   NTCategoryIcon,
+  NTIcon,
+  NTWebIcon,
 } from "../components/NationalTrustIcons";
 import Separator from "../components/Separator";
 import { Alert } from "../components/Alert";
 import { getDetailedPlace } from "../api/Places";
 import Distance from "../components/Distance";
+import ExpandingSection from "../components/ExpandingSection";
 
 type Props = NativeStackScreenProps<NativeStackParamList, "Place">;
 
@@ -70,7 +73,7 @@ export function PlaceScreen({ route, navigation }: Props) {
           backgroundColor: ntColours.desertStorm,
           top: -16,
           marginHorizontal: 8,
-          marginBottom: -8,
+          marginBottom: 48,
           padding: 8,
           elevation: 4,
         }}
@@ -103,29 +106,29 @@ export function PlaceScreen({ route, navigation }: Props) {
           </View>
         </View>
 
-        {/* {place.categories?.map((category) => (
-          <NTCategoryIcon key={category} category={category} size={24} />
-        ))} */}
-
-        {detailedPlace?.longDescription ? (
-          <>
-            <Separator style={{ marginVertical: 8 }} />
-            <Text style={appStyles.sectionHeading}>About</Text>
-            <View>
-              <Text style={appStyles.description}>
-                {detailedPlace.longDescription}
-              </Text>
-            </View>
-          </>
-        ) : null}
-
         <Separator style={{ marginVertical: 8 }} />
 
         <View style={{ flex: 1 }}>
           <Text style={appStyles.sectionHeading}>Location and Directions</Text>
           <MiniMap place={place} style={{ flex: 1, height: 200 }} />
         </View>
+
+        {detailedPlace?.longDescription ? (
+          <>
+            <Separator style={{ marginVertical: 8 }} />
+            <ExpandingSection
+              title="About"
+              content={detailedPlace.longDescription}
+            />
+          </>
+        ) : null}
       </View>
+      <NTWebIcon
+        name="nt_logo"
+        size={64}
+        color={ntColours.doveGrey}
+        style={{ alignSelf: "center", paddingBottom: 32, opacity: 0.5 }}
+      />
     </ScrollView>
   );
 }

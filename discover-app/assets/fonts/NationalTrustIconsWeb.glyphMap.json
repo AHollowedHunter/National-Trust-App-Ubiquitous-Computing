@@ -26,5 +26,7 @@
   "minus_circle": "\uE62D",
   "picture": "\uE60E",
   "tick": "\uE619",
-  "circle": "\uE638"
+  "circle": "\uE638",
+  "circle_down": "\uE622",
+  "circle_up": "\uE608"
 }
