@@ -7,7 +7,7 @@ import { appStyles, ntColours } from "../config/styles";
 import { MiniMap } from "../components/MiniMap";
 import ImageLoading from "../components/ImageLoading";
 import OpenStatus from "../components/OpenStatus";
-import { NTActivityIcon } from "../components/NationalTrustIcons";
+import { NTActivityIcon, NTCategoryIcon } from "../components/NationalTrustIcons";
 import Separator from "../components/Separator";
 import { Alert } from "../components/Alert";
 import { getDetailedPlace } from "../api/Places";
@@ -26,8 +26,6 @@ export function PlaceScreen({ route, navigation }: Props) {
     }
     getDetails();
   }, []);
-
-  console.log(place.categories)
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: ntColours.alto }}>
@@ -101,7 +99,7 @@ export function PlaceScreen({ route, navigation }: Props) {
           </View>
         </View>
 
-        <Text>{place.categories?.map(tag => tag)}</Text>
+        <Text>{place.categories?.map(category => <NTCategoryIcon key={category} category={category} size={24} />)}</Text>
 
         {detailedPlace?.longDescription ? (
           <>

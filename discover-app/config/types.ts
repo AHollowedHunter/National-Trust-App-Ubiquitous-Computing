@@ -121,8 +121,8 @@ export interface AccessTag {
 
 export enum PlaceCategory {
   IA000001 = "Churches and Chapels", //
-  IA000002 = "Houses", //
-  IA000003 = "Houses and Buildings",
+  // IA000002 = "Houses", 
+  IA000003 = "Houses and Buildings", //
   IA000004 = "Sites and Monuments", //
   // IA000005 = "Outdoors",
   // IA000006 = "Buildings",

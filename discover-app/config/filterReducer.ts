@@ -13,6 +13,7 @@ type ActionMap<M extends { [index: string]: any }> = {
 
 export enum Filters {
   Activity = "FILTER_ACTIVITY",
+  Category = "FILTER_CATEGORY",
   Status = "FILTER_STATUS",
   Clear = "FILTER_CLEAR",
 }

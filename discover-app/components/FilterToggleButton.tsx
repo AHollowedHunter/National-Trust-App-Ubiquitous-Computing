@@ -8,21 +8,25 @@ type Props = {
   icon?: JSX.Element;
   onPress: () => void;
   isToggled: boolean;
+  maxWidth?: string | number;
 };
 export default function FilterToggleButton({
   title,
   icon,
   onPress,
   isToggled,
+  maxWidth,
 }: Props) {
   return (
     <TouchableOpacity
       style={{
-        padding: 4,
+        maxWidth: maxWidth,
+        padding: 12,
         margin: 4,
         borderRadius: 2,
         elevation: 4,
         backgroundColor: isToggled ? "#04d875" : ntColours.cararra,
+        justifyContent: "center",
       }}
       onPress={() => {
         onPress();
@@ -37,12 +41,17 @@ export default function FilterToggleButton({
       >
         <NTWebIcon
           name={isToggled ? "tick" : "circle"}
-          style={{ fontSize: 16 }}
+          style={{ fontSize: 18 }}
         />
         <Text
           key={title}
           lineBreakMode={"middle"}
-          style={{ fontSize: 16, paddingHorizontal: 4 }}
+          style={{
+            fontSize: 18,
+            paddingHorizontal: 4,
+            flexShrink: 1,
+            flexWrap: "wrap",
+          }}
         >
           {title}
         </Text>

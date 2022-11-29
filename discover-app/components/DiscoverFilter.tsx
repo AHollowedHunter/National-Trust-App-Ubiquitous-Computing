@@ -69,6 +69,7 @@ export default function DiscoverFilter() {
             </TouchableWithoutFeedback>
           }
           coverScreen={true}
+          style={{marginHorizontal: 4}}
         >
           <FilterModal dismissModal={dismissFilterModal} />
         </Modal>
