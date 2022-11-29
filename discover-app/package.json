@@ -34,7 +34,8 @@
     "react-native-web": "~0.18.7",
     "react-native-webview": "11.23.0",
     "sanitize-html": "^2.7.3",
-    "vector-icons": "^0.1.0"
+    "vector-icons": "^0.1.0",
+    "@react-native-async-storage/async-storage": "~1.17.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

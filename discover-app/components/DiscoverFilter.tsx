@@ -49,8 +49,8 @@ export default function DiscoverFilter() {
     return (
       state.activeFilters.activities.length +
       state.activeFilters.categories.length +
-      state.activeFilters.region.length +
-      state.activeFilters.status.length
+      state.activeFilters.status.length +
+      (state.activeFilters.favourites ? 1 : 0)
     );
   };
 

@@ -12,13 +12,19 @@ import {
 } from "../config/filterReducer";
 import { NTOpenStatus } from "../config/types";
 import { usePlacesContext } from "./PlacesContext";
+import { useUserContext } from "./UserContext";
 
 export type FilterState = {
   activeFilters: FiltersType;
 };
 
 const initialState: FilterState = {
-  activeFilters: { activities: [], categories: [], status: [], region: [] },
+  activeFilters: {
+    activities: [],
+    categories: [],
+    status: [],
+    favourites: false,
+  },
 };
 
 const FilterContext = createContext<{
@@ -35,6 +41,7 @@ const mainReducer = (state: FilterState, action: FilterActions) => ({
 
 const FilterProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const [state, dispatch] = useReducer(mainReducer, initialState);
+  const { favourites } = useUserContext();
   const { allPlaces, setFilteredPlaces } = usePlacesContext();
 
   // Whenever the active filters or mian place are updated, update the filtered
@@ -70,6 +77,10 @@ const FilterProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
       places = places.filter(
         (place) => place.openStatus == NTOpenStatus.PARTIALLY_OPEN
       );
+    }
+
+    if (state.activeFilters.favourites) {
+      places = places.filter((place) => favourites.includes(place.id));
     }
 
     setFilteredPlaces(places);

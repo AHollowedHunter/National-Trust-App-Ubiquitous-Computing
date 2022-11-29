@@ -19,6 +19,7 @@ import DiscoverFilter from "./components/DiscoverFilter";
 import { NTIcon } from "./components/NationalTrustIcons";
 import { PlacesProvider } from "./contexts/PlacesContext";
 import { LocationProvider } from "./contexts/LocationContext";
+import { UserProvider } from "./contexts/UserContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -60,47 +61,53 @@ export default function App() {
   return (
     <SafeAreaView style={appStyles.container} onLayout={onLayoutRootView}>
       <StatusBar style="light" backgroundColor={ntColours.cardinalPink} />
-      <LocationProvider>
-        <PlacesProvider>
-          <ToastProvider duration={2500}>
-            <NavigationContainer>
-              <NativeStack.Navigator screenOptions={stackOptions}>
-                <NativeStack.Screen
-                  name="Discover"
-                  component={DiscoverScreen}
-                  options={() => ({
-                    headerLeft: () => (
-                      <NTIcon
-                        style={{
-                          fontSize: 48,
-                          textAlignVertical: "center",
-                          color: "white",
-                          marginLeft: -8,
-                          paddingRight: 8,
-                        }}
-                        name="National-Trust-oakleaf"
-                      ></NTIcon>
-                    ),
-                    headerRight: () => <DiscoverFilter />,
-                  })}
-                />
-                <NativeStack.Screen
-                  name="Place"
-                  component={PlaceScreen}
-                  options={({ route }) => ({
-                    headerTitle: () => (
-                      <PlaceHeader
-                        title={route.params.place.title}
-                        placeId={route.params.place.id}
-                      />
-                    ),
-                  })}
-                />
-              </NativeStack.Navigator>
-            </NavigationContainer>
-          </ToastProvider>
-        </PlacesProvider>
-      </LocationProvider>
+      <UserProvider>
+        <LocationProvider>
+          <PlacesProvider>
+            <ToastProvider
+              duration={800}
+              placement="top"
+              style={{ marginTop: 96, marginRight: 8, alignSelf: "flex-end" }}
+            >
+              <NavigationContainer>
+                <NativeStack.Navigator screenOptions={stackOptions}>
+                  <NativeStack.Screen
+                    name="Discover"
+                    component={DiscoverScreen}
+                    options={() => ({
+                      headerLeft: () => (
+                        <NTIcon
+                          style={{
+                            fontSize: 48,
+                            textAlignVertical: "center",
+                            color: "white",
+                            marginLeft: -8,
+                            paddingRight: 8,
+                          }}
+                          name="National-Trust-oakleaf"
+                        ></NTIcon>
+                      ),
+                      headerRight: () => <DiscoverFilter />,
+                    })}
+                  />
+                  <NativeStack.Screen
+                    name="Place"
+                    component={PlaceScreen}
+                    options={({ route }) => ({
+                      headerTitle: () => (
+                        <PlaceHeader
+                          title={route.params.place.title}
+                          placeId={route.params.place.id}
+                        />
+                      ),
+                    })}
+                  />
+                </NativeStack.Navigator>
+              </NavigationContainer>
+            </ToastProvider>
+          </PlacesProvider>
+        </LocationProvider>
+      </UserProvider>
     </SafeAreaView>
   );
 }

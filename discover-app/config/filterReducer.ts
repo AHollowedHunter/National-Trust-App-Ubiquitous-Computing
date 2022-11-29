@@ -15,6 +15,7 @@ export enum Filters {
   Activity = "FILTER_ACTIVITY",
   Category = "FILTER_CATEGORY",
   Status = "FILTER_STATUS",
+  Favourite = "FILTER_FAVOURITE",
   Clear = "FILTER_CLEAR",
 }
 
@@ -22,7 +23,7 @@ export type FiltersType = {
   activities: Activity[];
   categories: PlaceCategory[];
   status: NTOpenStatus[];
-  region: NTRegion[];
+  favourites: boolean;
 };
 
 type FilterPayload = {
@@ -35,6 +36,7 @@ type FilterPayload = {
   [Filters.Status]: {
     status: NTOpenStatus;
   };
+  [Filters.Favourite]: undefined;
   [Filters.Clear]: undefined;
 };
 
@@ -46,8 +48,8 @@ export const filterReducer = (state: FiltersType, action: FilterActions) => {
     case Filters.Clear:
       state.activities = [];
       state.categories = [];
-      state.region = [];
       state.status = [];
+      state.favourites = false;
       break;
     case Filters.Activity:
       if (state.activities.includes(action.payload.activity)) {
@@ -66,6 +68,9 @@ export const filterReducer = (state: FiltersType, action: FilterActions) => {
       } else {
         state.categories = [...state.categories, action.payload.category];
       }
+      break;
+    case Filters.Favourite:
+      state.favourites = !state.favourites;
       break;
     case Filters.Status:
       if (state.status.includes(action.payload.status)) {

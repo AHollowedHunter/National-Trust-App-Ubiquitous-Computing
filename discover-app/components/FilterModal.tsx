@@ -10,7 +10,12 @@ import {
   PlaceCategory,
 } from "../config/types";
 import FlexButton from "./FlexButton";
-import { NTActivityIcon, NTCategoryIcon, NTWebIcon } from "./NationalTrustIcons";
+import {
+  NTActivityIcon,
+  NTCategoryIcon,
+  NTIcon,
+  NTWebIcon,
+} from "./NationalTrustIcons";
 import FilterToggleButton from "./FilterToggleButton";
 import { Filters } from "../config/filterReducer";
 import { useFilterContext } from "../contexts/FilterContext";
@@ -35,7 +40,33 @@ export default function FilterModal({ dismissModal }: Props) {
         borderRadius: 2,
       }}
     >
-      <ScrollView style={{backgroundColor: ntColours.paletteNav, borderRadius: 2, paddingVertical: 4}}>
+      <ScrollView
+        style={{
+          backgroundColor: ntColours.paletteNav,
+          borderRadius: 2,
+          paddingVertical: 4,
+        }}
+      >
+        <View style={{ marginBottom: 8 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+          >
+            <FilterToggleButton
+              title={"Only Favourites"}
+              onPress={() => {
+                filterDispatch({
+                  type: Filters.Favourite,
+                });
+              }}
+              isToggled={filterState.activeFilters.favourites}
+              icon={<NTWebIcon name="heart_fill" size={24} />}
+            />
+          </View>
+        </View>
         <View style={{ marginBottom: 8 }}>
           <Text style={[appStyles.sectionHeading, { color: "white" }]}>
             Open Status
@@ -142,7 +173,10 @@ export default function FilterModal({ dismissModal }: Props) {
         </View>
       </ScrollView>
       <Text
-        style={[appStyles.sectionHeading, { color: "white", marginVertical: 8 }]}
+        style={[
+          appStyles.sectionHeading,
+          { color: "white", marginVertical: 8 },
+        ]}
       >
         Matching places: {filteredPlaces.length}
       </Text>

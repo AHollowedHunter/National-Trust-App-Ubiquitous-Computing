@@ -127,9 +127,13 @@ function convertPlaceData(
   return place;
 }
 
-export async function getDetailedPlace(place: NTPlace): Promise<DetailedPlace> {
+export async function getDetailedPlace(
+  place: NTPlace
+): Promise<DetailedPlace | undefined> {
   let url = DETAILED_PLACE_BASE_URL + place.websiteUrlPath + ".json";
   let placeJson = await getJsonFromUrl(url);
+
+  if (!placeJson) return undefined;
 
   let placeData = placeJson.pageProps.appContext.place.data;
 
