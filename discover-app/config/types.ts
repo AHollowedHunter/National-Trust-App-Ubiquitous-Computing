@@ -24,10 +24,12 @@ export interface NTPlace {
   imageUrl: string;
   imageDescription: string;
   websiteUrl: string;
+  websiteUrlPath: string;
   location: { longitude: number; latitude: number };
   activityTags: Activity[];
   openStatus: NTOpenStatus;
   region: string;
+  distance?: number;
 }
 
 export enum Activity {
@@ -66,4 +68,52 @@ export enum NTRegion {
   EastEngland = "RegionEastofEngland",
   NorthernIreland = "RegionNorthernIreland",
   Midlands = "RegionMidlands",
+}
+
+export interface DetailedPlace {
+  id: number;
+  emergencyNotice?: string;
+  longDescription?: string;
+  timedEntryUrl?: string;
+  openingCalendar?: OpeningCalendar;
+  directions?: Directions;
+  facilities?: Facilities[];
+  accessTags?: AccessTag[];
+}
+
+export interface OpeningCalendar {
+  openingTimesNote: string;
+  days: Day[];
+}
+
+export interface Day {
+  date: string;
+  status: NTOpenStatus;
+  assets: {
+    name: string;
+    description: string;
+    opensAt: string;
+    closesAt: string;
+  };
+}
+
+export interface Directions {
+  train?: { description: string };
+  road?: { description: string; parking: string; satnav: string };
+  foot?: { description: string };
+  ferry?: { description: string };
+  bus?: { description: string };
+  cycle?: { description: string };
+}
+
+export interface Facilities {
+  name: string;
+  description: string;
+  available: boolean;
+  keyFacility: boolean;
+}
+
+export interface AccessTag {
+  name: string;
+  description: string;
 }

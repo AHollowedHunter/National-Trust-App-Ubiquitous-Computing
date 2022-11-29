@@ -1,39 +1,27 @@
 import React, { useEffect, useState } from "react";
 import MapView from "react-native-maps";
-import {
-  requestForegroundPermissionsAsync,
-  getCurrentPositionAsync,
-} from "expo-location";
 import MapMarker from "./MapMarker";
 import { ActivityIndicator } from "react-native";
 import { ntColours } from "../config/styles";
 import { usePlacesContext } from "../contexts/PlacesContext";
 import MapModal from "./MapModal";
-import { MapProvider, useMapContext } from "../contexts/MapContext";
+import { MapProvider } from "../contexts/MapContext";
+import { useLocationContext } from "../contexts/LocationContext";
 
 export function MainMap() {
   const mapRef = React.useRef<MapView | null>(null);
-  const [mapWidth, setMapWidth] = useState(400);
   const [mapReady, setMapReady] = useState(false);
 
   const { filteredPlaces } = usePlacesContext();
-
+  const { initialLocation } = useLocationContext();
 
   useEffect(() => {
-    async function getLocation() {
-      let { status } = await requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        return;
-      }
-      let pos = await getCurrentPositionAsync();
-      mapRef.current?.animateCamera({
-        heading: 0,
-        center: pos.coords,
-        pitch: 0,
-      });
-    }
-    getLocation();
-  }, []);
+    mapRef.current?.animateCamera({
+      heading: 0,
+      center: initialLocation?.coords,
+      pitch: 0,
+    });
+  }, [initialLocation]);
 
   return (
     <MapProvider>
@@ -50,9 +38,6 @@ export function MainMap() {
           }}
           showsUserLocation={true}
           mapType="standard"
-          onLayout={(event) => {
-            setMapWidth(event.nativeEvent.layout.width);
-          }}
           onMapReady={() => setMapReady(true)}
           showsBuildings={true}
           moveOnMarkerPress={false} // Handled in MapMarker onPress

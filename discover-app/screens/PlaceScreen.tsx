@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { NativeStackParamList } from "../config/types";
+import React, { useEffect, useState } from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { View, ScrollView, Text } from "react-native";
+
+import { DetailedPlace, NativeStackParamList } from "../config/types";
 import { appStyles, ntColours } from "../config/styles";
 import { MiniMap } from "../components/MiniMap";
 import ImageLoading from "../components/ImageLoading";
@@ -9,11 +10,22 @@ import OpenStatus from "../components/OpenStatus";
 import { NTActivityIcon } from "../components/NationalTrustIcons";
 import Separator from "../components/Separator";
 import { Alert } from "../components/Alert";
+import { getDetailedPlace } from "../api/Places";
 
 type Props = NativeStackScreenProps<NativeStackParamList, "Place">;
 
 export function PlaceScreen({ route, navigation }: Props) {
   const place = route.params.place;
+
+  const [detailedPlace, setDetailedPlace] = useState<DetailedPlace>();
+
+  useEffect(() => {
+    async function getDetails() {
+      let detailed = await getDetailedPlace(place);
+      setDetailedPlace(detailed);
+    }
+    getDetails();
+  }, []);
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: ntColours.alto }}>
@@ -59,19 +71,17 @@ export function PlaceScreen({ route, navigation }: Props) {
           elevation: 4,
         }}
       >
-        <Alert
-          content={
-            "This location is closed for the season.\
-            We look forward to seeing you again when we reopen"
-          }
-        />
+        {detailedPlace?.emergencyNotice ? (
+          <Alert content={detailedPlace.emergencyNotice} />
+        ) : null}
         <View
           style={{
             flexDirection: "row",
             marginBottom: 8,
           }}
         >
-          <Text style={[appStyles.description, { flex: 1 }]}>
+          <Text>{place.distance}</Text>
+          <Text style={[appStyles.description, { flex: 1, padding: 4 }]}>
             {place.description}
           </Text>
           <View style={{ alignItems: "flex-end", paddingLeft: 8 }}>
@@ -88,6 +98,18 @@ export function PlaceScreen({ route, navigation }: Props) {
               : null}
           </View>
         </View>
+
+        {detailedPlace?.longDescription ? (
+          <>
+            <Separator style={{ marginVertical: 8 }} />
+            <Text style={appStyles.sectionHeading}>About</Text>
+            <View>
+              <Text style={appStyles.description}>
+                {detailedPlace.longDescription}
+              </Text>
+            </View>
+          </>
+        ) : null}
 
         <Separator style={{ marginVertical: 8 }} />
 
