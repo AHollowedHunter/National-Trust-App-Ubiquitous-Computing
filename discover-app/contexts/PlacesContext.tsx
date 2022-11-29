@@ -29,7 +29,7 @@ const PlacesProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
       setAllPlaces(places);
     }
     setPlaces();
-  }, []);
+  }, [currentLocation]);
 
   return (
     <PlacesContext.Provider

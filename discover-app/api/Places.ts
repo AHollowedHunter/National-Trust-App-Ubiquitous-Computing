@@ -252,5 +252,5 @@ export function calculateDistance(
  * @returns value reduced to maximum 1 decimal place
  */
 function roundDistance(value: number): number {
-  return Math.round(value * 10) / 10;
+  return Math.ceil(value);
 }

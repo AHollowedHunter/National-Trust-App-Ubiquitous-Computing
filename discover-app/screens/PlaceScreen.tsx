@@ -14,6 +14,7 @@ import {
 import Separator from "../components/Separator";
 import { Alert } from "../components/Alert";
 import { getDetailedPlace } from "../api/Places";
+import Distance from "../components/Distance";
 
 type Props = NativeStackScreenProps<NativeStackParamList, "Place">;
 
@@ -83,10 +84,10 @@ export function PlaceScreen({ route, navigation }: Props) {
             marginBottom: 8,
           }}
         >
-          <Text>{place.distance}</Text>
-          <Text style={[appStyles.description, { flex: 1, padding: 4 }]}>
-            {place.description}
-          </Text>
+          <View style={{ flex: 1 }}>
+            <Distance distance={place.distance} />
+            <Text style={[appStyles.description]}>{place.description}</Text>
+          </View>
           <View style={{ alignItems: "flex-end", paddingLeft: 8 }}>
             <OpenStatus openStatus={place.openStatus} />
             {place.activityTags

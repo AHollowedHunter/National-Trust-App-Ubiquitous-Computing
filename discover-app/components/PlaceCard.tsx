@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Text, View } from "react-native";
 import { appStyles, ntColours } from "../config/styles";
 import { NTPlace } from "../config/types";
+import Distance from "./Distance";
 import ImageLoading from "./ImageLoading";
 import { NTActivityIcon } from "./NationalTrustIcons";
 import OpenStatus from "./OpenStatus";
@@ -80,9 +81,12 @@ export default function PlaceCard({ place, imageHeight }: Props) {
           elevation: 4,
         }}
       >
-        <Text style={[appStyles.description, { flex: 1 }]}>
-          {place.description}
-        </Text>
+        <View style={{ flex: 1 }}>
+          <Distance distance={place.distance} />
+          <Text style={[appStyles.description]}>
+            {place.description}
+          </Text>
+        </View>
         <View style={{ alignItems: "flex-end", paddingLeft: 8 }}>
           <OpenStatus openStatus={place.openStatus} />
           {place.activityTags
