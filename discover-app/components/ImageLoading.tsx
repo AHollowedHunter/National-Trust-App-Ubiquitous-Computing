@@ -19,7 +19,7 @@ export default function ImageLoading({
   const [imageLoading, setImageLoading] = useState(true);
 
   return (
-    <View style={{ top: -offset, height: imageHeight }}>
+    <View style={{ top: -offset, height: imageHeight }} accessible={false}>
       <View
         // This view exists to placeholder the space behind the image if it
         // does not load
@@ -82,7 +82,7 @@ export default function ImageLoading({
             width: "100%",
           }}
           accessibilityLabel={"Image: " + description}
-        ></View>
+        />
       </View>
     </View>
   );

@@ -78,7 +78,7 @@ export interface DetailedPlace {
   timedEntryUrl?: string;
   openingCalendar?: OpeningCalendar;
   directions?: Directions;
-  facilities?: Facilities[];
+  facilities?: Facility[];
   accessTags?: AccessTag[];
 }
 
@@ -107,11 +107,59 @@ export interface Directions {
   cycle?: { description: string };
 }
 
-export interface Facilities {
+export interface Facility {
   name: string;
-  description: string;
+  description?: string;
   available: boolean;
   keyFacility: boolean;
+}
+
+export enum Facilities {
+  LICENSED_FOR_CIVIL_WEDDINGS = "Licensed for civil weddings",
+  PLANT_SHOP = "Plant shop",
+  SHOP = "Shop",
+  ASSISTANCE_DOGS_ONLY = "Assistance dogs only",
+  KIOSK = "Kiosk",
+  TOILETS = "Toilets",
+  FARM_SHOP = "Farm shop",
+  ELECTRIC_VEHICLE_CHARGING_POINT = "Electric vehicle charging point",
+  DOGS_ALLOWED = "Dogs allowed",
+  GUIDED_TOUR = "Guided tour",
+  COFFEE_SHOP = "Coffee shop",
+  BOOKSHOP = "Bookshop",
+  FOOD_DRINK = "Food/drink",
+  AUDIO_GUIDE = "Audio guide",
+  AVAILABLE_FOR_FUNCTIONS = "Available for functions",
+  TEA_ROOM = "Tea-room",
+  TOILET = "Toilet",
+  LEVEL_ACCESS_TERRAIN = "Level access/terrain",
+  RESTAURANT = "Restaurant",
+  PUB = "Pub",
+  CAFE = "Café",
+  CAR_PARK = "Car park",
+}
+
+export enum Access {
+  ACCESSIBLE_ROUTE_AND_OR_MAP = "Accessible route and/or map",
+  ACCESSIBLE_TOILET = "Accessible toilet",
+  CHANGING_PLACES = "Changing places",
+  INDUCTION_LOOP = "Induction loop",
+  LARGE_PRINT_GUIDE_OR_MENU = "Large print (guide or menu)",
+  LEVEL_ACCESS_TO_FOOD_OUTLET = "Level access to food outlet",
+  LEVEL_ACCESS_TERRAIN = "Level access/terrain",
+  PHOTOGRAPH_ALBUM = "Photograph album",
+  RAMPED_ACCESS_SLOPES = "Ramped access/slopes",
+  SEATING_AVAILABLE = "Seating available",
+  STEPS_UNEVEN_TERRAIN = "Steps/uneven terrain",
+  TRANSFER_AVAILABLE = "Transfer available",
+  WHEELCHAIRS_AVAILABLE = "Wheelchairs available",
+  DESIGNATED_PARKING = "Designated parking",
+  LEVEL_ACCESS_TO_SHOP = "Level access to shop",
+  POWERED_MOBILITY_VEHICLE_AVAILABLE = "Powered mobility vehicle available",
+  BRAILLE__GUIDE_OR_MENU_ = "Braille (guide or menu)",
+  NARROW_CORRIDORS = "Narrow corridors",
+  VIRTUAL_TOUR = "Virtual tour",
+  DROP_OFF_POINT = "Drop-off point",
 }
 
 export interface AccessTag {

@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { View, ScrollView, Text } from "react-native";
+import { View, ScrollView, Text, Linking } from "react-native";
 
 import { DetailedPlace, NativeStackParamList } from "../config/types";
 import { appStyles, ntColours } from "../config/styles";
 import { MiniMap } from "../components/MiniMap";
 import ImageLoading from "../components/ImageLoading";
 import OpenStatus from "../components/OpenStatus";
-import { NTActivityIcon, NTWebIcon } from "../components/NationalTrustIcons";
+import {
+  NTAccessIcon,
+  NTActivityIcon,
+  NTFacilityIcon,
+  NTWebIcon,
+} from "../components/NationalTrustIcons";
 import Separator from "../components/Separator";
 import { Alert } from "../components/Alert";
 import { getDetailedPlace } from "../api/Places";
 import Distance from "../components/Distance";
 import ExpandingSection from "../components/ExpandingSection";
+import AccessibleGroup from "../components/AccessibleGroup";
+import AdditionalInfo from "../components/PlaceScreen/AdditionalInfo";
 
 type Props = NativeStackScreenProps<NativeStackParamList, "Place">;
 
@@ -101,13 +108,6 @@ export function PlaceScreen({ route, navigation }: Props) {
           </View>
         </View>
 
-        <Separator style={{ marginVertical: 8 }} />
-
-        <View style={{ flex: 1 }}>
-          <Text style={appStyles.sectionHeading}>Location and Directions</Text>
-          <MiniMap place={place} style={{ flex: 1, height: 200 }} />
-        </View>
-
         {detailedPlace?.longDescription ? (
           <>
             <Separator style={{ marginVertical: 8 }} />
@@ -117,7 +117,96 @@ export function PlaceScreen({ route, navigation }: Props) {
             />
           </>
         ) : null}
+
+        <Separator style={{ marginVertical: 8 }} />
+
+        <View style={{ flex: 1 }}>
+          <Text style={appStyles.sectionHeading}>Location and Directions</Text>
+          <MiniMap place={place} style={{ flex: 1, height: 200 }} />
+        </View>
+
+        {detailedPlace?.accessTags ? (
+          <>
+            <Separator style={{ marginVertical: 8 }} />
+            <Text style={appStyles.sectionHeading}>Accessibility</Text>
+            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+              {detailedPlace.accessTags.map((access) => (
+                <AccessibleGroup
+                  key={access.name}
+                  accessiblilty={{ accessibilityLabel: access.name }}
+                  style={{ width: "50%", justifyContent: "center" }}
+                >
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      maxWidth: "100%",
+                      padding: 4,
+                    }}
+                  >
+                    <NTAccessIcon key={access.name} access={access.name} />
+                    <Text
+                      style={{
+                        paddingHorizontal: 4,
+                        flexShrink: 1,
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      {access.name}
+                    </Text>
+                  </View>
+                </AccessibleGroup>
+              ))}
+            </View>
+          </>
+        ) : null}
+
+        {detailedPlace?.facilities ? (
+          <>
+            <Separator style={{ marginVertical: 8 }} />
+            <Text style={appStyles.sectionHeading}>Facilities</Text>
+            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+              {detailedPlace.facilities.map((facility) =>
+                facility.available ? (
+                  <AccessibleGroup
+                    key={facility.name}
+                    accessiblilty={{ accessibilityLabel: facility.name }}
+                    style={{ width: "50%", justifyContent: "center" }}
+                  >
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        alignItems: "center",
+                        width: "100%",
+                        padding: 4,
+                      }}
+                    >
+                      <NTFacilityIcon
+                        key={facility.name}
+                        facility={facility.name}
+                      />
+                      <Text
+                        style={{
+                          paddingHorizontal: 4,
+                          flexShrink: 1,
+                          flexWrap: "wrap",
+                        }}
+                      >
+                        {facility.name}
+                      </Text>
+                    </View>
+                  </AccessibleGroup>
+                ) : null
+              )}
+            </View>
+          </>
+        ) : null}
+
+        <Separator style={{ marginVertical: 8 }} />
+
+        <AdditionalInfo place={place} detailedPlace={detailedPlace} />
       </View>
+
       <NTWebIcon
         name="nt_logo"
         size={64}

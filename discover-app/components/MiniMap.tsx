@@ -18,7 +18,7 @@ export function MiniMap({ place, zoom, style }: Props) {
         pitch: 0,
         heading: 0,
         zoom: zoom ?? 10,
-        altitude: zoom ?? 10,
+        altitude: (zoom ?? 10) * 100 ,
       }}
       mapType="standard"
       showsBuildings={true}

@@ -45,7 +45,6 @@ export default function FilterToggleButton({
         />
         <Text
           key={title}
-          lineBreakMode={"middle"}
           style={{
             fontSize: 18,
             paddingHorizontal: 4,

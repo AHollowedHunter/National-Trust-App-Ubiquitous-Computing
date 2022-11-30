@@ -149,6 +149,16 @@ export async function getDetailedPlace(
     accessTags: placeData._embedded.accessTags.tags,
     facilities: placeData._embedded.placeFacilities.facilities,
   };
+
+  // If no tags, mark as undefined
+  detailedPlace.accessTags?.length == 0
+    ? (detailedPlace.accessTags = undefined)
+    : null;
+
+  detailedPlace.facilities = detailedPlace.facilities?.filter(
+    (facility) => !facility.keyFacility
+  );
+
   return detailedPlace;
 }
 

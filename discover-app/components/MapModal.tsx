@@ -25,6 +25,7 @@ export default function MarkerModal() {
   return (
     <Modal
       isVisible={visible}
+      accessibilityLabel={`${place.title}: ${place.subTitle}`}
       onBackButtonPress={() => setVisible(false)}
       onBackdropPress={() => setVisible(false)}
       coverScreen={false}
