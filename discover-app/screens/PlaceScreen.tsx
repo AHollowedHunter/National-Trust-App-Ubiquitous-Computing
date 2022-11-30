@@ -20,6 +20,7 @@ import Distance from "../components/Distance";
 import ExpandingSection from "../components/ExpandingSection";
 import AccessibleGroup from "../components/AccessibleGroup";
 import AdditionalInfo from "../components/PlaceScreen/AdditionalInfo";
+import Footer from "../components/Footer";
 
 type Props = NativeStackScreenProps<NativeStackParamList, "Place">;
 
@@ -75,7 +76,7 @@ export function PlaceScreen({ route, navigation }: Props) {
           backgroundColor: ntColours.desertStorm,
           top: -16,
           marginHorizontal: 8,
-          marginBottom: 48,
+          marginBottom: -8,
           padding: 8,
           elevation: 4,
         }}
@@ -207,12 +208,7 @@ export function PlaceScreen({ route, navigation }: Props) {
         <AdditionalInfo place={place} detailedPlace={detailedPlace} />
       </View>
 
-      <NTWebIcon
-        name="nt_logo"
-        size={64}
-        color={ntColours.doveGrey}
-        style={{ alignSelf: "center", paddingBottom: 32, opacity: 0.5 }}
-      />
+      <Footer />
     </ScrollView>
   );
 }
