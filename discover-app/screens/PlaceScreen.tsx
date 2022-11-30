@@ -21,6 +21,8 @@ import ExpandingSection from "../components/ExpandingSection";
 import AccessibleGroup from "../components/AccessibleGroup";
 import AdditionalInfo from "../components/PlaceScreen/AdditionalInfo";
 import Footer from "../components/Footer";
+import Facilities from "../components/PlaceScreen/Facilities";
+import Access from "../components/PlaceScreen/Access";
 
 type Props = NativeStackScreenProps<NativeStackParamList, "Place">;
 
@@ -84,6 +86,7 @@ export function PlaceScreen({ route, navigation }: Props) {
         {detailedPlace?.emergencyNotice ? (
           <Alert content={detailedPlace.emergencyNotice} />
         ) : null}
+        
         <View
           style={{
             flexDirection: "row",
@@ -129,77 +132,14 @@ export function PlaceScreen({ route, navigation }: Props) {
         {detailedPlace?.accessTags ? (
           <>
             <Separator style={{ marginVertical: 8 }} />
-            <Text style={appStyles.sectionHeading}>Accessibility</Text>
-            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-              {detailedPlace.accessTags.map((access) => (
-                <AccessibleGroup
-                  key={access.name}
-                  accessiblilty={{ accessibilityLabel: access.name }}
-                  style={{ width: "50%", justifyContent: "center" }}
-                >
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      maxWidth: "100%",
-                      padding: 4,
-                    }}
-                  >
-                    <NTAccessIcon key={access.name} access={access.name} />
-                    <Text
-                      style={{
-                        paddingHorizontal: 4,
-                        flexShrink: 1,
-                        flexWrap: "wrap",
-                      }}
-                    >
-                      {access.name}
-                    </Text>
-                  </View>
-                </AccessibleGroup>
-              ))}
-            </View>
+            <Access accessTags={detailedPlace.accessTags} />
           </>
         ) : null}
 
         {detailedPlace?.facilities ? (
           <>
             <Separator style={{ marginVertical: 8 }} />
-            <Text style={appStyles.sectionHeading}>Facilities</Text>
-            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-              {detailedPlace.facilities.map((facility) =>
-                facility.available ? (
-                  <AccessibleGroup
-                    key={facility.name}
-                    accessiblilty={{ accessibilityLabel: facility.name }}
-                    style={{ width: "50%", justifyContent: "center" }}
-                  >
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        width: "100%",
-                        padding: 4,
-                      }}
-                    >
-                      <NTFacilityIcon
-                        key={facility.name}
-                        facility={facility.name}
-                      />
-                      <Text
-                        style={{
-                          paddingHorizontal: 4,
-                          flexShrink: 1,
-                          flexWrap: "wrap",
-                        }}
-                      >
-                        {facility.name}
-                      </Text>
-                    </View>
-                  </AccessibleGroup>
-                ) : null
-              )}
-            </View>
+            <Facilities facilities={detailedPlace.facilities} />
           </>
         ) : null}
 

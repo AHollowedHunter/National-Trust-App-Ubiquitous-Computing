@@ -154,6 +154,9 @@ export async function getDetailedPlace(
   detailedPlace.accessTags?.length == 0
     ? (detailedPlace.accessTags = undefined)
     : null;
+  detailedPlace.facilities?.length == 0
+    ? (detailedPlace.facilities = undefined)
+    : null;
 
   detailedPlace.facilities = detailedPlace.facilities?.filter(
     (facility) => !facility.keyFacility
