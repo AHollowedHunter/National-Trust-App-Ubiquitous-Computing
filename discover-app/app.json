@@ -21,6 +21,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "dev.acave.ntdiscover",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -28,6 +29,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3b139b15-5cbd-462b-93cc-bc6698877372"
+      }
     }
   }
 }

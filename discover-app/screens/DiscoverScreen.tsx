@@ -49,7 +49,15 @@ const bottomTabOptions: BottomTabNavigationOptions = {
 const ntTabBarIcon =
   (iconName: keyof typeof NTWebIcon.glyphMap) =>
   (props: { focused: boolean; color: string; size: number }) => {
-    return <NTWebIcon name={iconName} size={props.size} color={props.color} />;
+    return (
+      <NTWebIcon
+        name={iconName}
+        size={props.size}
+        color={props.color}
+        accessibilityElementsHidden
+        importantForAccessibility="no"
+      />
+    );
   };
 
 export function DiscoverScreen({ route, navigation }: Props) {
@@ -59,12 +67,18 @@ export function DiscoverScreen({ route, navigation }: Props) {
         <Tab.Screen
           name="Map"
           component={MapScreen}
-          options={{ tabBarIcon: ntTabBarIcon("map") }}
+          options={{
+            tabBarIcon: ntTabBarIcon("map"),
+            tabBarAccessibilityLabel: "Map",
+          }}
         />
         <Tab.Screen
           name="List"
           component={ListScreen}
-          options={{ tabBarIcon: ntTabBarIcon("list") }}
+          options={{
+            tabBarIcon: ntTabBarIcon("list"),
+            tabBarAccessibilityLabel: "List",
+          }}
         />
       </Tab.Navigator>
     </View>
