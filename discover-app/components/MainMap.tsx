@@ -29,6 +29,7 @@ export function MainMap() {
       <>
         <MapView
           ref={mapRef}
+          mapPadding={{ bottom: 64, top: 0, right: 0, left: 0 }}
           style={{ flex: 1 }}
           initialCamera={{
             center: { latitude: 50.6884, longitude: -1.95622 },

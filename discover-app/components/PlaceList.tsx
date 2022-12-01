@@ -13,7 +13,7 @@ type Props = {
 export function PlaceList(props: Props) {
   return (
     <FlatList
-      style={{ flex: 1, backgroundColor: ntColours.alto }}
+      style={{ flex: 1, backgroundColor: ntColours.alto, marginBottom: 64 }}
       data={props.places}
       keyExtractor={(item) => item.id.toString()}
       renderItem={(item) => <PlaceListItem place={item.item}></PlaceListItem>}

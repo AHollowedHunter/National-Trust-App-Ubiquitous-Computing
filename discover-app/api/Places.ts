@@ -159,10 +159,12 @@ export async function getDetailedPlace(
   detailedPlace.facilities = detailedPlace.facilities?.filter(
     (facility) => !facility.keyFacility && facility.available
   );
-  // Then set undefined if length is now 0
+  // Then set undefined if length is now 0, or sort alphabetically on name
   detailedPlace.facilities?.length == 0
     ? (detailedPlace.facilities = undefined)
-    : null;
+    : detailedPlace.facilities?.sort((f1, f2) =>
+        f1.name.localeCompare(f2.name)
+      );
 
   return detailedPlace;
 }

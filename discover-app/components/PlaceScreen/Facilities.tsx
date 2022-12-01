@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 import { appStyles } from "../../config/styles";
 import { Facility } from "../../config/types";
 import AccessibleGroup from "../AccessibleGroup";
-import { NTFacilityIcon } from "../NationalTrustIcons";
+import { NTFacilityIcon, NTWebIcon } from "../NationalTrustIcons";
 
 type Props = {
   facilities: Facility[];

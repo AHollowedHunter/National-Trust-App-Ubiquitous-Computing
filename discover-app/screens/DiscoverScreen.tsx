@@ -21,12 +21,26 @@ const Tab = createBottomTabNavigator<DiscoverBottomTabParamList>();
 const bottomTabOptions: BottomTabNavigationOptions = {
   headerShown: false,
   tabBarInactiveTintColor: "black",
-  tabBarActiveTintColor: "black",
-  tabBarActiveBackgroundColor: ntColours.alto,
+  tabBarActiveTintColor: "white",
+  tabBarActiveBackgroundColor: ntColours.redViolet,
   tabBarInactiveBackgroundColor: ntColours.cararra,
   tabBarLabelStyle: {
     fontFamily: ntFonts.standard,
-    fontSize: 16,
+    fontSize: 14,
+  },
+  tabBarStyle: {
+    borderTopWidth: 0,
+    backgroundColor: "transparent",
+    position: "absolute",
+    elevation: 0,
+    height: 64,
+  },
+  tabBarItemStyle: {
+    marginHorizontal: 4,
+    marginVertical: 4,
+    padding: 4,
+    borderRadius: 4,
+    elevation: 2,
   },
 };
 
