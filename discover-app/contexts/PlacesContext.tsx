@@ -44,5 +44,4 @@ export function usePlacesContext() {
   return useContext(PlacesContext);
 }
 
-// export default PlacesContext;
 export { PlacesProvider, PlacesContext };

@@ -1,5 +1,8 @@
 import { Activity, NTOpenStatus, PlaceCategory } from "./types";
 
+/**
+ * Maps Action type with custom payloads
+ */
 type ActionMap<M extends { [index: string]: any }> = {
   [Key in keyof M]: M[Key] extends undefined
     ? {

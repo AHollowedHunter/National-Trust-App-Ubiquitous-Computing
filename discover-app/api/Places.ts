@@ -154,13 +154,15 @@ export async function getDetailedPlace(
   detailedPlace.accessTags?.length == 0
     ? (detailedPlace.accessTags = undefined)
     : null;
+
+  // Remove keyFacility, as they are duplicates
+  detailedPlace.facilities = detailedPlace.facilities?.filter(
+    (facility) => !facility.keyFacility && facility.available
+  );
+  // Then set undefined if length is now 0
   detailedPlace.facilities?.length == 0
     ? (detailedPlace.facilities = undefined)
     : null;
-
-  detailedPlace.facilities = detailedPlace.facilities?.filter(
-    (facility) => !facility.keyFacility
-  );
 
   return detailedPlace;
 }
