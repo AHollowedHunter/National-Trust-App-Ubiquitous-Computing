@@ -34,12 +34,14 @@ const bottomTabOptions: BottomTabNavigationOptions = {
     position: "absolute",
     elevation: 0,
     height: 64,
+    paddingHorizontal: 2,
+    paddingBottom: 2
   },
   tabBarItemStyle: {
     marginHorizontal: 4,
     marginVertical: 4,
     padding: 4,
-    borderRadius: 4,
+    borderRadius: 2,
     elevation: 2,
   },
 };
