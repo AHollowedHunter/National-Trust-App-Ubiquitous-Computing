@@ -14,14 +14,22 @@ type Props = {
   title: string;
   content: string;
   titleStyle?: StyleProp<TextStyle>;
-  textStyle?: StyleProp<TextStyle>;
+  contentStyle?: StyleProp<TextStyle>;
 };
 
+/**
+ * Simple component that takes a title and content body
+ * @param title Title
+ * @param content Content to expand/collapse
+ * @param titleStyle Title text styling
+ * @param contentStyle Content text styling
+ * @returns An expanding component
+ */
 export default function ExpandingSection({
   title,
   content,
   titleStyle = appStyles.sectionHeading,
-  textStyle = appStyles.description,
+  contentStyle = appStyles.description,
 }: Props) {
   const [expanded, setExpanded] = useState(false);
   const [maxLines, setMaxLines] = useState(1);
@@ -60,7 +68,7 @@ export default function ExpandingSection({
     <TouchableOpacity onPress={toggleExpanded} activeOpacity={0.6}>
       <Text style={[titleStyle, { flex: 1 }]}>{title}</Text>
       <Animated.View style={{ maxHeight: animatedHeight, overflow: "hidden" }}>
-        <Text style={textStyle} numberOfLines={maxLines}>
+        <Text style={contentStyle} numberOfLines={maxLines}>
           {content}
         </Text>
         <NTWebIcon
