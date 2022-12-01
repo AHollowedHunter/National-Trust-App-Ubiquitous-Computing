@@ -35,7 +35,7 @@ const bottomTabOptions: BottomTabNavigationOptions = {
     elevation: 0,
     height: 64,
     paddingHorizontal: 2,
-    paddingBottom: 2
+    paddingBottom: 2,
   },
   tabBarItemStyle: {
     marginHorizontal: 4,
