@@ -37,6 +37,7 @@ export default function FilterToggleButton({
     >
       <View
         importantForAccessibility={"no-hide-descendants"}
+        accessibilityElementsHidden
         style={{ flexDirection: "row", alignItems: "center" }}
       >
         <NTWebIcon

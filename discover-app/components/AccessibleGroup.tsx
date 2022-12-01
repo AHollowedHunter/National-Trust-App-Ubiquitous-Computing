@@ -30,8 +30,11 @@ export default function AccessibleGroup({
   style,
 }: Props) {
   return (
-    <View {...accessiblilty} style={style}>
-      <View importantForAccessibility="no-hide-descendants">
+    <View {...accessiblilty} accessible style={style}>
+      <View
+        importantForAccessibility="no-hide-descendants"
+        accessibilityElementsHidden
+      >
         {children}
       </View>
     </View>

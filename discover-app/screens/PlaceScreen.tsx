@@ -7,22 +7,17 @@ import { appStyles, ntColours } from "../config/styles";
 import { MiniMap } from "../components/MiniMap";
 import ImageLoading from "../components/ImageLoading";
 import OpenStatus from "../components/OpenStatus";
-import {
-  NTAccessIcon,
-  NTActivityIcon,
-  NTFacilityIcon,
-  NTWebIcon,
-} from "../components/NationalTrustIcons";
+import { NTActivityIcon } from "../components/NationalTrustIcons";
 import Separator from "../components/Separator";
 import { Alert } from "../components/Alert";
 import { getDetailedPlace } from "../api/Places";
 import Distance from "../components/Distance";
 import ExpandingSection from "../components/ExpandingSection";
-import AccessibleGroup from "../components/AccessibleGroup";
 import AdditionalInfo from "../components/PlaceScreen/AdditionalInfo";
 import Footer from "../components/Footer";
 import Facilities from "../components/PlaceScreen/Facilities";
 import Access from "../components/PlaceScreen/Access";
+import ActivityTag from "../components/PlaceScreen/ActivityTag";
 
 type Props = NativeStackScreenProps<NativeStackParamList, "Place">;
 
@@ -86,7 +81,7 @@ export function PlaceScreen({ route, navigation }: Props) {
         {detailedPlace?.emergencyNotice ? (
           <Alert content={detailedPlace.emergencyNotice} />
         ) : null}
-        
+
         <View
           style={{
             flexDirection: "row",
@@ -100,13 +95,8 @@ export function PlaceScreen({ route, navigation }: Props) {
           <View style={{ alignItems: "flex-end", paddingLeft: 8 }}>
             <OpenStatus openStatus={place.openStatus} />
             {place.activityTags
-              ? place.activityTags.map((tag, index) => (
-                  <Text
-                    key={index}
-                    style={{ fontSize: 16, textAlignVertical: "center" }}
-                  >
-                    {tag} <NTActivityIcon activity={tag} size={18} />
-                  </Text>
+              ? place.activityTags.map((tag) => (
+                  <ActivityTag key={tag} tag={tag} />
                 ))
               : null}
           </View>

@@ -31,6 +31,7 @@ export default function ImageLoading({
           display: imageLoading ? "flex" : "none",
         }}
         importantForAccessibility={"no-hide-descendants"}
+        accessibilityElementsHidden
       >
         <NTWebIcon
           name="picture"

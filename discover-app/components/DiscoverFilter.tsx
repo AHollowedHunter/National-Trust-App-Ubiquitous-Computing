@@ -62,6 +62,7 @@ export default function DiscoverFilter() {
           <View
             style={{ flexDirection: "row", paddingVertical: 10 }}
             importantForAccessibility="no-hide-descendants"
+            accessibilityElementsHidden
           >
             <Text style={style.text}>
               {(activeFiltersCount()

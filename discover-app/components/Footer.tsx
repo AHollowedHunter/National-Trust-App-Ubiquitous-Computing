@@ -8,6 +8,9 @@ const Footer = () => (
     size={64}
     color={ntColours.doveGrey}
     style={{ alignSelf: "center", paddingVertical: 32, opacity: 0.5 }}
+    accessible={false}
+    importantForAccessibility="no"
+    accessibilityElementsHidden
   />
 );
 

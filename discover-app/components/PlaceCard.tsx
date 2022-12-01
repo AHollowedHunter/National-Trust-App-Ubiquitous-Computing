@@ -6,6 +6,7 @@ import Distance from "./Distance";
 import ImageLoading from "./ImageLoading";
 import { NTActivityIcon } from "./NationalTrustIcons";
 import OpenStatus from "./OpenStatus";
+import ActivityTag from "./PlaceScreen/ActivityTag";
 
 type Props = {
   place: NTPlace;
@@ -85,23 +86,8 @@ export default function PlaceCard({ place, imageHeight = 200 }: Props) {
         <View style={{ alignItems: "flex-end", paddingLeft: 8 }}>
           <OpenStatus openStatus={place.openStatus} />
           {place.activityTags
-            ? place.activityTags.map((tag, index) => (
-                <View
-                  key={index}
-                  style={{ flexDirection: "row", alignItems: "center" }}
-                >
-                  <Text
-                    lineBreakMode={"middle"}
-                    style={{
-                      fontSize: 16,
-                      paddingHorizontal: 2,
-                      textAlign: "right",
-                    }}
-                  >
-                    {tag}
-                  </Text>
-                  <NTActivityIcon activity={tag} size={18} />
-                </View>
+            ? place.activityTags.map((tag) => (
+                <ActivityTag key={tag} tag={tag} />
               ))
             : null}
         </View>

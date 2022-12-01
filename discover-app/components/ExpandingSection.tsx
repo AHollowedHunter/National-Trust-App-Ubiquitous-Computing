@@ -75,6 +75,8 @@ export default function ExpandingSection({
           name={expanded ? "circle_up" : "circle_down"}
           size={24}
           style={{ padding: 8, alignSelf: "center" }}
+          accessibilityHint={"Toggle section"}
+          accessibilityState={{ checked: expanded }}
         />
       </Animated.View>
     </TouchableOpacity>
