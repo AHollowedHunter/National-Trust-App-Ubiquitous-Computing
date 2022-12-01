@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import MapView from "react-native-maps";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { ActivityIndicator } from "react-native";
 
 import { ntColours } from "../config/styles";
@@ -28,6 +28,7 @@ export function MainMap() {
     <MapProvider>
       <>
         <MapView
+          provider={PROVIDER_GOOGLE}
           ref={mapRef}
           mapPadding={{ bottom: 64, top: 0, right: 0, left: 0 }}
           style={{ flex: 1 }}
