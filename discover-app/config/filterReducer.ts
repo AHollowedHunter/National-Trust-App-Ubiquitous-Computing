@@ -2,6 +2,7 @@ import { Activity, NTOpenStatus, PlaceCategory } from "./types";
 
 /**
  * Maps Action type with custom payloads
+ * see https://dev.to/elisealcala/react-context-with-usereducer-and-typescript-4obm
  */
 type ActionMap<M extends { [index: string]: any }> = {
   [Key in keyof M]: M[Key] extends undefined
